@@ -14,9 +14,10 @@ app.config ($stateProvider, $urlRouterProvider) ->
       templateUrl: 'sign_in.html'
       controller: 'SignInCtrl'
       skipLogin: true
-      onEnter: ($state, AuthenticationService) ->
-        if AuthenticationService.isLoggedIn
-          $state.go('home')
+      onEnter: ($state, AuthenticationService, $timeout) ->
+        $timeout ->
+          if AuthenticationService.isLoggedIn
+            $state.go('home')
 
 app.run ($rootScope, $location, AuthenticationService, $state) ->
   $rootScope.$on "$stateChangeStart", (event, toState, toParams, fromState, fromParams) ->
