@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require libs/underscore
 //= require libs/angular
+//= require angular-rails-templates
+//= require_tree ../templates
 //= require libs/angular-ui-router
 //= require libs/famous-global
 //= require libs/famous-angular
