@@ -1,1 +1,1 @@
-window.taskManagerSPA = angular.module('taskManagerSPA', ['famous.angular', 'ui.router', 'templates'])
+window.app = angular.module('taskManagerSPA', ['famous.angular', 'ui.router', 'templates', 'rails'])

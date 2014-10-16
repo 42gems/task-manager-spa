@@ -1,4 +1,4 @@
-taskManagerSPA
+app
   .controller 'FamousFlipperCtrl', ($scope, $famous) ->
     EventHandler = $famous['famous/core/EventHandler']
 

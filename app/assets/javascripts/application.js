@@ -15,6 +15,7 @@
 //= require libs/underscore
 //= require libs/angular
 //= require angular-rails-templates
+//= require angularjs/rails/resource
 //= require_tree ../templates
 //= require libs/angular-ui-router
 //= require libs/famous-global
