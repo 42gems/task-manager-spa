@@ -12,4 +12,9 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require_tree .
+//= require libs/underscore
+//= require libs/angular
+//= require libs/angular-ui-router
+//= require libs/famous-global
+//= require libs/famous-angular
+//= require_tree ./app
