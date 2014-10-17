@@ -1,8 +1,8 @@
 app.factory 'TokenInterceptor', ($q, $window, AuthenticationService, $location) ->
   request: (config) ->
     config.headers ?= {}
-    if $window.sessionStorage.token
-      config.headers.Authorization = 'Token token=' + $window.sessionStorage.token
+    if $window.localStorage.taskManagerSpaToken
+      config.headers.Authorization = 'Token token=' + $window.localStorage.taskManagerSpaToken
     config
 
   requestError: (rejection) ->
@@ -12,8 +12,8 @@ app.factory 'TokenInterceptor', ($q, $window, AuthenticationService, $location) 
     response || $q.when(response)
 
   responseError: (rejection) ->
-    if rejection?.status == 401 && $window.sessionStorage.token
-      delete $window.sessionStorage.token
+    if rejection?.status == 401 && $window.localStorage.taskManagerSpaToken
+      delete $window.localStorage.taskManagerSpaToken
       AuthenticationService.isLoggedIn = false
       $location.path('/sign_in')
     $q.reject(rejection)

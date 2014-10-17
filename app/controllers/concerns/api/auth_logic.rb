@@ -16,7 +16,8 @@ module API::AuthLogic
   end
 
   def current_token
-    token = authenticate_with_http_token{|token, opts| break token}
+    token = authenticate_with_http_token { |token, opts| break token }
+    # token = cookies['remember_token'] || authenticate_with_http_token { |token, opts| break token }
     @current_token ||= Token.find_by(token: token)
   end
 end

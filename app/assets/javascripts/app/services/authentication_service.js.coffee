@@ -1,4 +1,4 @@
 app.factory 'AuthenticationService', ($window)->
   auth =
-    isLoggedIn: $window.sessionStorage.token?
+    isLoggedIn: $window.localStorage.taskManagerSpaToken?
   auth
