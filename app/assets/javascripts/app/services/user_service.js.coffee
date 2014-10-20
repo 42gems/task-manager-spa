@@ -5,4 +5,4 @@ app.factory 'UserService', ($http) ->
         email: email
         password: password
   logOut: ->
-    console.log 'Please, implement logout'
+    $http.delete "/api/users/sign_out"

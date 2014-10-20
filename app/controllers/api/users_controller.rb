@@ -9,4 +9,9 @@ class API::UsersController < API::BaseController
       render json: { error: 'Wrong credentials' }, status: :bad_request
     end
   end
+
+  def sign_out
+    current_token.destroy
+    head 204
+  end
 end

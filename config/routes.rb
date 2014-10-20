@@ -3,7 +3,8 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     resources :users do
-      post :sign_in, on: :collection
+      post :sign_in,    on: :collection
+      delete :sign_out, on: :collection
     end
     resources :projects
   end
