@@ -6,7 +6,7 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      %a.navbar-brand{ href: root_path }
+      %a.navbar-brand{ href: '#' }
     #collapsable.collapse.navbar-collapse
       %ul.nav.navbar-nav
         %li
@@ -14,8 +14,6 @@
             %i.icon-aktivity
             Task Manager SPA
       %ul.nav.navbar-nav.navbar-right
-        %li{ 'ng-controller'=>'SignOutCtrl' }
+        %li( ng-controller='SignOutCtrl' )
           %a{ href: '#', 'ng-click' => 'logOut()'}
             Sign Out
-.container
-  %ng-view
