@@ -1,0 +1,6 @@
+%div( ng-if='projects' )
+  %h1 Projects:
+  %ul
+    %li( ng-repeat='project in projects' )
+      {{ project.title }}
+      %a( ui-sref='showProject({id: {{project.id}} })' ) details
