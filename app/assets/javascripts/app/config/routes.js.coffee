@@ -12,9 +12,9 @@ app.config ($stateProvider, $urlRouterProvider) ->
     .state 'projects',
       url: '/projects'
       templateUrl: 'projects/index.html'
-      controller: 'ProjectsCtrl'
-    .state 'showProject',
-      url: 'projects/:id'
+      controller: 'ProjectsListCtrl'
+    .state 'projects.show',
+      url: '/:id'
       templateUrl: 'projects/show.html'
       controller: 'ProjectsCtrl'
     .state 'sign_in',

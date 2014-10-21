@@ -1,6 +1,6 @@
-%div( ng-if='current_project' )
-  %h3 {{ current_project.title }}
+%div( ng-if='project' )
+  %h3 {{ project.title }}
   %hr
-  %h4 {{ current_project.description }}
+  %h4 {{ project.description }}
   %span 
-    Owner id: {{ current_project.owner_id }}
+    Owner id: {{ project.owner_id }}
