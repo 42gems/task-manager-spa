@@ -1,0 +1,8 @@
+%div( ng-if='project' )
+  %h3 {{ project.title }}
+  %hr
+  %div( ng-if='project.description')
+    %h4 {{ project.description }}
+  %div( ng-if='!project.description')
+    %h4 No description given
+  Owner id: {{ project.ownerId }}
