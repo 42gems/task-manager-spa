@@ -1,7 +1,16 @@
-%div(ui-view)
+%div( ui-view )
   %div( ng-if='projects' )
-    %h1 Projects:
-    %ul
-      %li( ng-repeat='project in projects' )
-        {{ project.title }}
-        %a( ui-sref='projects.show({id: {{project.id}} })' ) details
+    %h2 Projects
+    %table.table.table-hover.table-responsive
+      %thead
+        %tr
+          %td Title
+          %td Owner #
+          %td Actions
+      %tbody
+        %tr( ng-repeat='project in projects' )
+          %td {{ project.title }}
+          %td {{ project.ownerId }}
+          %td
+            .btn.btn-success( ui-sref='projects.show({id: {{project.id}} })' ) Details
+            .btn.btn-success( ng-click='deleteProject(project.id)' ) Destroy
