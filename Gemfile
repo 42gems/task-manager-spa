@@ -27,4 +27,10 @@ group :development do
   gem 'spring'
   gem 'quiet_assets'
   gem 'letter_opener'
+  gem "pry-rails"
+
+  #guards for watching files changes and
+  gem 'guard-bundler' #bundle on gemfile changed
+  gem 'guard-rails' #run rails on config cahnges
+  gem 'guard-livereload', require: false #reload browser on assets change, to correct work need to install live reload plug for browser
 end
