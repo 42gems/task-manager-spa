@@ -1,5 +1,5 @@
 class API::ProjectsController < API::BaseController
-  before_actoin :current_project, only: [:show, :edit, :update, :destroy]
+  before_action :current_project, only: [:show, :edit, :update, :destroy]
 
   def index
     respond_with Project.all
