@@ -5,3 +5,4 @@
       %li( ng-repeat='project in projects' )
         {{ project.title }}
         %a( ui-sref='projects.show({id: {{project.id}} })' ) details
+        %a( ui-sref='projects.tasks({projectId: {{project.id}} })' ) tasks

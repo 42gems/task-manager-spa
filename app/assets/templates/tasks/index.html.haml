@@ -1,0 +1,24 @@
+.col-md-3(ng-drop='true' ng-drop-success='updateStatus($data, "new")')
+  .header
+    %h1 Todo
+  %ul(ng-repeat="task in tasks | filter:{ state: 'new' }")
+    %li(ng-drag='true' ng-drag-data='task' draggable='false' ) {{task.title}}
+
+.col-md-3(ng-drop='true' ng-drop-success='updateStatus($data, "in_progress")')
+  .header
+    %h1 In Progress
+  %ul(ng-repeat="task in tasks | filter:{ state: 'in_progress' }")
+    %li(ng-drag='true' ng-drag-data='task' draggable='false' ) {{task.title}}
+
+.col-md-3(ng-drop='true' ng-drop-success='updateStatus($data, "done")')
+  .header
+    %h1 Done
+  %ul(ng-repeat="task in tasks | filter:{ state: 'done' }" )
+    %li(ng-drag='true' ng-drag-data='task') {{task.title}}
+
+.col-md-3(ng-drop='true' ng-drop-success='updateStatus($data, "approved")')
+  .header
+    %h1 Approved
+  %ul(ng-repeat="task in tasks | filter:{ state: 'approved' }")
+    %li(ng-drag='true' ng-drag-data='task' draggable='false' ) {{task.title}}
+

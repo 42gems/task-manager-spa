@@ -23,6 +23,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # heroku
 gem 'rails_12factor',  group: :production
 
+gem 'inherited_resources'
+
 group :development do
   gem 'spring'
   gem 'quiet_assets'
@@ -31,6 +33,6 @@ group :development do
 
   #guards for watching files changes and
   gem 'guard-bundler' #bundle on gemfile changed
-  gem 'guard-rails' #run rails on config cahnges
+  gem 'guard-rails' #run rails on config changes
   gem 'guard-livereload', require: false #reload browser on assets change, to correct work need to install live reload plug for browser
 end

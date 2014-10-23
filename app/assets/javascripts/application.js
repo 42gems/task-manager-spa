@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require libs/underscore
 //= require libs/angular
+//= require libs/ng-draggable
 //= require angular-rails-templates
 //= require angularjs/rails/resource
 //= require_tree ../templates
