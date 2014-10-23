@@ -12,7 +12,7 @@ class API::ProjectsController < API::BaseController
   def create
     project = Project.new(project_params)
     if project.save
-      respond_with project, status: :created, location: project
+      respond_with project, status: :created, location: api_projects_url
     else
       render json: project.errors, status: 422
     end
@@ -39,6 +39,6 @@ class API::ProjectsController < API::BaseController
   end
 
   def project_params
-    params.require(:owner_id, :title, :description)
+    params.require(:project).permit(:owner_id, :title, :description)
   end
 end
