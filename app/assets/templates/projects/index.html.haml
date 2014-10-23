@@ -1,14 +1,15 @@
+%h2 Projects
+%a( ui-sref='projects.new' )
+  .btn.btn-success New Project
+%div( ui-view='project' )
 %div( ng-if='projects' )
-  %h2 Projects
-  %a( ui-sref='projects.new' )
-    .btn.btn-success New Project
-  %div( ui-view )
   %table.table.table-hover.table-responsive
     %thead
       %tr
         %td Title
         %td Owner #
         %td Actions
+        %td Tasks
     %tbody
       %tr( ng-repeat='project in projects' )
         %td {{ project.title }}
@@ -16,3 +17,7 @@
         %td
           .btn.btn-info( ui-sref='project({id: {{project.id}} })' ) Details
           .btn.btn-danger( ng-click='deleteProject(project.id)' ) Destroy
+        %td
+          %a( ui-sref='projects.tasks({projectId: {{project.id}} })' )
+            .btn.btn-info Taks
+%div( ui-view='tasks' )

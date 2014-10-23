@@ -15,8 +15,16 @@ app.config ($stateProvider, $urlRouterProvider) ->
       controller: 'ProjectsListCtrl'
     .state 'projects.new',
       url: '/new'
-      templateUrl: 'projects/edit.html'
-      controller: 'ProjectsListCtrl'
+      views:
+        'project':
+          templateUrl: 'projects/edit.html'
+          controller: 'ProjectsListCtrl'
+    .state 'projects.tasks',
+      url: "/:projectId/tasks"
+      views:
+        'tasks':
+          templateUrl: "tasks/index.html"
+          controller: "TasksCtrl"
     .state 'project',
       url: '/projects/:id'
       templateUrl: 'projects/show.html'
