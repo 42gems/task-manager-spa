@@ -4,15 +4,11 @@ class Task < ActiveRecord::Base
   belongs_to :project
   has_many :comments, dependent: :destroy
 
-  def self.states_names(*names)
-    names.map { |name| [name, I18n.t("states.#{name.to_s}")] }.to_h
-  end
-
-  STATES = states_names :todo, :in_progress, :done, :approved
-
   aasm column: :state do
     state :todo, initial: true
-    STATES.keys[1..-1].each { |key| state key }
+    state :in_progress
+    state :done
+    state :approved
   end
 
   validates :title, :state, presence: true

@@ -9,8 +9,8 @@ User.all[1..-1].each do |u|
   p.invites.create! user_id: u.id
 end
 
-6.times do |n|
-  p.tasks.create! title: "task ##{n}", state: Task::STATES.keys[rand(5)]
+7.times do |n|
+  p.tasks.create! title: "task ##{n}", state: Task.aasm.states.map{|state| state.name}[rand(3)]
 end
 
 p.tasks.first.comments.create! user_id: p.owner.id, body: 'yo meh'
