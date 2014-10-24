@@ -4,12 +4,11 @@ class Task < ActiveRecord::Base
   belongs_to :project
   has_many :comments, dependent: :destroy
 
-  STATES = {
-    todo:        I18n.t('states.todo'),
-    in_progress: I18n.t('states.in_progress'),
-    done:        I18n.t('states.done'),
-    approved:    I18n.t('states.approved')
-  }
+  def self.states_names(*names)
+    names.map { |name| [name, I18n.t("states.#{name.to_s}")] }.to_h
+  end
+
+  STATES = states_names :todo, :in_progress, :done, :approved
 
   aasm column: :state do
     state :todo, initial: true
@@ -17,5 +16,5 @@ class Task < ActiveRecord::Base
   end
 
   validates :title, :state, presence: true
-  scope :open, -> { where("state IN (?)", ['todo', 'in_progress']) }
+  scope :open, -> { where(state: [:todo, :in_progress]) }
 end
