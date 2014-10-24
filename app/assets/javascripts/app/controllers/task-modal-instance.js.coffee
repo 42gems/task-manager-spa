@@ -1,12 +1,8 @@
 app.controller "TasksModalInstanceCtrl", ($scope, $modalInstance, $stateParams, Task) ->
-
+  $scope.task = new Task(projectId: $stateParams.projectId)
   $scope.ok = ->
-    Task.$post('/api/projects/' + $stateParams.projectId + '/tasks', 
-      title: task.title
-      description: task.description
-      project_id: task.projectId
-    ).then (response) ->
-      $modalInstance.close # result
+    $scope.task.create().then (response) ->
+      $modalInstance.close response
       console.log 'Task successfuly created'
     , (error) ->
       $modalInstance.dismiss "error"

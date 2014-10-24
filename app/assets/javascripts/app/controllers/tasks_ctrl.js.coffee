@@ -13,7 +13,7 @@ app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, $modal) ->
       templateUrl: "tasks/modalForm.html"
       controller: "TasksModalInstanceCtrl"
     )
-    modalInstance.result.then (response) ->
-      console.log response
+    modalInstance.result.then (task) ->
+      $scope.tasks.push(task)
     , ->
       console.log "Modal dismissed at: " + new Date()
