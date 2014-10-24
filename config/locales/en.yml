@@ -21,3 +21,8 @@
 
 en:
   hello: "Hello world"
+  states:
+    todo: "New"
+    in_progress: "In progress"
+    done: "Done"
+    approved: "Approved"

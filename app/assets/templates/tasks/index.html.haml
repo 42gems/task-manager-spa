@@ -1,7 +1,7 @@
-.col-md-3(ng-drop='true' ng-drop-success='updateStatus($data, "new")')
+.col-md-3(ng-drop='true' ng-drop-success='updateStatus($data, "todo")')
   .header
     %h1 Todo
-  %ul(ng-repeat="task in tasks | filter:{ state: 'new' }")
+  %ul(ng-repeat="task in tasks | filter:{ state: 'todo' }")
     %li(ng-drag='true' ng-drag-data='task' draggable='false' ) {{task.title}}
 
 .col-md-3(ng-drop='true' ng-drop-success='updateStatus($data, "in_progress")')
