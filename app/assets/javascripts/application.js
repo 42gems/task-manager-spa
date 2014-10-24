@@ -21,4 +21,5 @@
 //= require libs/angular-ui-router
 //= require libs/famous-global
 //= require libs/famous-angular
+//= require libs/ui-bootstrap-modal
 //= require_tree ./app

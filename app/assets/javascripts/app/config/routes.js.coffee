@@ -17,21 +17,21 @@ app.config ($stateProvider, $urlRouterProvider) ->
       url: '/new'
       views:
         'project':
-          templateUrl: 'projects/edit.html'
+          templateUrl: 'projects/form.html'
           controller: 'ProjectsListCtrl'
     .state 'projects.tasks',
-      url: "/:projectId/tasks"
+      url: '/:projectId/tasks'
       views:
         'tasks':
-          templateUrl: "tasks/index.html"
-          controller: "TasksCtrl"
+          templateUrl: 'tasks/index.html'
+          controller: 'TasksCtrl'
     .state 'project',
       url: '/projects/:id'
       templateUrl: 'projects/show.html'
       controller: 'ProjectsCtrl'
     .state 'project.edit',
       url: '/edit'
-      templateUrl: 'projects/edit.html'
+      templateUrl: 'projects/form.html'
       controller: 'ProjectsCtrl'
     .state 'sign_in',
       url: '/sign_in'

@@ -1,6 +1,7 @@
 .col-md-3(ng-drop='true' ng-drop-success='updateStatus($data, "todo")')
   .header
-    %h1 Todo
+    %h1(style="display: inline-block;") Todo
+    .btn.btn-success.pull-right( ng-click="openModal()" style="margin: 23px 30px;" ) Create Task
   %ul(ng-repeat="task in tasks | filter:{ state: 'todo' }")
     %li(ng-drag='true' ng-drag-data='task' draggable='false' ) {{task.title}}
 
@@ -21,4 +22,3 @@
     %h1 Approved
   %ul(ng-repeat="task in tasks | filter:{ state: 'approved' }")
     %li(ng-drag='true' ng-drag-data='task' draggable='false' ) {{task.title}}
-
