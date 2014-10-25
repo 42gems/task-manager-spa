@@ -3,4 +3,5 @@ window.app = angular.module('taskManagerSPA', ['famous.angular',
                                                'ui.bootstrap',
                                                'templates',
                                                'rails',
-                                               'ngDraggable'])
+                                               'ngDraggable',
+                                               'directives.customvalidation.customValidationTypes'])

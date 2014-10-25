@@ -21,5 +21,7 @@
 //= require libs/angular-ui-router
 //= require libs/famous-global
 //= require libs/famous-angular
+//look https://github.com/nelsonomuto/angular-ui-form-validation as form validation guide
+//= require libs/form-validation
 //= require libs/ui-bootstrap-modal
 //= require_tree ./app
