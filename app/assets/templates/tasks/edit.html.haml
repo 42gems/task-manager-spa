@@ -2,11 +2,27 @@
   .form-group
     %label.col-sm-4.control-label( for='inputTitle' ) Title
     .col-sm-4
-      %input#inputTitle.form-control( type='text' placeholder='Title of the task' ng-model='task.title' validation-field-required="true")
+      %input#inputTitle.form-control( type='text' placeholder='Title of the task' ng-model='task.title' validation-field-required="true" )
   .form-group
     %label.col-sm-4.control-label( for='inputDesc' ) Description
     .col-sm-4
-      %textarea#inputDesc.form-control( placeholder='Description of the task' ng-model='task.description' validation-field-required="true")
+      %textarea#inputDesc.form-control( placeholder='Description of the task' ng-model='task.description' validation-field-required="false" )
+  .form-group
+    %label.col-sm-4.control-label( for='estimatedTime' ) Estimated time
+    .col-sm-4
+      .dropdown
+        %a#dropdown1.dropdown-toggle( data-target="#" data-toggle="dropdown" href="#" role="button" )
+          %input#estimatedTime.form-control( type='text' placeholder='Estimated Time to complete this task' ng-model='task.estimatedTime' validation-field-required="false" )
+        %ul.dropdown-menu( aria-labelledby="dLabel" role="menu" )
+          %datetimepicker( data-datetimepicker-config="{ dropdownSelector: '#dropdown1' }" ng-model="task.estimatedTime" )
+  .form-group
+    %label.col-sm-4.control-label( for='deadline' ) Deadline
+    .col-sm-4
+      .dropdown
+        %a#dropdown2.dropdown-toggle( data-target="#" data-toggle="dropdown" href="#" role="button" )
+          %input#deadline.form-control( type='text' placeholder='Deadline for this task' ng-model='task.deadline' validation-field-required="false" )
+        %ul.dropdown-menu( aria-labelledby="dLabel" role="menu" )
+          %datetimepicker( data-datetimepicker-config="{ dropdownSelector: '#dropdown2' }" ng-model="task.deadline" )
   .form-group
     .col-sm-4
     .col-sm-4
