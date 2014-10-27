@@ -1,0 +1,15 @@
+%form.form-horizontal(name="taskForm" novalidate)
+  .form-group
+    %label.col-sm-4.control-label( for='inputTitle' ) Title
+    .col-sm-4
+      %input#inputTitle.form-control( type='text' placeholder='Title of the task' ng-model='task.title' validation-field-required="true")
+  .form-group
+    %label.col-sm-4.control-label( for='inputDesc' ) Description
+    .col-sm-4
+      %textarea#inputDesc.form-control( placeholder='Description of the task' ng-model='task.description' validation-field-required="true")
+  .form-group
+    .col-sm-4
+    .col-sm-4
+      %button.btn.btn-success( ng-click='save(taskForm)' ) Save
+      %a( ui-sref='^' )
+        %button.btn.btn-warning Cancel

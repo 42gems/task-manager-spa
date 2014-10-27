@@ -3,3 +3,4 @@ app.factory 'Task', (railsResourceFactory, RailsResource, $famous) ->
     @configure
       url: '/api/projects/{{projectId}}/tasks/{{id}}'
       name: 'task'
+      updateMethod: 'patch'

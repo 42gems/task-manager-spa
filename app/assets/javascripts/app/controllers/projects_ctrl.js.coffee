@@ -1,22 +1,28 @@
-app.controller 'ProjectsCtrl', ($scope, $q, Project, $stateParams, $state) ->
-  
-  Project.get({ id: $stateParams.id }).then (results) ->
-    $scope.project = results
+app.controller 'ProjectsCtrl', ($scope, $q, Project, $state) ->
+  Project.query({}).then (results) ->
+    $scope.projects = results
   , (error) ->
-    console.log 'Could not fetch project'
+    console.log 'Unauthorized request'
 
-  $scope.saveProject = ->
-    $scope.project.save().then (response) ->
-      console.log 'Project successfuly updated'
-      $state.go('project', {}, { reload: true })
+  $scope.deleteProject = (id) ->
+    Project.$delete('/api/projects/' + id).then (response) ->
+      for project in $scope.projects
+        if project.id == id
+          $scope.projects.pop(project)
+          break
+      console.log 'Project successfuly deleted'
     , (error) ->
-      console.log 'Could not update the project'
+      console.log 'Could not remove project'
       console.log error
 
-  $scope.delete = ->
-    $scope.project.delete().then (respone) ->
-      console.log 'Project successfuly deleted'
-      $state.go 'projects'
+  $scope.saveProject = ->
+    Project.$post('/api/projects', 
+      title: $scope.project.title
+      description: $scope.project.description
+      owner_id: $scope.project.ownerId
+    ).then (response) ->
+      $state.go('projects', {}, { reload: true })
+      console.log 'Project successfuly created'
     , (error) ->
-      console.log 'Could not delete the project'
+      console.log 'Could not create a project'
       console.log error

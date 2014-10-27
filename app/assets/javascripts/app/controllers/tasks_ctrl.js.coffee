@@ -4,6 +4,14 @@ app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, $modal) ->
   Task.query({}, projectId: $stateParams.projectId).then (tasks) ->
     $scope.tasks = tasks
 
+  $scope.delete = (task) ->
+    task.delete().then (respone) ->
+      $scope.tasks.pop(task)
+      console.log 'Task successfuly deleted'
+    , (error) ->
+      console.log 'Could not delete task'
+      console.log error
+
   $scope.updateStatus = (task, state)->
     task.state = state
     task.save()

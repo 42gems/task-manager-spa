@@ -1,0 +1,19 @@
+%div( ui-view )
+  %h2 Tasks
+  %table.table.table-responsive
+    %thead
+      %td Title
+      %td Description
+      %td Project #
+      %td Actions
+    %tr( ng-repeat='task in tasks' )
+      %td {{ task.title }}
+      %td( ng-if='task.description')
+        {{ task.description }}
+      %td( ng-if='!task.description')
+        No description given
+      %td {{ task.projectId }}
+      %td
+        %a( ui-sref='.edit({taskId: {{task.id}} })' )
+          .btn.btn-success.btn-sm Edit
+        .btn.btn-danger.btn-sm( ng-click='delete(task)' ) Destroy

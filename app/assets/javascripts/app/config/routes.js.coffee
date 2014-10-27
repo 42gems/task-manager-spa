@@ -12,27 +12,35 @@ app.config ($stateProvider, $urlRouterProvider) ->
     .state 'projects',
       url: '/projects'
       templateUrl: 'projects/index.html'
-      controller: 'ProjectsListCtrl'
+      controller: 'ProjectsCtrl'
     .state 'projects.new',
       url: '/new'
       views:
         'project':
           templateUrl: 'projects/form.html'
-          controller: 'ProjectsListCtrl'
+          controller: 'ProjectsCtrl'
     .state 'projects.tasks',
-      url: '/:projectId/tasks'
+      url: '/:projectId/tasks-drag'
       views:
         'tasks':
           templateUrl: 'tasks/index.html'
           controller: 'TasksCtrl'
     .state 'project',
-      url: '/projects/:id'
+      url: '/projects/:projectId'
       templateUrl: 'projects/show.html'
-      controller: 'ProjectsCtrl'
+      controller: 'ProjectCtrl'
     .state 'project.edit',
       url: '/edit'
       templateUrl: 'projects/form.html'
-      controller: 'ProjectsCtrl'
+      controller: 'ProjectCtrl'
+    .state 'project.tasks',
+      url: '/tasks'
+      templateUrl: 'tasks/tasks_list.html'
+      controller: 'TasksCtrl'
+    .state 'project.tasks.edit',
+      url: '/:taskId/edit'
+      templateUrl: 'tasks/edit.html'
+      controller: 'TaskCtrl'
     .state 'sign_in',
       url: '/sign_in'
       templateUrl: 'sign_in.html'

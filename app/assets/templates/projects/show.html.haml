@@ -1,12 +1,22 @@
 %div( ui-view )
   %div( ng-if='project' )
-    %h3 {{ project.title }}
-    %div( ng-if='project.description')
-      %h4 {{ project.description }}
-    %div( ng-if='!project.description')
-      %h4 No description given
-    Owner id: {{ project.ownerId }}
-    %p
-    %a( ui-sref='project.edit({id: {{project.id}} })' )
-      .btn.btn-success.btn-sm Edit
-    .btn.btn-danger.btn-sm( ng-click='delete()' ) Destroy
+    %h2 {{ project.title }}
+    %table.table.table-responsive
+      %thead
+        %td Description
+        %td Owner #
+        %td Tasks
+        %td Actions
+      %tr
+        %td( ng-if='project.description')
+          {{ project.description }}
+        %td( ng-if='!project.description')
+          No description given
+        %td {{ project.ownerId }}
+        %td
+          %a( ui-sref='project.tasks' )
+            .btn.btn-primary.btn-sm Edit Tasks
+        %td
+          %a( ui-sref='project.edit' )
+            .btn.btn-success.btn-sm Edit
+          .btn.btn-danger.btn-sm( ng-click='delete()' ) Destroy

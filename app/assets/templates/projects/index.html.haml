@@ -8,16 +8,16 @@
       %tr
         %td Title
         %td Owner #
-        %td Actions
         %td Tasks
+        %td Actions
     %tbody
       %tr( ng-repeat='project in projects' )
         %td {{ project.title }}
         %td {{ project.ownerId }}
         %td
-          .btn.btn-info( ui-sref='project({id: {{project.id}} })' ) Details
-          .btn.btn-danger( ng-click='deleteProject(project.id)' ) Destroy
-        %td
           %a( ui-sref='projects.tasks({projectId: {{project.id}} })' )
-            .btn.btn-info Taks
+            .btn.btn-primary Taks
+        %td
+          .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
+          .btn.btn-danger( ng-click='deleteProject(project.id)' ) Destroy
 %div( ui-view='tasks' )
