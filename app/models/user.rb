@@ -10,10 +10,6 @@ class User < ActiveRecord::Base
   end
 
   def can_manage?(project)
-    if id == project.owner.id || invites.where(project_id: project.id).any?
-      true
-    else
-      false
-    end
+    id == project.owner.id || invites.where(project_id: project.id).any?
   end
 end

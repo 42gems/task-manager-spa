@@ -8,7 +8,11 @@
     .col-sm-4
       %input#inputPassword.form-control{"ng-model" => "user.password", :placeholder => "Password", :type => "password"}/
   .form-group
+    %label.col-sm-4.control-label{:for => "confirmPassword"} Password Confirmation
+    .col-sm-4
+      %input#confirmPassword.form-control{"ng-model" => "user.password_confirmation", :placeholder => "Password", :type => "password"}/
+  .form-group
     .col-sm-offset-4.col-sm-10
-      %button.btn.btn-default{"ng-click" => "logIn(user.email, user.password)", :type => "submit"} Log In
-      %a( ui-sref='sign_up' )
-        %button.btn.btn-default Sign Up
+      %button.btn.btn-default{"ng-click" => "signUp()", :type => "submit"} Sign Up
+      %a( ui-sref='sign_in' )
+        %button.btn.btn-default Log In
