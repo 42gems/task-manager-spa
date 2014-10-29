@@ -57,6 +57,7 @@ app.config ($stateProvider, $urlRouterProvider) ->
             $state.go('home')
 
 app.run ($rootScope, $location, AuthenticationService, $state) ->
+  $rootScope.$state = $state
   $rootScope.$on "$stateChangeStart", (event, toState, toParams, fromState, fromParams) ->
     if !toState.skipLogin && !AuthenticationService.isLoggedIn
       event.preventDefault()

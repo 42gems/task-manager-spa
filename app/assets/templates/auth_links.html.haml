@@ -1,0 +1,18 @@
+%ul.nav.navbar-nav.navbar-right( ng-if="$state.is('sign_in')" )
+  %li
+    %a( ui-sref='sign_in' )
+      Log In
+  %li
+    %a( ui-sref='sign_up' )
+      Register
+%ul.nav.navbar-nav.navbar-right( ng-if="$state.is('sign_up')" )
+  %li
+    %a( ui-sref='sign_in' )
+      Log In
+  %li
+    %a( ui-sref='sign_up' )
+      Register
+%ul.nav.navbar-nav.navbar-right( ng-if="$state.current.name !== 'sign_in'" ng-hide="$state.is('sign_up')" )
+  %li( ng-controller='SignOutCtrl' )
+    %a( href='#' ng-click='logOut()' )
+      Sign Out
