@@ -19,8 +19,8 @@
 //= require angularjs/rails/resource
 //= require_tree ../templates
 //= require libs/angular-ui-router
-//= require libs/famous-global
-//= require libs/famous-angular
+//= require famous
+//= require famous-angular
 //look https://github.com/nelsonomuto/angular-ui-form-validation as form validation guide
 //= require libs/form-validation
 //= require_tree ./app
