@@ -4,6 +4,11 @@ app.controller 'ProjectsCtrl', ($scope, $q, Project, $state) ->
   , (error) ->
     console.log 'Unauthorized request'
 
+  Project.$get('/api/projects/members').then (results) ->
+    $scope.members = results
+  , (error) ->
+    console.log 'Could not fetch members'
+
   $scope.deleteProject = (id) ->
     Project.$delete('/api/projects/' + id).then (response) ->
       for project in $scope.projects

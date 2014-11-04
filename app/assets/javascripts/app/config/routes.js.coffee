@@ -21,6 +21,10 @@ app.config ($stateProvider, $urlRouterProvider) ->
         'tasks':
           templateUrl: 'tasks/index.html'
           controller: 'TasksCtrl'
+    .state 'members',
+      url: '/members'
+      templateUrl: 'members.html'
+      controller: 'ProjectsCtrl'
     .state 'project',
       url: '/projects/:projectId'
       templateUrl: 'projects/show.html'

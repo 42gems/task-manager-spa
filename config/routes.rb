@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     end
     resources :projects do
       resources :tasks
+      get :members, on: :collection
     end
   end
 end
