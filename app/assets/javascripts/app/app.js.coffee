@@ -1,5 +1,4 @@
-window.app = angular.module('taskManagerSPA', ['famous.angular',
-                                               'ui.router',
+window.app = angular.module('taskManagerSPA', ['ui.router',
                                                'ui.bootstrap',
                                                'ui.bootstrap.datetimepicker',
                                                'templates',

@@ -5,10 +5,6 @@ app.config ($stateProvider, $urlRouterProvider) ->
       url: '/home'
       templateUrl: 'home.html'
       controller: 'HomeCtrl'
-    .state 'famous-flipper',
-      url: '/famous-flipper'
-      templateUrl: 'famous-flipper.html'
-      controller: 'FamousFlipperCtrl'
     .state 'projects',
       url: '/projects'
       templateUrl: 'projects/index.html'

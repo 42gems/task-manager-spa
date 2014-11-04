@@ -63,7 +63,6 @@ GEM
     erubis (2.7.0)
     eventmachine (1.0.3)
     execjs (2.2.1)
-    famous-angular-rails (1.0.0)
     ffi (1.9.6)
     formatador (0.2.5)
     guard (2.6.1)
@@ -214,7 +213,6 @@ DEPENDENCIES
   bootstrap-sass (~> 3.2.0)
   coffee-rails (~> 4.0.0)
   devise
-  famous-angular-rails (~> 1.0.0)
   guard-bundler
   guard-livereload
   guard-rails
