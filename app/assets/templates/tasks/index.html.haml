@@ -1,24 +1,30 @@
-.col-md-3(ng-drop='true' ng-drop-success='updateStatus($data, "todo")')
-  .header
-    %h1(style="display: inline-block;") Todo
-    .btn.btn-success.pull-right( ng-click="openModal()" style="margin: 23px 30px;" ) Create Task
-  %ul(ng-repeat="task in tasks | filter:{ state: 'todo' }")
-    %li(ng-drag='true' ng-drag-data='task' draggable='false' ) {{task.title}}
+.tasks
+  .col-md-3.list(ng-drop='true' ng-drop-success='updateStatus($data, "todo")')
+    .title Todo
+    .pull-right( ng-click="newTaskModal()" ) 
+      #create_btn.btn.btn-success create task
+    %div(ng-repeat="task in tasks | filter:{ state: 'todo' }")
+      .task( ng-drag='true' ng-drag-data='task' draggable='false' )
+        %span {{task.title}}
+        %span.glyphicon.glyphicon-edit.pull-right( ng-drag='false' ng-click="editTaskModal(task.id)" )
 
-.col-md-3(ng-drop='true' ng-drop-success='updateStatus($data, "in_progress")')
-  .header
-    %h1 In Progress
-  %ul(ng-repeat="task in tasks | filter:{ state: 'in_progress' }")
-    %li(ng-drag='true' ng-drag-data='task' draggable='false' ) {{task.title}}
+  .col-md-3.list( ng-drop='true' ng-drop-success='updateStatus($data, "in_progress")' )
+    .title In Progress
+    %div( ng-repeat="task in tasks | filter:{ state: 'in_progress' }" )
+      .task( ng-drag='true' ng-drag-data='task' draggable='false' )
+        %span {{task.title}}
+        %span.glyphicon.glyphicon-edit.pull-right( ng-drag='false' ng-click="editTaskModal(task.id)" )
 
-.col-md-3(ng-drop='true' ng-drop-success='updateStatus($data, "done")')
-  .header
-    %h1 Done
-  %ul(ng-repeat="task in tasks | filter:{ state: 'done' }" )
-    %li(ng-drag='true' ng-drag-data='task') {{task.title}}
+  .col-md-3.list( ng-drop='true' ng-drop-success='updateStatus($data, "done")' )
+    .title Done
+    %div( ng-repeat="task in tasks | filter:{ state: 'done' }" )
+      .task(ng-drag='true' ng-drag-data='task')
+        %span {{task.title}}
+        %span.glyphicon.glyphicon-edit.pull-right( ng-drag='false' ng-click="editTaskModal(task.id)" )
 
-.col-md-3(ng-drop='true' ng-drop-success='updateStatus($data, "approved")')
-  .header
-    %h1 Approved
-  %ul(ng-repeat="task in tasks | filter:{ state: 'approved' }")
-    %li(ng-drag='true' ng-drag-data='task' draggable='false' ) {{task.title}}
+  .col-md-3.list( ng-drop='true' ng-drop-success='updateStatus($data, "approved")' )
+    .title Approved
+    %div( ng-repeat="task in tasks | filter:{ state: 'approved' }" )
+      .task( ng-drag='true' ng-drag-data='task' draggable='false' )
+        %span {{task.title}}
+        %span.glyphicon.glyphicon-edit.pull-right( ng-drag='false' ng-click="editTaskModal(task.id)" )

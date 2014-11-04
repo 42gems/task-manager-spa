@@ -1,0 +1,50 @@
+/* Variables
+*******************************************/
+$dark_grey: #B3B3B3;
+$light_grey: #E8E8E8;
+$lighter_grey: #F5F5F5;
+
+/* General
+*******************************************/
+.title {
+  display: inline-block;
+  margin: 10px 0;
+  font-size: 26px;
+}
+
+.col-md-3 {
+  width: 23%;
+  float: none;
+}
+
+/* Tasks
+*******************************************/
+#create_btn {
+  margin-top: 12px;
+  font-variant: small-caps;
+  font-weight: 600;
+}
+
+.tasks {
+  .list {
+    display: inline-block;
+    vertical-align: top;
+    margin: 5px;
+
+    background-color: $light_grey;
+    border-radius: 10px;
+
+    .task {
+      cursor: pointer;
+      margin: 8px 0;
+      margin-bottom: 10px;
+      padding: 8px;
+      border-radius: 5px;
+      background-color: $lighter_grey;
+      
+      &:hover{
+        box-shadow: 3px 3px 0 $dark_grey;
+      }
+    } 
+  }
+}

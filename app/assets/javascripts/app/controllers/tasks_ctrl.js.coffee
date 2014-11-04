@@ -16,12 +16,25 @@ app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, $modal) ->
     task.state = state
     task.save()
 
-  $scope.openModal = ->
+  $scope.newTaskModal = ->
     modalInstance = $modal.open(
       templateUrl: "tasks/modalForm.html"
-      controller: "TasksModalInstanceCtrl"
+      controller: "NewTaskModalInstanceCtrl"
     )
     modalInstance.result.then (task) ->
       $scope.tasks.push(task)
     , ->
-      console.log "Modal dismissed at: " + new Date()
+      console.log "Modal dismissed"
+
+  $scope.editTaskModal = (id) ->
+    modalInstance = $modal.open(
+      templateUrl: "tasks/modalForm.html"
+      controller: "EditTaskModalInstanceCtrl"
+      resolve:
+        id: ->
+          id
+    )
+    modalInstance.result.then (task) ->
+      console.log 'Task has been successfuly updated'
+    , ->
+      console.log "Modal dismissed"
