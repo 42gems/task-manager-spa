@@ -1,18 +1,18 @@
-%form.form-horizontal(role='form')
+%form.form-horizontal(role='form' name='SignUpForm' novalidate)
   .form-group
     %label.col-sm-4.control-label{:for => "inputEmail"} Email
     .col-sm-4
-      %input#inputEmail.form-control{"ng-model" => "user.email", :placeholder => "Email", :type => "text"}/
+      %input#inputEmail.form-control{"ng-model" => "user.email", :placeholder => "Email", :type => "text", "validation-field-required" => "true", "name" => "email", "validation-email" => "true"}
   .form-group
     %label.col-sm-4.control-label{:for => "inputPassword"} Password
     .col-sm-4
-      %input#inputPassword.form-control{"ng-model" => "user.password", :placeholder => "Password", :type => "password"}/
+      %input#inputPassword.form-control{"ng-model" => "user.password", :placeholder => "Password", :type => "password", "name" => "password","validation-field-required" => "true", "validation-min-length" => "8"}
   .form-group
     %label.col-sm-4.control-label{:for => "confirmPassword"} Password Confirmation
     .col-sm-4
-      %input#confirmPassword.form-control{"ng-model" => "user.password_confirmation", :placeholder => "Password", :type => "password"}/
+      %input#confirmPassword.form-control{"ng-model" => "user.password_confirmation", :placeholder => "Repeat Password", :type => "password", "name" => "confirmPassword", "validation-field-required" => "true", "validation-confirm-password" => "true"}
   .form-group
     .col-sm-offset-4.col-sm-10
-      %button.btn.btn-default{"ng-click" => "signUp()", :type => "submit"} Sign Up
+      %button.btn.btn-default{"ng-click" => "signUp(SignUpForm)", :type => "submit"} Sign Up
       %a( ui-sref='sign_in' )
         %button.btn.btn-default Log In
