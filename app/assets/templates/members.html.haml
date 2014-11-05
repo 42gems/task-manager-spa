@@ -2,16 +2,18 @@
   %table.table.table-hover.table-responsive
     %thead
       %tr
-        %td Project
-        %td #
+        %td Project #
+        %td Project Title
+        %td Member #
         %td Email
         %td Actions
-    %tbody( ng-repeat='project in projects' )
-      %tr( ng-repeat="member in members" )
-        %td {{ project.title }}
+    %tbody( ng-repeat="relation in members" )
+      %tr( ng-repeat="member in relation.users" )
+        %td {{ relation.project.id }}
+        %td {{ relation.project.title }}
         %td {{ member.id }}
         %td {{ member.email }}
         %td
-          .btn.btn-danger( ng-click='removeMember(project.id, member.id)' ) Remove
+          .btn.btn-danger( ng-click='removeMember(relation.project.id, member.id)' ) Remove
 %div(ng-hide='members')
   %h3(style="text-align: center;") There are no invited users yet

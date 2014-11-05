@@ -10,17 +10,6 @@ app.controller 'ProjectsCtrl', ($scope, $q, Project, $state) ->
   , (error) ->
     console.log 'Unauthorized request'
 
-  $scope.deleteProject = (id) ->
-    Project.$delete('/api/projects/' + id).then (response) ->
-      for project in $scope.projects
-        if project.id == id
-          $scope.projects.pop(project)
-          break
-      console.log 'Project successfuly deleted'
-    , (error) ->
-      console.log 'Could not remove project'
-      console.log error
-
   $scope.saveProject = ->
     Project.$post('/api/projects', 
       title: $scope.project.title
@@ -33,5 +22,16 @@ app.controller 'ProjectsCtrl', ($scope, $q, Project, $state) ->
       console.log 'Could not create a project'
       console.log error
 
-  $scope.removeMember = (projectId, memberId) ->
-    console.log 'not yet implemented'
+  $scope.deleteProject = (id) ->
+    Project.$delete('/api/projects/' + id).then (response) ->
+      $state.go('projects', {}, { reload: true })
+      console.log 'Project successfuly deleted'
+    , (error) ->
+      console.log 'Could not remove project'
+
+  $scope.removeMember = (project_id, member_id) ->
+    Project.$delete("/api/projects/#{project_id}/remove_member/#{member_id}").then (response) ->
+      $state.go('members', {}, { reload: true })
+      console.log 'Member successfuly removed from the project'
+    , (error) ->
+      console.log 'Could not remove member'

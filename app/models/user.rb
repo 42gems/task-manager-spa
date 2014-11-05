@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   end
 
   def invited
-    projects.map { |project| project.members }.flatten
+    projects.map do |project|
+      { project: project, users: project.members }
+    end
   end
 end
