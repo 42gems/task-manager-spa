@@ -1,13 +1,14 @@
 app.controller 'ProjectsCtrl', ($scope, $q, Project, $state) ->
+
   Project.query({}).then (results) ->
     $scope.projects = results
   , (error) ->
     console.log 'Unauthorized request'
-
-  Project.$get('/api/projects/members').then (results) ->
+  
+  Project.$get("/api/projects/members").then (results) ->
     $scope.members = results
   , (error) ->
-    console.log 'Could not fetch members'
+    console.log 'Unauthorized request'
 
   $scope.deleteProject = (id) ->
     Project.$delete('/api/projects/' + id).then (response) ->
@@ -31,3 +32,6 @@ app.controller 'ProjectsCtrl', ($scope, $q, Project, $state) ->
     , (error) ->
       console.log 'Could not create a project'
       console.log error
+
+  $scope.removeMember = (projectId, memberId) ->
+    console.log 'not yet implemented'

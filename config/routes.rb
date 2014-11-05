@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     resources :projects do
       resources :tasks
       get :members, on: :collection
+
+      get    'add_member/:id',    to: 'projects#add_member',    as: 'add_member'
+      delete 'remove_member/:id', to: 'projects#remove_member', as: 'remove_member'
+      post   'send_invite/:id',   to: 'projects#send_invite',   as: 'send_invite'
     end
   end
 end

@@ -1,5 +1,5 @@
 app.controller 'ProjectCtrl', ($scope, $q, Project, $stateParams, $state) ->
-  
+
   Project.get({ id: $stateParams.projectId }).then (results) ->
     $scope.project = results
   , (error) ->

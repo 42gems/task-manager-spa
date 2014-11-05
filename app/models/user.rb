@@ -14,11 +14,6 @@ class User < ActiveRecord::Base
   end
 
   def invited
-    project_ids = projects.pluck :id
-    user_ids = project_ids.map do |id|
-      Invite.where(project_id: id).pluck :user_id
-    end.flatten.uniq
-
-    User.where id: user_ids
+    projects.map { |project| project.members }.flatten
   end
 end

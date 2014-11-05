@@ -2,14 +2,16 @@
   %table.table.table-hover.table-responsive
     %thead
       %tr
+        %td Project
         %td #
         %td Email
         %td Actions
-    %tbody
-      %tr( ng-repeat='member in members' )
+    %tbody( ng-repeat='project in projects' )
+      %tr( ng-repeat="member in members" )
+        %td {{ project.title }}
         %td {{ member.id }}
         %td {{ member.email }}
         %td
-          .btn.btn-danger Remove
+          .btn.btn-danger( ng-click='removeMember(project.id, member.id)' ) Remove
 %div(ng-hide='members')
   %h3(style="text-align: center;") There are no invited users yet
