@@ -23,14 +23,5 @@ class Project < ActiveRecord::Base
   def select_users_for_invites
     user_ids = Invite.where(project_id: id).pluck(:user_id) << owner.id
     users = User.where.not('id IN (?)', user_ids)
-
-    users.map do |user|
-      [
-        user.email,
-        user.id,
-        email: user.email,
-        'data-project-url' => Rails.application.routes.url_helpers.project_send_invite_path(self, user)
-      ]
-    end
   end
 end

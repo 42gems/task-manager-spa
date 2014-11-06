@@ -21,12 +21,44 @@ a:hover {
   cursor: pointer;
 }
 
+.small-caps {
+  font-variant: small-caps;
+  font-weight: 600;
+}
+
+/* Misc
+*******************************************/
+
+.btn-like {
+  text-decoration: none;
+  cursor: pointer;
+  background-color: #f8f8f8;
+
+  background-image: -webkit-gradient(
+  linear,
+  left top,
+  left bottom,
+  color-stop(0, #FFFFFF),
+  color-stop(1, #F2F2F2)
+  );
+  background-image: linear-gradient(to bottom, #FFFFFF 0%, #F2F2F2 100%);
+  
+  &:hover, &:focus, &:active {
+    background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0, #FFFFFF),
+      color-stop(1, #F2F2F2)
+    );
+    background-image: linear-gradient(to top, #FFFFFF 0%, #F2F2F2 100%);
+  }
+}
+
 /* Tasks
 *******************************************/
 #create_btn {
   margin-top: 12px;
-  font-variant: small-caps;
-  font-weight: 600;
 }
 
 .tasks {

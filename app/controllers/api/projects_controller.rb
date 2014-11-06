@@ -1,32 +1,44 @@
 class API::ProjectsController < API::BaseController
+  before_action :fetch_project, only: [:members, :send_invite, :add_member, :remove_member, :users_for_invite]
+  skip_before_action :authenticate_user, only: :add_member
+
   def index
     respond_with current_user.participant_in
   end
 
   def members
-    respond_with Project.find(params[:id]).members
+    respond_with @project.members
   end
 
   def send_invite
-    project = Project.find(params[:project_id])
     user = User.find(params[:id])
-    UserMailer.send_invite(project, user)
+    UserMailer.send_invite(@project, user)
     head 200
   end
 
   def add_member
-    project = Project.find(params[:project_id])
-    project.members << User.find(params[:id])
+    @project.members << User.find(params[:id])
     head 200
   end
 
   def remove_member
-    project = Project.find(params[:project_id])
-    project.members.delete(params[:id])
+    @project.members.delete(params[:id])
     head 204
   end
 
+  def users_for_invite
+    respond_with @project.select_users_for_invites
+  end
+  
   private
+  def fetch_project
+    if params[:project_id]
+      @project = Project.find params[:project_id]
+    else
+      @project = Project.find params[:id]
+    end
+  end
+
   def project_params
     params.require(:project).permit(:owner_id, :title, :description)
   end

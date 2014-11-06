@@ -10,6 +10,12 @@ app.controller 'ProjectCtrl', ($scope, $q, Project, $stateParams, $state) ->
   , (error) ->
     console.log 'Could not fetch members of a project'
 
+  Project.get("#{$stateParams.projectId}/users_for_invite").then (results) ->
+    $scope.usersForInvite = results  
+    $scope.selected = $scope.usersForInvite[0]
+  , (error) ->
+    console.log 'Could not fetch users for invite'
+
   $scope.saveProject = ->
     $scope.project.save().then (response) ->
       console.log 'Project successfuly updated'
@@ -33,3 +39,10 @@ app.controller 'ProjectCtrl', ($scope, $q, Project, $stateParams, $state) ->
       console.log 'Member successfuly removed from the project'
     , (error) ->
       console.log 'Could not remove member'
+
+  $scope.sendInvite = (member_id) ->
+    project_id = $scope.project.id
+    Project.$post("/api/projects/#{project_id}/send_invite/#{member_id}").then (response) ->
+      console.log 'Invitation has been sent'
+    , (error) ->
+      console.log 'Could not send an invitation'

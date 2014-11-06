@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     end
     resources :projects do
       resources :tasks
-      get :members, on: :member
+
+      get    :members,          on: :member
+      get    :users_for_invite, on: :member
 
       get    'add_member/:id',    to: 'projects#add_member',    as: 'add_member'
       delete 'remove_member/:id', to: 'projects#remove_member', as: 'remove_member'

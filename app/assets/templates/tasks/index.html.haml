@@ -2,7 +2,7 @@
   .col-md-3.list(ng-drop='true' ng-drop-success='updateStatus($data, "todo")')
     .title Todo
     .pull-right( ng-click="newTaskModal()" ) 
-      #create_btn.btn.btn-success create task
+      #create_btn.small-caps.btn.btn-success create task
     %div(ng-repeat="task in tasks | filter:{ state: 'todo' }")
       .task( ng-drag='true' ng-drag-data='task' draggable='false' )
         %span {{task.title}}

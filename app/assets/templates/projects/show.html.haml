@@ -26,3 +26,6 @@
         %li
           {{ member.email }} -
           %a( ng-click='removeMember(member.id)' ) kick
+      .input-group
+        %select.form-control( ng-model="selected" ng-options="user.email for user in usersForInvite" )
+        .input-group-addon.btn-like( ng-click='sendInvite(selected.id)' ) invite

@@ -1,0 +1,15 @@
+Good day, sir! You have been invited to take participation in the following project:
+%br
+%br
+%table
+  %thead
+    %tr
+      %td Name
+      %td Description
+  %tbody
+    %tr
+      %td= @project.title
+      %td= @project.description
+%br
+If you agree, please click the following link:
+= link_to 'Agree', api_project_add_member_url(@project.id, @user.id)
