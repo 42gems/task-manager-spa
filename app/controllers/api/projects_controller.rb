@@ -10,24 +10,20 @@ class API::ProjectsController < API::BaseController
     respond_with @project.members
   end
 
+  def users_for_invite
+    respond_with @project.select_users_for_invites
+  end
+  
   def send_invite
     user = User.find(params[:id])
-    UserMailer.send_invite(@project, user)
-    head 200
-  end
-
-  def add_member
     @project.members << User.find(params[:id])
+    UserMailer.send_notification(@project, user)
     head 200
   end
 
   def remove_member
     @project.members.delete(params[:id])
     head 204
-  end
-
-  def users_for_invite
-    respond_with @project.select_users_for_invites
   end
   
   private

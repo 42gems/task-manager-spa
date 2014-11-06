@@ -1,0 +1,20 @@
+%div( ng-if='invites' )
+  %h4 You have been invited to the following projects:
+  %div( ng-repeat='invite in invites' )
+    %table.table.table-responsive.table-hover
+      %thead
+        %tr
+          %td #
+          %td Name
+          %td Description
+          %td Decision
+      %tbody
+        %tr
+          %td {{ invite.project.id }}
+          %td {{ invite.project.title }}
+          %td {{ invite.project.description }}
+          %td
+            .btn.btn-sm.btn-success.small-caps( ng-click='accept(invite.invite)' ) accept
+            .btn.btn-sm.btn-danger.small-caps( ng-click='decline(invite.invite)' ) decline
+%div( ng-hide='invites' )
+  %h3(style="text-align: center;") You do not have invites

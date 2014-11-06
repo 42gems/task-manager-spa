@@ -22,7 +22,6 @@ app.controller 'ProjectCtrl', ($scope, $q, Project, $stateParams, $state) ->
       $state.go('project', {}, { reload: true })
     , (error) ->
       console.log 'Could not update the project'
-      console.log error
 
   $scope.delete = ->
     $scope.project.delete().then (respone) ->
@@ -30,7 +29,6 @@ app.controller 'ProjectCtrl', ($scope, $q, Project, $stateParams, $state) ->
       $state.go 'projects'
     , (error) ->
       console.log 'Could not delete the project'
-      console.log error
 
   $scope.removeMember = (member_id) ->
     project_id = $scope.project.id

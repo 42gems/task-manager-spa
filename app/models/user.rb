@@ -19,8 +19,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def pending_invites
+    invites.pending.map do |invite|
+      { 
+        project: Project.find(invite.project_id),
+        invite: invite
+      }
+    end
+  end
+
   def participant_in
-    project_ids = self.project_ids << self.invites.pluck(:project_id)
+    project_ids = self.project_ids << self.invites.accepted.pluck(:project_id)
     project_ids.flatten!
     Project.where 'id IN (?)', project_ids
   end
