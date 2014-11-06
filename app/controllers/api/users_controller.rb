@@ -1,6 +1,10 @@
 class API::UsersController < API::BaseController
   skip_before_action :authenticate_user, only: [:sign_in, :create]
 
+  def invited
+    respond_with current_user.invited
+  end
+
   def sign_in
     token = User.authenticate(params[:user][:email], params[:user][:password])
     if token

@@ -1,6 +1,10 @@
 class API::ProjectsController < API::BaseController
+  def index
+    respond_with current_user.participant_in
+  end
+
   def members
-    respond_with current_user.invited
+    respond_with Project.find(params[:id]).members
   end
 
   def send_invite

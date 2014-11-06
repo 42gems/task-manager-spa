@@ -20,3 +20,9 @@
           %a( ui-sref='project.edit' )
             .btn.btn-success.btn-sm Edit
           .btn.btn-danger.btn-sm( ng-click='delete()' ) Destroy
+    %div( ng-if='members' )
+      %h4 Members of a project:
+      %ul( ng-repeat='member in members')
+        %li
+          {{ member.email }} -
+          %a( ng-click='removeMember(member.id)' ) kick

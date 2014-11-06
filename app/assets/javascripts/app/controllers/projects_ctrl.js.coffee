@@ -1,11 +1,11 @@
-app.controller 'ProjectsCtrl', ($scope, $q, Project, $state) ->
+app.controller 'ProjectsCtrl', ($scope, $q, Project, User, $state) ->
 
   Project.query({}).then (results) ->
     $scope.projects = results
   , (error) ->
     console.log 'Unauthorized request'
   
-  Project.$get("/api/projects/members").then (results) ->
+  User.query({}, 'invited').then (results) ->
     $scope.members = results
   , (error) ->
     console.log 'Unauthorized request'

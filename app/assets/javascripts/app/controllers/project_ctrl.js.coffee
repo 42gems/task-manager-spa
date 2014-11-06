@@ -5,6 +5,11 @@ app.controller 'ProjectCtrl', ($scope, $q, Project, $stateParams, $state) ->
   , (error) ->
     console.log 'Could not fetch project'
 
+  Project.get("#{$stateParams.projectId}/members").then (results) ->
+    $scope.members = results
+  , (error) ->
+    console.log 'Could not fetch members of a project'
+
   $scope.saveProject = ->
     $scope.project.save().then (response) ->
       console.log 'Project successfuly updated'
@@ -20,3 +25,11 @@ app.controller 'ProjectCtrl', ($scope, $q, Project, $stateParams, $state) ->
     , (error) ->
       console.log 'Could not delete the project'
       console.log error
+
+  $scope.removeMember = (member_id) ->
+    project_id = $scope.project.id
+    Project.$delete("/api/projects/#{project_id}/remove_member/#{member_id}").then (response) ->
+      $state.go($state.current, {}, { reload: true })
+      console.log 'Member successfuly removed from the project'
+    , (error) ->
+      console.log 'Could not remove member'

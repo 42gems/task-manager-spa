@@ -18,4 +18,10 @@ class User < ActiveRecord::Base
       { project: project, users: project.members }
     end
   end
+
+  def participant_in
+    project_ids = self.project_ids << self.invites.pluck(:project_id)
+    project_ids.flatten!
+    Project.where 'id IN (?)', project_ids
+  end
 end
