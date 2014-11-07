@@ -19,5 +19,5 @@
             .btn.btn-primary Taks
         %td
           .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
-          .btn.btn-danger( ng-click='deleteProject(project.id)' ) Destroy
+          .btn.btn-danger( ng-click='deleteProject(project)' ) Destroy
 %div( ui-view='tasks' )

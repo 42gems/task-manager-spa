@@ -1,19 +1,23 @@
+%div(ng-hide='members')
+  %h3(style="text-align: center;") There are no users who accepted any invites, if they were.
+
 %div( ng-if='members' )
-  %table.table.table-hover.table-responsive
+  %table.table.table-hover.table-responsives
     %thead
       %tr
-        %td Project #
-        %td Project Title
+        %td( rowspan=2 ) Project #
+        %td( rowspan=2 ) Project Title
+        %td( colspan=3 ) Members
+      %tr
         %td Member #
         %td Email
         %td Actions
     %tbody( ng-repeat="relation in members" )
+      %tr
+        %td( rowspan="{{ relation.users.length + 1 }}" ) {{ relation.project.id }}
+        %td( rowspan="{{ relation.users.length + 1 }}" ) {{ relation.project.title }}
       %tr( ng-repeat="member in relation.users" )
-        %td {{ relation.project.id }}
-        %td {{ relation.project.title }}
         %td {{ member.id }}
         %td {{ member.email }}
         %td
-          .btn.btn-danger( ng-click='removeMember(relation.project.id, member.id)' ) Remove
-%div(ng-hide='members')
-  %h3(style="text-align: center;") There are no invited users yet
+          .btn.btn-danger( ng-click='removeMember(relation.project, member.id)' ) Remove

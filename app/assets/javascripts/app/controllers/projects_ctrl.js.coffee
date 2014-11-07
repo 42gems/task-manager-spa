@@ -11,26 +11,25 @@ app.controller 'ProjectsCtrl', ($scope, $q, Project, User, $state) ->
     console.log 'Unauthorized request'
 
   $scope.saveProject = ->
-    Project.$post('/api/projects', 
-      title: $scope.project.title
-      description: $scope.project.description
-      owner_id: $scope.project.ownerId
-    ).then (response) ->
+    project = new Project($scope.project)
+    project.save().then (response) ->
       $state.go('projects', {}, { reload: true })
       console.log 'Project successfuly created'
     , (error) ->
       console.log 'Could not create a project'
       console.log error
 
-  $scope.deleteProject = (id) ->
-    Project.$delete('/api/projects/' + id).then (response) ->
+  $scope.deleteProject = (projct) ->
+    project = new Project(projct)
+    project.delete().then (response) ->
       $state.go('projects', {}, { reload: true })
       console.log 'Project successfuly deleted'
     , (error) ->
       console.log 'Could not remove project'
 
-  $scope.removeMember = (project_id, member_id) ->
-    Project.$delete("/api/projects/#{project_id}/remove_member/#{member_id}").then (response) ->
+  $scope.removeMember = (projct, member_id) ->
+    project = new Project(projct)
+    project.removeMember(member_id).then (response) ->
       $state.go('members', {}, { reload: true })
       console.log 'Member successfuly removed from the project'
     , (error) ->

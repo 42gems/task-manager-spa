@@ -7,7 +7,7 @@ class API::ProjectsController < API::BaseController
   end
 
   def members
-    respond_with @project.members
+    respond_with @project.members.accepted_invite
   end
 
   def users_for_invite

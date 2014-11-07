@@ -5,6 +5,9 @@ class User < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :tokens,   dependent: :destroy
 
+  scope :accepted_invite, -> { where(invites: { accepted: true }) }
+  scope :pending_invite,  -> { where(invites: { accepted: false }) }
+
   def self.select_all_emails
     User.pluck :email, :id
   end
@@ -15,8 +18,8 @@ class User < ActiveRecord::Base
 
   def invited
     projects.map do |project|
-      { project: project, users: project.members }
-    end
+      { project: project, users: project.members.accepted_invite } if project.members.accepted_invite.any?
+    end.reject &:nil?
   end
 
   def pending_invites

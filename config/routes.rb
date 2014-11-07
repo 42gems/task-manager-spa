@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
       get    :members,            on: :member
       get    :users_for_invite,   on: :member
-      post   'send_invite/:id',   to: 'projects#send_invite',   as: 'send_invite'
+      get    'send_invite/:id',   to: 'projects#send_invite',   as: 'send_invite'
       delete 'remove_member/:id', to: 'projects#remove_member', as: 'remove_member'
     end
     resources :invites, only: [:index, :update, :destroy]

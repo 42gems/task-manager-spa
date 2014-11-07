@@ -5,12 +5,12 @@ app.controller 'ProjectCtrl', ($scope, $q, Project, $stateParams, $state) ->
   , (error) ->
     console.log 'Could not fetch project'
 
-  Project.get("#{$stateParams.projectId}/members").then (results) ->
+  Project.members($stateParams.projectId).then (results) ->
     $scope.members = results
   , (error) ->
     console.log 'Could not fetch members of a project'
 
-  Project.get("#{$stateParams.projectId}/users_for_invite").then (results) ->
+  Project.users_for_invite($stateParams.projectId).then (results) ->
     $scope.usersForInvite = results  
     $scope.selected = $scope.usersForInvite[0]
   , (error) ->
@@ -31,16 +31,14 @@ app.controller 'ProjectCtrl', ($scope, $q, Project, $stateParams, $state) ->
       console.log 'Could not delete the project'
 
   $scope.removeMember = (member_id) ->
-    project_id = $scope.project.id
-    Project.$delete("/api/projects/#{project_id}/remove_member/#{member_id}").then (response) ->
+    $scope.project.removeMember(member_id).then (response) ->
       $state.go($state.current, {}, { reload: true })
       console.log 'Member successfuly removed from the project'
     , (error) ->
       console.log 'Could not remove member'
 
   $scope.sendInvite = (member_id) ->
-    project_id = $scope.project.id
-    Project.$post("/api/projects/#{project_id}/send_invite/#{member_id}").then (response) ->
+    $scope.project.sendInvite(member_id).then (response) ->
       console.log 'Invitation has been sent'
     , (error) ->
       console.log 'Could not send an invitation'
