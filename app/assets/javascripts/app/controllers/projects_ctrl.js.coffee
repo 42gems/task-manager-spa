@@ -3,12 +3,12 @@ app.controller 'ProjectsCtrl', ($scope, $q, Project, User, $state) ->
   Project.query({}).then (results) ->
     $scope.projects = results
   , (error) ->
-    console.log 'Unauthorized request'
+    console.log 'Could not fetch projects'
   
   User.query({}, 'invited').then (results) ->
     $scope.members = results
   , (error) ->
-    console.log 'Unauthorized request'
+    console.log 'Could not fetch invited users'
 
   $scope.saveProject = ->
     project = new Project($scope.project)

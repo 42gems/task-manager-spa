@@ -1,6 +1,10 @@
 class API::UsersController < API::BaseController
   skip_before_action :authenticate_user, only: [:sign_in, :create]
 
+  def current
+    render json: current_user
+  end
+
   def invited
     respond_with current_user.invited
   end
@@ -19,7 +23,7 @@ class API::UsersController < API::BaseController
     head 204
   end
 
-  private  
+  private
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
   end
