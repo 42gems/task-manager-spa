@@ -40722,12 +40722,12 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
     Project.query({}).then(function(results) {
       return $scope.projects = results;
     }, function(error) {
-      return console.log('Unauthorized request');
+      return console.log('Could not fetch projects');
     });
     User.query({}, 'invited').then(function(results) {
       return $scope.members = results;
     }, function(error) {
-      return console.log('Unauthorized request');
+      return console.log('Could not fetch invited users');
     });
     $scope.saveProject = function() {
       var project;
@@ -40770,18 +40770,27 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
 
 }).call(this);
 (function() {
-  app.controller('SignInCtrl', function($scope, $window, $state, UserService, AuthenticationService) {
-    return $scope.logIn = function(email, password) {
+  app.controller('SignInCtrl', function($rootScope, $scope, $window, $state, UserService, AuthenticationService) {
+    $scope.logIn = function(email, password) {
       if (email && password) {
         return UserService.logIn(email, password).success(function(data) {
           AuthenticationService.isLoggedIn = true;
           $window.localStorage.taskManagerSpaToken = data.auth_token;
-          return $state.go('home');
+          $state.go('home');
+          return $scope.currentUser();
         }).error(function(status, data) {
           console.log(data);
           return console.log(status);
         });
       }
+    };
+    return $scope.currentUser = function() {
+      return UserService.currentUser().success(function(data) {
+        return $rootScope.currentUser = data;
+      }).error(function(status, data) {
+        console.log(data);
+        return console.log(status);
+      });
     };
   });
 
@@ -41063,6 +41072,9 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
       },
       logOut: function() {
         return $http["delete"]("/api/users/sign_out");
+      },
+      currentUser: function() {
+        return $http.get("/api/users/current");
       }
     };
   });
