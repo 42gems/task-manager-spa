@@ -4,5 +4,9 @@ app.factory 'UserService', ($http) ->
       user:
         email: email
         password: password
+  
   logOut: ->
     $http.delete "/api/users/sign_out"
+  
+  currentUser: ->
+    $http.get "/api/users/current"
