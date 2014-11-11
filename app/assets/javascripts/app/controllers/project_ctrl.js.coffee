@@ -1,8 +1,9 @@
 app.controller 'ProjectCtrl', ($rootScope, $scope, $q, Project, UserService, $stateParams, $state) ->
+  $scope.currentUser = {}
 
   Project.get({ id: $stateParams.projectId }).then (results) ->
     $scope.project = results
-    $scope.isManagable()
+    $scope.getCurrentUser()
   , (error) ->
     console.log 'Could not fetch project'
 
@@ -44,7 +45,20 @@ app.controller 'ProjectCtrl', ($rootScope, $scope, $q, Project, UserService, $st
     , (error) ->
       console.log 'Could not send an invitation'
 
-  $scope.isManagable = ->
+  $scope.getCurrentUser = ->
     UserService.getCurrentUser()
-      .success (currentUser) ->
-        $scope.project.isManagable = currentUser.id == $scope.project.ownerId
+      .success (user) ->
+        $scope.currentUser = user
+        $scope.isOwner()
+        $scope.isMember()
+
+  $scope.isOwner = ->
+    $scope.currentUser.isOwner = $scope.currentUser.id == $scope.project.ownerId
+
+  $scope.isMember = ->
+    isMember = false
+    isMember = true for member in $scope.members when member.id == $scope.currentUser.id
+    $scope.currentUser.isMember = isMember
+
+  $scope.isManagable = ->
+    $scope.currentUser.isOwner or $scope.currentUser.isMember

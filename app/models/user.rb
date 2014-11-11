@@ -8,14 +8,6 @@ class User < ActiveRecord::Base
   scope :accepted_invite, -> { where(invites: { accepted: true }) }
   scope :pending_invite,  -> { where(invites: { accepted: false }) }
 
-  def self.select_all_emails
-    User.pluck :email, :id
-  end
-
-  def can_manage?(project)
-    id == project.owner.id || invites.where(project_id: project.id).any?
-  end
-
   def invited
     projects.map do |project|
       { project: project, users: project.members.accepted_invite } if project.members.accepted_invite.any?
@@ -31,9 +23,10 @@ class User < ActiveRecord::Base
     end
   end
 
-  def participant_in
-    project_ids = self.project_ids << self.invites.accepted.pluck(:project_id)
-    project_ids.flatten!
-    Project.where 'id IN (?)', project_ids
+  def all_projects
+    data = []
+    data << self.projects 
+    data << Project.is_public
+    data.flatten.uniq
   end
 end

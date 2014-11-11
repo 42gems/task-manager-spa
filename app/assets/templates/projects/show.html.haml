@@ -6,8 +6,8 @@
         %td Description
         %td Owner #
         %td Private
-        %td Tasks
-        %td( ng-if='project.isManagable' ) Actions
+        %td( ng-if='currentUser.isMember' ) Tasks
+        %td( ng-if='currentUser.isOwner' ) Actions
       %tr
         %td( ng-if='project.description')
           {{ project.description }}
@@ -15,21 +15,22 @@
           No description given
         %td {{ project.ownerId }}
         %td {{ project.private }}
-        %td
+        %td( ng-if='currentUser.isMember' )
           %a( ui-sref='project.tasks' )
             .btn.btn-primary.btn-sm Edit Tasks
-        %td( ng-if='project.isManagable' )
+        %td( ng-if='currentUser.isOwner' )
           %a( ui-sref='project.edit' )
             .btn.btn-success.btn-sm Edit
           .btn.btn-danger.btn-sm( ng-click='delete()' ) Destroy
-    %div( ng-if='project.isManagable' )
+    %div
       %h4 Members of a project:
-      %p( ng-hide='members' ) There is no members except you
+      %p( ng-hide='members' ) There is no members except owner
       %div( ng-if='members' )
         %ul( ng-repeat='member in members')
           %li
-            {{ member.email }} -
-            %a( ng-click='removeMember(member.id)' ) kick
-      .input-group
+            {{ member.email }}
+            %a( ng-if='currentUser.isOwner' ng-click='removeMember(member.id)' ) 
+              .btn.btn-sm.btn-default.small-caps X
+      .input-group( ng-if='currentUser.isOwner' )
         %select.form-control( ng-model="selected" ng-options="user.email for user in usersForInvite" )
         .input-group-addon.btn-like( ng-click='sendInvite(selected.id)' ) invite
