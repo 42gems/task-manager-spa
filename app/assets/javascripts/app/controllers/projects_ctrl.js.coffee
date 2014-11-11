@@ -1,7 +1,9 @@
-app.controller 'ProjectsCtrl', ($scope, $q, Project, User, $state) ->
+app.controller 'ProjectsCtrl', ($scope, $q, Project, User, UserService, $state) ->
+  $scope.currentUser = {}
 
   Project.query({}).then (results) ->
     $scope.projects = results
+    $scope.getCurrentUser()
   , (error) ->
     console.log 'Could not fetch projects'
   
@@ -34,3 +36,11 @@ app.controller 'ProjectsCtrl', ($scope, $q, Project, User, $state) ->
       console.log 'Member successfuly removed from the project'
     , (error) ->
       console.log 'Could not remove member'
+
+  $scope.getCurrentUser = ->
+    UserService.getCurrentUser()
+      .success (data) ->
+        $scope.currentUser = data
+
+  $scope.isManagable = (project) ->
+    $scope.currentUser.id == project.ownerId
