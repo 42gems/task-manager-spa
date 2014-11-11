@@ -5,22 +5,24 @@
       %thead
         %td Description
         %td Owner #
+        %td Private
         %td Tasks
-        %td Actions
+        %td( ng-if='project.isManagable' ) Actions
       %tr
         %td( ng-if='project.description')
           {{ project.description }}
         %td( ng-if='!project.description')
           No description given
         %td {{ project.ownerId }}
+        %td {{ project.private }}
         %td
           %a( ui-sref='project.tasks' )
             .btn.btn-primary.btn-sm Edit Tasks
-        %td
+        %td( ng-if='project.isManagable' )
           %a( ui-sref='project.edit' )
             .btn.btn-success.btn-sm Edit
           .btn.btn-danger.btn-sm( ng-click='delete()' ) Destroy
-    %div
+    %div( ng-if='project.isManagable' )
       %h4 Members of a project:
       %p( ng-hide='members' ) There is no members except you
       %div( ng-if='members' )

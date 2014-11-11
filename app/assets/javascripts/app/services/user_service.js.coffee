@@ -8,5 +8,5 @@ app.factory 'UserService', ($http) ->
   logOut: ->
     $http.delete "/api/users/sign_out"
   
-  currentUser: ->
+  getCurrentUser: ->
     $http.get "/api/users/current"

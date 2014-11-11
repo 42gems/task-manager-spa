@@ -10,7 +10,7 @@ app.factory 'Project', (railsResourceFactory) ->
   Project.prototype.removeMember = (memberId) ->
     @$delete(@$url() + "/remove_member/#{memberId}")
   
-  Project.users_for_invite = (id) ->
+  Project.usersForInvite = (id) ->
     @$get(@$url() + "/#{id}/users_for_invite")
   
   Project.prototype.sendInvite = (memberId) ->

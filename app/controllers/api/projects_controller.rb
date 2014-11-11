@@ -36,6 +36,6 @@ class API::ProjectsController < API::BaseController
   end
 
   def project_params
-    params.require(:project).permit(:owner_id, :title, :description)
+    params.require(:project).permit(:owner_id, :title, :description, :private)
   end
 end
