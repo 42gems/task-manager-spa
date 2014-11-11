@@ -13,6 +13,7 @@ app.controller 'ProjectsCtrl', ($scope, $q, Project, User, UserService, $state) 
     console.log 'Could not fetch invited users'
 
   $scope.saveProject = ->
+    $scope.project.ownerId = $scope.currentUser.id
     project = new Project($scope.project)
     project.save().then (response) ->
       $state.go('projects', {}, { reload: true })
