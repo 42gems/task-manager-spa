@@ -36161,14 +36161,14 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/templates/projects/form.html.haml
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("projects/form.html", "<form class='form-horizontal' role='form'>\n  <div class='form-group'>\n    <label class='col-sm-4 control-label' for='inputTitle'>Title</label>\n    <div class='col-sm-4'>\n      <input class='form-control' id='inputTitle' ng-model='project.title' placeholder='Title of the project' type='text'>\n    </div>\n  </div>\n  <div class='form-group'>\n    <label class='col-sm-4 control-label' for='inputDesc'>Description</label>\n    <div class='col-sm-4'>\n      <input class='form-control' id='inputDesc' ng-model='project.description' placeholder='Description of the project' type='text'>\n    </div>\n  </div>\n  <div class='form-group'>\n    <label class='col-sm-4 control-label' for='inputOwner'>Onwer #</label>\n    <div class='col-sm-4'>\n      <input class='form-control' id='inputOwner' ng-model='project.ownerId' placeholder='ID of the owner' type='text'>\n    </div>\n  </div>\n  <div class='form-group'>\n    <div class='col-sm-4'></div>\n    <div class='col-sm-4'>\n      <div class='btn btn-success btn-sm' ng-click='saveProject()'>Save</div>\n      <a ui-sref='^'>\n        <div class='btn btn-warning btn-sm'>Cancel</div>\n      </a>\n    </div>\n  </div>\n</form>")
+  $templateCache.put("projects/form.html", "<form class='form-horizontal' role='form'>\n  <div class='form-group'>\n    <label class='col-sm-4 control-label' for='inputTitle'>Title</label>\n    <div class='col-sm-4'>\n      <input class='form-control' id='inputTitle' ng-model='project.title' placeholder='Title of the project' type='text'>\n    </div>\n  </div>\n  <div class='form-group'>\n    <label class='col-sm-4 control-label' for='inputDesc'>Description</label>\n    <div class='col-sm-4'>\n      <input class='form-control' id='inputDesc' ng-model='project.description' placeholder='Description of the project' type='text'>\n    </div>\n  </div>\n  <div class='form-group'>\n    <label class='col-sm-4 control-label' for='inputOwner'>Onwer #</label>\n    <div class='col-sm-4'>\n      <input class='form-control' id='inputOwner' ng-model='project.ownerId' placeholder='ID of the owner' type='text'>\n    </div>\n  </div>\n  <div class='form-group'>\n    <label class='control-label col-sm-4' for='inputPrivate'>Private</label>\n    <div class='col-sm-4'>\n      <input id='inputPrivate' ng-model='project.private' type='checkbox'>\n    </div>\n  </div>\n  <div class='form-group'>\n    <div class='col-sm-4'></div>\n    <div class='col-sm-4'>\n      <div class='btn btn-success btn-sm' ng-click='saveProject()'>Save</div>\n      <a ui-sref='^'>\n        <div class='btn btn-warning btn-sm'>Cancel</div>\n      </a>\n    </div>\n  </div>\n</form>")
 }]);
 
 // Angular Rails Template
 // source: app/assets/templates/projects/index.html.haml
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("projects/index.html", "<h2>Projects</h2>\n<a ui-sref='projects.new'>\n  <div class='btn btn-success'>New Project</div>\n</a>\n<div ui-view='project'></div>\n<div ng-if='projects'>\n  <table class='table table-hover table-responsive'>\n    <thead>\n      <tr>\n        <td>Title</td>\n        <td>Owner #</td>\n        <td>Tasks</td>\n        <td>Actions</td>\n      </tr>\n    </thead>\n    <tbody>\n      <tr ng-repeat='project in projects'>\n        <td>{{ project.title }}</td>\n        <td>{{ project.ownerId }}</td>\n        <td>\n          <a ui-sref='projects.tasks({projectId: {{project.id}} })'>\n            <div class='btn btn-primary'>Taks</div>\n          </a>\n        </td>\n        <td>\n          <div class='btn btn-info' ui-sref='project({projectId: {{project.id}} })'>Details</div>\n          <div class='btn btn-danger' ng-click='deleteProject(project)'>Destroy</div>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n<div ui-view='tasks'></div>")
+  $templateCache.put("projects/index.html", "<h2>Projects</h2>\n<a ui-sref='projects.new'>\n  <div class='btn btn-success'>New Project</div>\n</a>\n<div ui-view='project'></div>\n<div ng-if='projects'>\n  <table class='table table-hover table-responsive'>\n    <thead>\n      <tr>\n        <td>Title</td>\n        <td>Owner #</td>\n        <td>Tasks</td>\n        <td>Actions</td>\n      </tr>\n    </thead>\n    <tbody>\n      <tr ng-repeat='project in projects'>\n        <td>{{ project.title }}</td>\n        <td>{{ project.ownerId }}</td>\n        <td>\n          <a ui-sref='projects.tasks({projectId: {{project.id}} })'>\n            <div class='btn btn-primary'>Taks</div>\n          </a>\n        </td>\n        <td>\n          <div class='btn btn-info' ui-sref='project({projectId: {{project.id}} })'>Details</div>\n          <div class='btn btn-danger' ng-click='deleteProject(project)' ng-if='isManagable(project)'>Destroy</div>\n        </td>\n      </tr>\n    </tbody>\n  </table>\n</div>\n<div ui-view='tasks'></div>")
 }]);
 
 // Angular Rails Template
@@ -36182,7 +36182,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/templates/projects/show.html.haml
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("projects/show.html", "<div ui-view>\n  <div ng-if='project'>\n    <h2>{{ project.title }}</h2>\n    <table class='table table-responsive'>\n      <thead>\n        <td>Description</td>\n        <td>Owner #</td>\n        <td>Tasks</td>\n        <td>Actions</td>\n      </thead>\n      <tr>\n        <td ng-if='project.description'>\n          {{ project.description }}\n        </td>\n        <td ng-if='!project.description'>\n          No description given\n        </td>\n        <td>{{ project.ownerId }}</td>\n        <td>\n          <a ui-sref='project.tasks'>\n            <div class='btn btn-primary btn-sm'>Edit Tasks</div>\n          </a>\n        </td>\n        <td>\n          <a ui-sref='project.edit'>\n            <div class='btn btn-success btn-sm'>Edit</div>\n          </a>\n          <div class='btn btn-danger btn-sm' ng-click='delete()'>Destroy</div>\n        </td>\n      </tr>\n    </table>\n    <div>\n      <h4>Members of a project:</h4>\n      <p ng-hide='members'>There is no members except you</p>\n      <div ng-if='members'>\n        <ul ng-repeat='member in members'>\n          <li>\n            {{ member.email }} -\n            <a ng-click='removeMember(member.id)'>kick</a>\n          </li>\n        </ul>\n      </div>\n      <div class='input-group'>\n        <select class='form-control' ng-model='selected' ng-options='user.email for user in usersForInvite'></select>\n        <div class='input-group-addon btn-like' ng-click='sendInvite(selected.id)'>invite</div>\n      </div>\n    </div>\n  </div>\n</div>")
+  $templateCache.put("projects/show.html", "<div ui-view>\n  <div ng-if='project'>\n    <h2>{{ project.title }}</h2>\n    <table class='table table-responsive'>\n      <thead>\n        <td>Description</td>\n        <td>Owner #</td>\n        <td>Private</td>\n        <td ng-if='currentUser.isMember'>Tasks</td>\n        <td ng-if='currentUser.isOwner'>Actions</td>\n      </thead>\n      <tr>\n        <td ng-if='project.description'>\n          {{ project.description }}\n        </td>\n        <td ng-if='!project.description'>\n          No description given\n        </td>\n        <td>{{ project.ownerId }}</td>\n        <td>{{ project.private }}</td>\n        <td ng-if='currentUser.isMember'>\n          <a ui-sref='project.tasks'>\n            <div class='btn btn-primary btn-sm'>Edit Tasks</div>\n          </a>\n        </td>\n        <td ng-if='currentUser.isOwner'>\n          <a ui-sref='project.edit'>\n            <div class='btn btn-success btn-sm'>Edit</div>\n          </a>\n          <div class='btn btn-danger btn-sm' ng-click='delete()'>Destroy</div>\n        </td>\n      </tr>\n    </table>\n    <div>\n      <h4>Members of a project:</h4>\n      <p ng-hide='members'>There is no members except owner</p>\n      <div ng-if='members'>\n        <ul ng-repeat='member in members'>\n          <li>\n            {{ member.email }}\n            <a ng-click='removeMember(member.id)' ng-if='currentUser.isOwner'>\n              <div class='btn btn-sm btn-default small-caps'>X</div>\n            </a>\n          </li>\n        </ul>\n      </div>\n      <div class='input-group' ng-if='currentUser.isOwner'>\n        <select class='form-control' ng-model='selected' ng-options='user.email for user in usersForInvite'></select>\n        <div class='input-group-addon btn-like' ng-click='sendInvite(selected.id)'>invite</div>\n      </div>\n    </div>\n  </div>\n</div>")
 }]);
 
 // Angular Rails Template
@@ -36210,7 +36210,7 @@ angular.module("templates").run(["$templateCache", function($templateCache) {
 // source: app/assets/templates/tasks/index.html.haml
 
 angular.module("templates").run(["$templateCache", function($templateCache) {
-  $templateCache.put("tasks/index.html", "<div class='tasks'>\n  <div class='col-md-3 list' ng-drop-success='updateStatus($data, \"todo\")' ng-drop='true'>\n    <div class='title'>Todo</div>\n    <div class='pull-right' ng-click='newTaskModal()'>\n      <div class='small-caps btn btn-success' id='create_btn'>create task</div>\n    </div>\n    <div ng-repeat=\"task in tasks | filter:{ state: 'todo' }\">\n      <div class='task' draggable='false' ng-drag-data='task' ng-drag='true'>\n        <span>{{task.title}}</span>\n        <span class='glyphicon glyphicon-edit pull-right' ng-click='editTaskModal(task.id)' ng-drag='false'></span>\n      </div>\n    </div>\n  </div>\n  <div class='col-md-3 list' ng-drop-success='updateStatus($data, \"in_progress\")' ng-drop='true'>\n    <div class='title'>In Progress</div>\n    <div ng-repeat=\"task in tasks | filter:{ state: 'in_progress' }\">\n      <div class='task' draggable='false' ng-drag-data='task' ng-drag='true'>\n        <span>{{task.title}}</span>\n        <span class='glyphicon glyphicon-edit pull-right' ng-click='editTaskModal(task.id)' ng-drag='false'></span>\n      </div>\n    </div>\n  </div>\n  <div class='col-md-3 list' ng-drop-success='updateStatus($data, \"done\")' ng-drop='true'>\n    <div class='title'>Done</div>\n    <div ng-repeat=\"task in tasks | filter:{ state: 'done' }\">\n      <div class='task' ng-drag-data='task' ng-drag='true'>\n        <span>{{task.title}}</span>\n        <span class='glyphicon glyphicon-edit pull-right' ng-click='editTaskModal(task.id)' ng-drag='false'></span>\n      </div>\n    </div>\n  </div>\n  <div class='col-md-3 list' ng-drop-success='updateStatus($data, \"approved\")' ng-drop='true'>\n    <div class='title'>Approved</div>\n    <div ng-repeat=\"task in tasks | filter:{ state: 'approved' }\">\n      <div class='task' draggable='false' ng-drag-data='task' ng-drag='true'>\n        <span>{{task.title}}</span>\n        <span class='glyphicon glyphicon-edit pull-right' ng-click='editTaskModal(task.id)' ng-drag='false'></span>\n      </div>\n    </div>\n  </div>\n</div>")
+  $templateCache.put("tasks/index.html", "<div class='tasks'>\n  <div class='col-md-3 list' ng-drop-success='updateStatus($data, \"todo\")' ng-drop='{{tasks.isManagable}}'>\n    <div class='title'>Todo</div>\n    <div class='pull-right'>\n      <div class='small-caps btn btn-success' id='create_btn' ng-click='newTaskModal()' ng-disabled='!tasks.isManagable'>create task</div>\n    </div>\n    <div ng-repeat=\"task in tasks | filter:{ state: 'todo' }\">\n      <div class='task' draggable='false' ng-drag-data='task' ng-drag='tasks.isManagable'>\n        <span>{{task.title}}</span>\n        <span class='glyphicon glyphicon-edit pull-right' ng-click='editTaskModal(task.id)' ng-drag='false' ng-if='tasks.isManagable'></span>\n      </div>\n    </div>\n  </div>\n  <div class='col-md-3 list' ng-drop-success='updateStatus($data, \"in_progress\")' ng-drop='{{tasks.isManagable}}'>\n    <div class='title'>In Progress</div>\n    <div ng-repeat=\"task in tasks | filter:{ state: 'in_progress' }\">\n      <div class='task' draggable='false' ng-drag-data='task' ng-drag='tasks.isManagable'>\n        <span>{{task.title}}</span>\n        <span class='glyphicon glyphicon-edit pull-right' ng-click='editTaskModal(task.id)' ng-drag='false' ng-if='tasks.isManagable'></span>\n      </div>\n    </div>\n  </div>\n  <div class='col-md-3 list' ng-drop-success='updateStatus($data, \"done\")' ng-drop='{{tasks.isManagable}}'>\n    <div class='title'>Done</div>\n    <div ng-repeat=\"task in tasks | filter:{ state: 'done' }\">\n      <div class='task' ng-drag-data='task' ng-drag='tasks.isManagable'>\n        <span>{{task.title}}</span>\n        <span class='glyphicon glyphicon-edit pull-right' ng-click='editTaskModal(task.id)' ng-drag='false' ng-if='tasks.isManagable'></span>\n      </div>\n    </div>\n  </div>\n  <div class='col-md-3 list' ng-drop-success='updateStatus($data, \"approved\")' ng-drop='{{tasks.isManagable}}'>\n    <div class='title'>Approved</div>\n    <div ng-repeat=\"task in tasks | filter:{ state: 'approved' }\">\n      <div class='task' draggable='false' ng-drag-data='task' ng-drag='tasks.isManagable'>\n        <span>{{task.title}}</span>\n        <span class='glyphicon glyphicon-edit pull-right' ng-click='editTaskModal(task.id)' ng-drag='false' ng-if='tasks.isManagable'></span>\n      </div>\n    </div>\n  </div>\n</div>")
 }]);
 
 // Angular Rails Template
@@ -40660,11 +40660,13 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
 
 }).call(this);
 (function() {
-  app.controller('ProjectCtrl', function($scope, $q, Project, $stateParams, $state) {
+  app.controller('ProjectCtrl', function($rootScope, $scope, $q, Project, UserService, $stateParams, $state) {
+    $scope.currentUser = {};
     Project.get({
       id: $stateParams.projectId
     }).then(function(results) {
-      return $scope.project = results;
+      $scope.project = results;
+      return $scope.getCurrentUser();
     }, function(error) {
       return console.log('Could not fetch project');
     });
@@ -40673,7 +40675,7 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
     }, function(error) {
       return console.log('Could not fetch members of a project');
     });
-    Project.users_for_invite($stateParams.projectId).then(function(results) {
+    Project.usersForInvite($stateParams.projectId).then(function(results) {
       $scope.usersForInvite = results;
       return $scope.selected = $scope.usersForInvite[0];
     }, function(error) {
@@ -40707,20 +40709,47 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
         return console.log('Could not remove member');
       });
     };
-    return $scope.sendInvite = function(member_id) {
+    $scope.sendInvite = function(member_id) {
       return $scope.project.sendInvite(member_id).then(function(response) {
         return console.log('Invitation has been sent');
       }, function(error) {
         return console.log('Could not send an invitation');
       });
     };
+    $scope.getCurrentUser = function() {
+      return UserService.getCurrentUser().success(function(user) {
+        $scope.currentUser = user;
+        $scope.isOwner();
+        return $scope.isMember();
+      });
+    };
+    $scope.isOwner = function() {
+      return $scope.currentUser.isOwner = $scope.currentUser.id === $scope.project.ownerId;
+    };
+    $scope.isMember = function() {
+      var isMember, member, _i, _len, _ref;
+      isMember = false;
+      _ref = $scope.members;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        member = _ref[_i];
+        if (member.id === $scope.currentUser.id) {
+          isMember = true;
+        }
+      }
+      return $scope.currentUser.isMember = isMember;
+    };
+    return $scope.isManagable = function() {
+      return $scope.currentUser.isOwner || $scope.currentUser.isMember;
+    };
   });
 
 }).call(this);
 (function() {
-  app.controller('ProjectsCtrl', function($scope, $q, Project, User, $state) {
+  app.controller('ProjectsCtrl', function($scope, $q, Project, User, UserService, $state) {
+    $scope.currentUser = {};
     Project.query({}).then(function(results) {
-      return $scope.projects = results;
+      $scope.projects = results;
+      return $scope.getCurrentUser();
     }, function(error) {
       return console.log('Could not fetch projects');
     });
@@ -40754,7 +40783,7 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
         return console.log('Could not remove project');
       });
     };
-    return $scope.removeMember = function(projct, member_id) {
+    $scope.removeMember = function(projct, member_id) {
       var project;
       project = new Project(projct);
       return project.removeMember(member_id).then(function(response) {
@@ -40766,31 +40795,30 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
         return console.log('Could not remove member');
       });
     };
+    $scope.getCurrentUser = function() {
+      return UserService.getCurrentUser().success(function(data) {
+        return $scope.currentUser = data;
+      });
+    };
+    return $scope.isManagable = function(project) {
+      return $scope.currentUser.id === project.ownerId;
+    };
   });
 
 }).call(this);
 (function() {
   app.controller('SignInCtrl', function($rootScope, $scope, $window, $state, UserService, AuthenticationService) {
-    $scope.logIn = function(email, password) {
+    return $scope.logIn = function(email, password) {
       if (email && password) {
         return UserService.logIn(email, password).success(function(data) {
           AuthenticationService.isLoggedIn = true;
           $window.localStorage.taskManagerSpaToken = data.auth_token;
-          $state.go('home');
-          return $scope.currentUser();
+          return $state.go('home');
         }).error(function(status, data) {
           console.log(data);
           return console.log(status);
         });
       }
-    };
-    return $scope.currentUser = function() {
-      return UserService.currentUser().success(function(data) {
-        return $rootScope.currentUser = data;
-      }).error(function(status, data) {
-        console.log(data);
-        return console.log(status);
-      });
     };
   });
 
@@ -40874,12 +40902,25 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
 
 }).call(this);
 (function() {
-  app.controller('TasksCtrl', function($scope, $q, $stateParams, Task, $modal) {
+  app.controller('TasksCtrl', function($scope, $q, $stateParams, Task, Project, UserService, $modal) {
     $scope.tasks = [];
     Task.query({}, {
       projectId: $stateParams.projectId
     }).then(function(tasks) {
       return $scope.tasks = tasks;
+    });
+    Project.get({
+      id: $stateParams.projectId
+    }).then(function(results) {
+      return $scope.project = results;
+    }, function(error) {
+      return console.log('Could not fetch project');
+    });
+    Project.members($stateParams.projectId).then(function(results) {
+      $scope.members = results;
+      return $scope.isManagable();
+    }, function(error) {
+      return console.log('Could not fetch members of a project');
     });
     $scope["delete"] = function(task) {
       return task["delete"]().then(function(respone) {
@@ -40906,7 +40947,7 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
         return console.log("Modal dismissed");
       });
     };
-    return $scope.editTaskModal = function(id) {
+    $scope.editTaskModal = function(id) {
       var modalInstance;
       modalInstance = $modal.open({
         templateUrl: "tasks/modalForm.html",
@@ -40921,6 +40962,21 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
         return console.log('Task has been successfuly updated');
       }, function() {
         return console.log("Modal dismissed");
+      });
+    };
+    return $scope.isManagable = function() {
+      return UserService.getCurrentUser().success(function(currentUser) {
+        var isMember, isOwner, member, _i, _len, _ref;
+        isMember = false;
+        _ref = $scope.members;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          member = _ref[_i];
+          if (member.id === currentUser.id) {
+            isMember = true;
+          }
+        }
+        isOwner = currentUser.id === $scope.project.ownerId;
+        return $scope.tasks.isManagable = isOwner || isMember;
       });
     };
   });
@@ -41004,7 +41060,7 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
     Project.prototype.removeMember = function(memberId) {
       return this.$delete(this.$url() + ("/remove_member/" + memberId));
     };
-    Project.users_for_invite = function(id) {
+    Project.usersForInvite = function(id) {
       return this.$get(this.$url() + ("/" + id + "/users_for_invite"));
     };
     Project.prototype.sendInvite = function(memberId) {
@@ -41073,7 +41129,7 @@ angular.module('directives.invalidinputformatter.invalidInputFormatter', [])
       logOut: function() {
         return $http["delete"]("/api/users/sign_out");
       },
-      currentUser: function() {
+      getCurrentUser: function() {
         return $http.get("/api/users/current");
       }
     };
