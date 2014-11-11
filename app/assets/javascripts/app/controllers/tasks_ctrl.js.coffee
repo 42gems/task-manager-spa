@@ -1,8 +1,19 @@
-app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, $modal) ->
+app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, Project, UserService, $modal) ->
   $scope.tasks = []
 
   Task.query({}, projectId: $stateParams.projectId).then (tasks) ->
     $scope.tasks = tasks
+
+  Project.get({ id: $stateParams.projectId }).then (results) ->
+    $scope.project = results
+  , (error) ->
+    console.log 'Could not fetch project'
+  
+  Project.members($stateParams.projectId).then (results) ->
+    $scope.members = results
+    $scope.isManagable()
+  , (error) ->
+    console.log 'Could not fetch members of a project'
 
   $scope.delete = (task) ->
     task.delete().then (respone) ->
@@ -38,3 +49,11 @@ app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, $modal) ->
       console.log 'Task has been successfuly updated'
     , ->
       console.log "Modal dismissed"
+
+  $scope.isManagable = ->
+    UserService.getCurrentUser()
+      .success (currentUser) ->
+        isMember = false
+        isMember = true for member in $scope.members when member.id == currentUser.id
+        isOwner  = currentUser.id == $scope.project.ownerId
+        $scope.tasks.isManagable = isOwner or isMember

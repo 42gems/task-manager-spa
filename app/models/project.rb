@@ -7,6 +7,8 @@ class Project < ActiveRecord::Base
   validates_presence_of :title
   validates_length_of :description, maximum: 255
 
+  scope :is_public, -> { where private: false }
+
   def not_new_tasks
     {
       'In progress' => tasks.in_progress,

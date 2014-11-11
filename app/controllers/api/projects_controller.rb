@@ -3,7 +3,7 @@ class API::ProjectsController < API::BaseController
   skip_before_action :authenticate_user, only: :add_member
 
   def index
-    respond_with current_user.participant_in
+    respond_with current_user.all_projects
   end
 
   def members
@@ -13,7 +13,7 @@ class API::ProjectsController < API::BaseController
   def users_for_invite
     respond_with @project.select_users_for_invites
   end
-  
+
   def send_invite
     user = User.find(params[:id])
     @project.members << User.find(params[:id])
@@ -25,7 +25,7 @@ class API::ProjectsController < API::BaseController
     @project.members.delete(params[:id])
     head 204
   end
-  
+
   private
   def fetch_project
     if params[:project_id]
