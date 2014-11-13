@@ -1,0 +1,6 @@
+.col-md-3.list( ng-drop='{{tasks.isManagable}}' ng-drop-success='dropSuccess()' )
+  .title {{state}}
+  %div( ng-repeat="task in tasks | filter:{ state: state }" )
+    .task( ng-drag='tasks.isManagable' ng-drag-data='task' draggable='false' )
+      %span {{task.title}}
+      %span.glyphicon.glyphicon-edit.pull-right( ng-if='tasks.isManagable' ng-drag='false' ng-click="editTaskModal(task.id)" )

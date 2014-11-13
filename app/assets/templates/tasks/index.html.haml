@@ -18,13 +18,8 @@
   .col-md-3.list( ng-drop='{{tasks.isManagable}}' ng-drop-success='updateStatus($data, "done")' )
     .title Done
     %div( ng-repeat="task in tasks | filter:{ state: 'done' }" )
-      .task( ng-drag='tasks.isManagable' ng-drag-data='task' )
-        %span {{task.title}}
-        %span.glyphicon.glyphicon-edit.pull-right( ng-if='tasks.isManagable' ng-drag='false' ng-click="editTaskModal(task.id)" )
-
-  .col-md-3.list( ng-drop='{{tasks.isManagable}}' ng-drop-success='updateStatus($data, "approved")' )
-    .title Approved
-    %div( ng-repeat="task in tasks | filter:{ state: 'approved' }" )
       .task( ng-drag='tasks.isManagable' ng-drag-data='task' draggable='false' )
         %span {{task.title}}
         %span.glyphicon.glyphicon-edit.pull-right( ng-if='tasks.isManagable' ng-drag='false' ng-click="editTaskModal(task.id)" )
+
+  %tasks-column( tasks="tasks" state="approved" drop-success='updateStatus($data, "approved")' )

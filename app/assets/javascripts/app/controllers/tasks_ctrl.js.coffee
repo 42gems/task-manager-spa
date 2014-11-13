@@ -29,7 +29,7 @@ app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, Project, UserServic
 
   $scope.newTaskModal = ->
     modalInstance = $modal.open(
-      templateUrl: "tasks/modalForm.html"
+      templateUrl: "tasks/modal_form.html"
       controller: "NewTaskModalInstanceCtrl"
     )
     modalInstance.result.then (task) ->
@@ -39,7 +39,7 @@ app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, Project, UserServic
 
   $scope.editTaskModal = (id) ->
     modalInstance = $modal.open(
-      templateUrl: "tasks/modalForm.html"
+      templateUrl: "tasks/modal_form.html"
       controller: "EditTaskModalInstanceCtrl"
       resolve:
         id: ->
