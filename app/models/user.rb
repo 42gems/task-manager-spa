@@ -8,15 +8,20 @@ class User < ActiveRecord::Base
   scope :accepted_invite, -> { where(invites: { accepted: true }) }
   scope :pending_invite,  -> { where(invites: { accepted: false }) }
 
+  #TODO invited what, who? Don't tell me 42
   def invited
+    #TODO avoid N+1 select. You can use includes for relation
     projects.map do |project|
       { project: project, users: project.members.accepted_invite } if project.members.accepted_invite.any?
+    #We have method for array named compact
     end.reject &:nil?
   end
 
   def pending_invites
+    #TODO avoid N+1 select. You can use includes for relation
     invites.pending.map do |invite|
-      { 
+      {
+        #TODO less letters - more hardcore.
         project: Project.find(invite.project_id),
         invite: invite
       }

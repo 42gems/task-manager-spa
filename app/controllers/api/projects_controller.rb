@@ -15,6 +15,7 @@ class API::ProjectsController < API::BaseController
   end
 
   def send_invite
+    #TODO simplify, and move mailing to callback
     user = User.find(params[:id])
     @project.members << User.find(params[:id])
     UserMailer.send_notification(@project, user)
@@ -28,6 +29,7 @@ class API::ProjectsController < API::BaseController
 
   private
   def fetch_project
+    #TODO nil || "lol" wil result "lol"
     if params[:project_id]
       @project = Project.find params[:project_id]
     else
