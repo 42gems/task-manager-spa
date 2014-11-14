@@ -33,4 +33,4 @@
               .btn.btn-sm.btn-default.small-caps X
       .input-group( ng-if='currentUser.isOwner' )
         %select.form-control( ng-model="selected" ng-options="user.email for user in usersForInvite" )
-        .input-group-addon.btn-like( ng-click='sendInvite(selected.id)' ) invite
+        .input-group-addon.btn-like( ng-click='addMember(selected.id)' ) invite

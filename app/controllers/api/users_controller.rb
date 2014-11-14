@@ -5,8 +5,8 @@ class API::UsersController < API::BaseController
     render json: current_user
   end
 
-  def invited
-    respond_with current_user.invited
+  def invited_members
+    respond_with current_user.invited_members
   end
 
   def sign_in

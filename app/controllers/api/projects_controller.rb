@@ -1,6 +1,7 @@
 class API::ProjectsController < API::BaseController
-  before_action :fetch_project, only: [:members, :send_invite, :add_member, :remove_member, :users_for_invite]
-  skip_before_action :authenticate_user, only: :add_member
+  before_action :fetch_project,     only: [:members, :add_member, :remove_member, :users_for_invite]
+  before_action :fetch_user,        only: [:add_member, :send_notification]
+  after_action  :send_notification, only: :add_member
 
   def index
     respond_with current_user.all_projects
@@ -14,11 +15,8 @@ class API::ProjectsController < API::BaseController
     respond_with @project.select_users_for_invites
   end
 
-  def send_invite
-    #TODO simplify, and move mailing to callback
-    user = User.find(params[:id])
-    @project.members << User.find(params[:id])
-    UserMailer.send_notification(@project, user)
+  def add_member
+    @project.members << @user
     head 200
   end
 
@@ -28,13 +26,16 @@ class API::ProjectsController < API::BaseController
   end
 
   private
+  def send_notification
+    UserMailer.send_notification(@project, @user)
+  end
+
+  def fetch_user
+    @user = User.find(params[:id])
+  end
+
   def fetch_project
-    #TODO nil || "lol" wil result "lol"
-    if params[:project_id]
-      @project = Project.find params[:project_id]
-    else
-      @project = Project.find params[:id]
-    end
+    @project = params[:project_id] ? Project.find(params[:project_id]) : Project.find(params[:id])
   end
 
   def project_params

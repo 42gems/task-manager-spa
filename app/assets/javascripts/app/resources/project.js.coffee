@@ -13,7 +13,7 @@ app.factory 'Project', (railsResourceFactory) ->
   Project.usersForInvite = (id) ->
     @$get(@$url() + "/#{id}/users_for_invite")
   
-  Project.prototype.sendInvite = (memberId) ->
-    Project.$get(@$url() + "/send_invite/#{memberId}")
+  Project.prototype.addMember = (memberId) ->
+    Project.$get(@$url() + "/add_member/#{memberId}")
 
   Project

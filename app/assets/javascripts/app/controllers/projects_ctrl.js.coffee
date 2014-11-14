@@ -7,7 +7,7 @@ app.controller 'ProjectsCtrl', ($scope, $q, Project, User, UserService, $state) 
   , (error) ->
     console.log 'Could not fetch projects'
   
-  User.query({}, 'invited').then (results) ->
+  User.query({}, 'invited_members').then (results) ->
     $scope.members = results
   , (error) ->
     console.log 'Could not fetch invited users'

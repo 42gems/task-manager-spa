@@ -39,8 +39,8 @@ app.controller 'ProjectCtrl', ($rootScope, $scope, $q, Project, UserService, $st
     , (error) ->
       console.log 'Could not remove member'
 
-  $scope.sendInvite = (member_id) ->
-    $scope.project.sendInvite(member_id).then (response) ->
+  $scope.addMember = (member_id) ->
+    $scope.project.addMember(member_id).then (response) ->
       console.log 'Invitation has been sent'
     , (error) ->
       console.log 'Could not send an invitation'
