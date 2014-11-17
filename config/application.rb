@@ -10,6 +10,7 @@ module TaskManagerSpa
   class Application < Rails::Application
     # for heroku
     config.serve_static_assets = true
+    config.assets.js_compressor = Uglifier.new(mangle: false)
     
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
