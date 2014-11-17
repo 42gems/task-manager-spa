@@ -1,4 +1,4 @@
-app.controller 'ProjectCtrl', ($rootScope, $scope, $q, Project, UserService, $stateParams, $state) ->
+app.controller 'ProjectCtrl', ($scope, $q, Project, UserService, $stateParams, $state) ->
   $scope.currentUser = {}
 
   Project.get({ id: $stateParams.projectId }).then (results) ->

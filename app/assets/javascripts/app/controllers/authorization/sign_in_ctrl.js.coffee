@@ -1,4 +1,4 @@
-app.controller 'SignInCtrl', ($rootScope, $scope, $window, $state, UserService, AuthenticationService) ->
+app.controller 'SignInCtrl', ($scope, $window, $state, UserService, AuthenticationService) ->
   $scope.logIn = (email, password) ->
     if email && password
       UserService.logIn(email, password)
