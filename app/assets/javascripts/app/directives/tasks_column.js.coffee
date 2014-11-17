@@ -1,6 +1,6 @@
 app.directive 'tasksColumn', () ->
   {
-    restrict: 'E',
+    restrict: 'E'
     templateUrl: 'tasks/tasks_column.html'
     scope: {
       tasks: "="
