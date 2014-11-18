@@ -47,6 +47,9 @@ app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, Project, UserServic
     )
     modalInstance.result.then (task) ->
       console.log 'Task has been successfuly updated'
+      i = $scope.tasks.indexOf(tsk) for tsk in $scope.tasks when tsk.id == task.id
+      $scope.tasks.splice(i, 1)
+      $scope.tasks.push(task)
     , ->
       console.log "Modal dismissed"
 
