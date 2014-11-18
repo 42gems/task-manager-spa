@@ -1,5 +1,5 @@
-.col-md-3.list( ng-drop='{{tasks.isManagable}}' ng-drop-success='dropSuccess()' )
-  .title {{state}}
+.col-md-3.list( ng-drop='{{tasks.isManagable}}' ng-drop-success='updateStatus($data, state)' )
+  .title {{stateTitle}}
   %div( ng-repeat="task in tasks | filter:{ state: state }" )
     .task( ng-drag='tasks.isManagable' ng-drag-data='task' draggable='false' )
       %span {{task.title}}

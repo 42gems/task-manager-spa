@@ -1,25 +1,5 @@
 .tasks
-  .col-md-3.list( ng-drop='{{tasks.isManagable}}' ng-drop-success='updateStatus($data, "todo")' )
-    .title Todo
-    .pull-right
-      #create_btn.small-caps.btn.btn-success( ng-disabled='!tasks.isManagable' ng-click="newTaskModal()" ) create task
-    %div( ng-repeat="task in tasks | filter:{ state: 'todo' }" )
-      .task( ng-drag='tasks.isManagable' ng-drag-data='task' draggable='false' )
-        %span {{task.title}}
-        %span.glyphicon.glyphicon-edit.pull-right( ng-if='tasks.isManagable' ng-drag='false' ng-click="editTaskModal(task.id)" )
-
-  .col-md-3.list( ng-drop='{{tasks.isManagable}}' ng-drop-success='updateStatus($data, "in_progress")' )
-    .title In Progress
-    %div( ng-repeat="task in tasks | filter:{ state: 'in_progress' }" )
-      .task( ng-drag='tasks.isManagable' ng-drag-data='task' draggable='false' )
-        %span {{task.title}}
-        %span.glyphicon.glyphicon-edit.pull-right( ng-if='tasks.isManagable' ng-drag='false' ng-click="editTaskModal(task.id)" )
-
-  .col-md-3.list( ng-drop='{{tasks.isManagable}}' ng-drop-success='updateStatus($data, "done")' )
-    .title Done
-    %div( ng-repeat="task in tasks | filter:{ state: 'done' }" )
-      .task( ng-drag='tasks.isManagable' ng-drag-data='task' draggable='false' )
-        %span {{task.title}}
-        %span.glyphicon.glyphicon-edit.pull-right( ng-if='tasks.isManagable' ng-drag='false' ng-click="editTaskModal(task.id)" )
-
-  %tasks-column( tasks="tasks" state="approved" drop-success='updateStatus($data, "approved")' )
+  %tasks-column(tasks="tasks" state-title="Todo" state="todo")
+  %tasks-column(tasks="tasks" state-title="In Progress" state="in_progress")
+  %tasks-column(tasks="tasks" state-title="Done" state="done")
+  %tasks-column(tasks="tasks" state-title="Approved" state="approved")

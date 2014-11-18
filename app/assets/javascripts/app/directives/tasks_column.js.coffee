@@ -1,10 +1,10 @@
 app.directive 'tasksColumn', () ->
-  {
-    restrict: 'E'
-    templateUrl: 'tasks/tasks_column.html'
-    scope: {
-      tasks: "="
-      state: "@"
-      dropSuccess: "&"
-    }
-  }
+  restrict: 'E'
+  templateUrl: 'tasks/tasks_column.html'
+  controller: "TasksCtrl"
+  scope:
+    tasks: "="
+    state: "@"
+    stateTitle: "@"
+    dropSuccess: "&"
+  replace: true
