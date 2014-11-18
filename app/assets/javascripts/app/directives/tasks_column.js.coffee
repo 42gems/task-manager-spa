@@ -6,5 +6,4 @@ app.directive 'tasksColumn', () ->
     tasks: "="
     state: "@"
     stateTitle: "@"
-    dropSuccess: "&"
   replace: true
