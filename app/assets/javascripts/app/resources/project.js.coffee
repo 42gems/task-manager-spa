@@ -14,6 +14,6 @@ app.factory 'Project', (railsResourceFactory) ->
     @$get(@$url() + "/#{id}/users_for_invite")
   
   Project.prototype.addMember = (memberId) ->
-    Project.$get(@$url() + "/add_member/#{memberId}")
+    Project.$patch(@$url() + "/add_member/#{memberId}")
 
   Project

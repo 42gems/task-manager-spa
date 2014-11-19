@@ -16,7 +16,7 @@ Rails.application.routes.draw do
         get :members
         get :users_for_invite
       end
-      get    'add_member/:id',    to: 'projects#add_member',    as: 'add_member'
+      patch  'add_member/:id',    to: 'projects#add_member',    as: 'add_member'
       delete 'remove_member/:id', to: 'projects#remove_member', as: 'remove_member'
     end
     resources :invites, only: [:index, :update, :destroy]
