@@ -13,7 +13,7 @@ app.controller 'ProjectCtrl', ($scope, $q, Project, UserService, $stateParams, $
     console.log 'Could not fetch members of a project'
 
   Project.usersForInvite($stateParams.projectId).then (results) ->
-    $scope.usersForInvite = results  
+    $scope.usersForInvite = results
     $scope.selected = $scope.usersForInvite[0]
   , (error) ->
     console.log 'Could not fetch users for invite'
@@ -42,6 +42,9 @@ app.controller 'ProjectCtrl', ($scope, $q, Project, UserService, $stateParams, $
   $scope.addMember = (member_id) ->
     $scope.project.addMember(member_id).then (response) ->
       console.log 'Invitation has been sent'
+      i = $scope.usersForInvite.indexOf(user) for user in $scope.usersForInvite when user.id == member_id
+      $scope.usersForInvite.splice(i, 1)
+      $scope.selected = $scope.usersForInvite[0]
     , (error) ->
       console.log 'Could not send an invitation'
 

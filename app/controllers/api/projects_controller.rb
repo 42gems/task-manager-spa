@@ -16,7 +16,7 @@ class API::ProjectsController < API::BaseController
   end
 
   def add_member
-    @project.members << @user
+    @project.members << @user unless @project.members.include? @user
     head 200
   end
 
