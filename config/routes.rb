@@ -11,7 +11,9 @@ Rails.application.routes.draw do
       end
     end
     resources :projects do
-      resources :tasks
+      resources :tasks do
+        resources :timetracks
+      end
       member do
         get :members
         get :users_for_invite

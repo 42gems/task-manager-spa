@@ -2,7 +2,8 @@ class Task < ActiveRecord::Base
   include AASM
 
   belongs_to :project
-  has_many :comments, dependent: :destroy
+  has_many :comments,   dependent: :destroy
+  has_many :timetracks, dependent: :destroy
 
   aasm column: :state do
     state :todo, initial: true

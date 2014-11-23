@@ -7,6 +7,7 @@ gem 'thin'
 gem 'devise'
 gem 'bcrypt', require: 'bcrypt'
 gem 'aasm'
+gem 'inherited_resources'
 
 # front end
 gem 'haml'
@@ -20,18 +21,19 @@ gem 'angular-rails-templates'
 gem 'angularjs-rails-resource', '~> 1.1.1'
 gem 'bootstrap-sass', '~> 3.2.0'
 
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 # heroku
 gem 'rails_12factor',  group: :production
-
-gem 'inherited_resources'
 
 group :development do
   gem 'spring'
   gem 'quiet_assets'
   gem 'letter_opener'
   gem "pry-rails"
+  gem 'pry-byebug'
+  gem 'awesome_print'
 
   #guards for watching files changes and
   gem 'guard-bundler' #bundle on gemfile changed
