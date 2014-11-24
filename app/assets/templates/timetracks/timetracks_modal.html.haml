@@ -1,0 +1,30 @@
+.modal-header
+  %h3.modal-title New Timetrack
+.modal-body
+  %div( ng-if='timetracks' )
+    %h4 Tracked time
+    %table.table
+      %tr
+        %td Amount/Time
+        %td Start date
+        %td Actions
+      %tr( ng-repeat='timetrack in timetracks' )
+        %td( ng-hide='timetrack.time' ) 
+          %input.form-control( type='text' ng-model='timetrack.amount' )
+        %td( ng-if='timetrack.time' )
+          %input.form-control( type='text' ng-model='timetrack.time' )
+        %td
+          %timetrack-date-dropdown
+        %td
+          .btn.btn-danger( ng-click='deleteTimetrack(timetrack)' ) Destroy
+  %h4 Track new time
+  %form.form-inline(name="form" novalidate)
+    .form-group
+      .input-group
+        .input-group-addon Time
+        %input#inputTime.form-control( type='text' placeholder='1d 10h 20m 10s' ng-model='timetrack.time' )
+    %timetrack-date-dropdown
+    .btn.btn-success(ng-click='addTimetrack(form)') Add
+.modal-footer
+  %button.btn.btn-success( ng-click='save(form)' ) Save
+  %button.btn.btn-warning( ng-click='cancel()' ) Cancel

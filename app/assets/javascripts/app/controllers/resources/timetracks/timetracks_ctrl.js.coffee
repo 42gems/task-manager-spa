@@ -2,7 +2,7 @@ app.controller 'TimetracksCtrl', ($scope, $q, Timetrack, $modal) ->
 
   $scope.openModal = (projectId, taskId) ->
     modalInstance = $modal.open
-      templateUrl: "timetracks_modal.html"
+      templateUrl: "timetracks/timetracks_modal.html"
       controller: "TimetracksModalInstanceCtrl"
       resolve:
         projectId: ->

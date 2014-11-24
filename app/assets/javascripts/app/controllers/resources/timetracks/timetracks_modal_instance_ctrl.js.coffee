@@ -1,4 +1,4 @@
-app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId, taskId, Timetrack) ->
+app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, $state, projectId, taskId, Timetrack) ->
   
   $scope.getTimetracks = (projectId, taskId) ->
     Timetrack.query({}, projectId: projectId, taskId: taskId).then (results) ->
@@ -8,8 +8,8 @@ app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId
 
   $scope.init = ->
     $scope.getTimetracks(projectId, taskId)
-    $scope.timetrack = new Timetrack(projectId: projectId, taskId: taskId)
-    $scope.timetrack.start_date = new Date().toLocaleDateString('ca-iso8601')
+    $scope.timetrack = new Timetrack(taskId: taskId)
+    $scope.timetrack.startDate = new Date().toLocaleDateString('ca-iso8601')
 
   $scope.init()
 
@@ -17,19 +17,26 @@ app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId
     $scope.$broadcast('runCustomValidations')
 
     if form.$valid
-      $scope.timetrack.create().then (response) ->
-        $modalInstance.close(response)
-      , (error) ->
-        $modalInstance.dismiss "error"
+      for timetrack in $scope.timetracks
+        timetrack.projectId = projectId
+        timetrack.save().then (response) ->
+          $modalInstance.close(response)
+        , (error) ->
+          $modalInstance.dismiss "error"
 
   $scope.cancel = ->
     $modalInstance.dismiss "cancel"
 
+  $scope.addTimetrack = (form) ->
+    $scope.$broadcast('runCustomValidations')
+
+    if form.$valid
+      $scope.timetracks.push($scope.timetrack)
+      $scope.timetrack = new Timetrack(taskId: taskId)
+      $scope.timetrack.startDate = new Date().toLocaleDateString('ca-iso8601')
+    else
+      console.log "Can not add timetrack"
+
   $scope.deleteTimetrack = (timetrack) ->
     timetrack.projectId = projectId
-    
-    timetrack.delete().then ->
-      $scope.timetracks.pop(timetrack)
-      console.log 'Timetrack successfuly deleted'
-    , ->
-      console.log 'Could not delete timetrack'
+    $scope.timetracks.pop(timetrack)

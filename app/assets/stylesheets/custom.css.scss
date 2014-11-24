@@ -6,12 +6,6 @@ $lighter_grey: #F5F5F5;
 
 /* General
 *******************************************/
-.title {
-  display: inline-block;
-  margin: 10px 0;
-  font-size: 26px;
-}
-
 .col-md-3 {
   width: 23%;
   float: none;
@@ -21,6 +15,14 @@ a:hover {
   cursor: pointer;
 }
 
+/* Misc
+*******************************************/
+.title {
+  display: inline-block;
+  margin: 10px 0;
+  font-size: 26px;
+}
+
 .small-caps {
   font-variant: small-caps;
   font-weight: 600;
@@ -28,9 +30,6 @@ a:hover {
 
 .mgl { margin-left: 5px; }
 .mgr { margin-right: 5px; }
-
-/* Misc
-*******************************************/
 
 .btn-like {
   text-decoration: none;
