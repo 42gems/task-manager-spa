@@ -18,13 +18,16 @@
         %td
           .btn.btn-danger( ng-click='deleteTimetrack(timetrack)' ) Destroy
   %h4 Track new time
-  %form.form-inline(name="form" novalidate)
-    .form-group
-      .input-group
-        .input-group-addon Time
-        %input#inputTime.form-control( type='text' placeholder='1d 10h 20m 10s' ng-model='timetrack.time' )
-    %timetrack-date-dropdown
-    .btn.btn-success(ng-click='addTimetrack(form)') Add
+  %form( name="form" novalidate )
+    .form-inline
+      .form-group
+        .input-group
+          .input-group-addon Time
+          %input#inputTime.form-control( type='text' placeholder='1d 10h 20m 10s' ng-model='timetrack.time' )
+      %timetrack-date-dropdown
+      .btn.btn-success(ng-click='addTimetrack(form)') Add
+    %br
+      %textarea#inputComment.form-control( placeholder='Have some thoughts?' ng-model='comment.body' )
 .modal-footer
   %button.btn.btn-success( ng-click='save(form)' ) Save
   %button.btn.btn-warning( ng-click='cancel()' ) Cancel

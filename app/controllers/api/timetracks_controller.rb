@@ -6,12 +6,10 @@ class API::TimetracksController < API::BaseController
   end
 
   def create
-    timetrack = @task.timetracks.build
-    t = params[:timetrack]
+    timetrack = @task.timetracks.build(timetrack_params)
 
-    timetrack.start_date = t[:start_date]
-    timetrack.amount = t[:amount]
-    timetrack.parse_amount!(t[:time]) if t[:time]
+    time = params[:timetrack][:time]
+    timetrack.parse_amount!(time) if time
 
     if timetrack.save
       render json: timetrack, status: 201
@@ -22,7 +20,10 @@ class API::TimetracksController < API::BaseController
 
   private
   def timetrack_params
-    params.require(:timetrack).permit(:task_id, :amount, :start_date)
+    params.require(:timetrack).permit(:task_id, :amount, :start_date,
+                                      comments_attributes: [
+                                        :task_id, :timetrack_id, 
+                                        :id, :body ])
   end
 
   def fetch_task

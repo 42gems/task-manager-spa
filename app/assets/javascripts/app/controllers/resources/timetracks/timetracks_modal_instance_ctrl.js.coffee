@@ -6,12 +6,15 @@ app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, $state, p
     , ->
       console.log 'Could not fetch timetracks'
 
-  $scope.init = ->
-    $scope.getTimetracks(projectId, taskId)
+  $scope.initTimetrack = ->
     $scope.timetrack = new Timetrack(taskId: taskId)
     $scope.timetrack.startDate = new Date().toLocaleDateString('ca-iso8601')
-
-  $scope.init()
+    $scope.timetrack.comments_attributes = []
+    $scope.comment = {}
+    $scope.comment.timetrackId = $scope.timetrack.id
+  
+  $scope.getTimetracks(projectId, taskId)
+  $scope.initTimetrack()
 
   $scope.save = (form)->
     $scope.$broadcast('runCustomValidations')
@@ -32,8 +35,8 @@ app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, $state, p
 
     if form.$valid
       $scope.timetracks.push($scope.timetrack)
-      $scope.timetrack = new Timetrack(taskId: taskId)
-      $scope.timetrack.startDate = new Date().toLocaleDateString('ca-iso8601')
+      $scope.timetrack.comments_attributes.push($scope.comment)
+      $scope.initTimetrack()
     else
       console.log "Can not add timetrack"
 
