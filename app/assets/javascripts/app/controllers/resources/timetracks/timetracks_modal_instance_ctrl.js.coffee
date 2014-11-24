@@ -1,17 +1,5 @@
 app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId, taskId, Timetrack) ->
   
-  $scope.save = (form)->
-    $scope.$broadcast('runCustomValidations')
-
-    if form.$valid
-      $scope.timetrack.create().then (response) ->
-        $modalInstance.close(response)
-      , (error) ->
-        $modalInstance.dismiss "error"
-
-  $scope.cancel = ->
-    $modalInstance.dismiss "cancel"
-
   $scope.getTimetracks = (projectId, taskId) ->
     Timetrack.query({}, projectId: projectId, taskId: taskId).then (results) ->
       $scope.timetracks = results
@@ -24,3 +12,24 @@ app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId
     $scope.timetrack.start_date = new Date().toLocaleDateString('ca-iso8601')
 
   $scope.init()
+
+  $scope.save = (form)->
+    $scope.$broadcast('runCustomValidations')
+
+    if form.$valid
+      $scope.timetrack.create().then (response) ->
+        $modalInstance.close(response)
+      , (error) ->
+        $modalInstance.dismiss "error"
+
+  $scope.cancel = ->
+    $modalInstance.dismiss "cancel"
+
+  $scope.deleteTimetrack = (timetrack) ->
+    timetrack.projectId = projectId
+    
+    timetrack.delete().then ->
+      $scope.timetracks.pop(timetrack)
+      console.log 'Timetrack successfuly deleted'
+    , ->
+      console.log 'Could not delete timetrack'

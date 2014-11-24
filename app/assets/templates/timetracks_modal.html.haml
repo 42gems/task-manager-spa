@@ -6,11 +6,14 @@
     %table.table
       %tr
         %td Amount
-        %td Edit
+        %td Start date
+        %td Actions
       %tr( ng-repeat='timetrack in timetracks' )
         %td {{timetrack.amount}}
+        %td {{timetrack.startDate | date: 'dd/MM/yyyy'}}
         %td
           .btn.btn-success Edit
+          .btn.btn-danger( ng-click='deleteTimetrack(timetrack)' ) Destroy
   %h4 Track new time
   %form.form-inline(name="form" novalidate)
     .form-group
