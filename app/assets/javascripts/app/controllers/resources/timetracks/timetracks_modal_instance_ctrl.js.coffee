@@ -39,4 +39,9 @@ app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, $state, p
 
   $scope.deleteTimetrack = (timetrack) ->
     timetrack.projectId = projectId
-    $scope.timetracks.pop(timetrack)
+    
+    timetrack.delete().then ->
+      $scope.timetracks.pop(timetrack)
+      console.log 'Timetrack successfuly deleted'
+    , ->
+      console.log 'Could not delete timetrack'
