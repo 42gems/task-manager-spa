@@ -47,12 +47,12 @@ app.config ($stateProvider, $urlRouterProvider) ->
       controller: 'TaskCtrl'
     .state 'sign_up',
       url: '/sign_up'
-      templateUrl: 'sign_up.html'
+      templateUrl: 'authentication/sign_up.html'
       controller: 'SignUpCtrl'
       skipLogin: true
     .state 'sign_in',
       url: '/sign_in'
-      templateUrl: 'sign_in.html'
+      templateUrl: 'authentication/sign_in.html'
       controller: 'SignInCtrl'
       skipLogin: true
       onEnter: ($state, AuthenticationService, $timeout) ->
