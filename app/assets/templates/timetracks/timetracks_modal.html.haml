@@ -1,7 +1,7 @@
 .modal-header
   %h3.modal-title New Timetrack
 .modal-body
-  %div( ng-if='timetracks' )
+  %div( ng-if='timetracks.length > 0' )
     %h4 Tracked time
     %table.table
       %tr
