@@ -1,4 +1,4 @@
-app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, $state, projectId, taskId, Timetrack) ->
+app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId, taskId, currentUser, Timetrack) ->
   
   $scope.getTimetracks = (projectId, taskId) ->
     Timetrack.query({}, projectId: projectId, taskId: taskId).then (results) ->
@@ -7,25 +7,23 @@ app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, $state, p
       console.log 'Could not fetch timetracks'
 
   $scope.initTimetrack = ->
-    $scope.timetrack = new Timetrack(taskId: taskId)
+    $scope.timetrack = new Timetrack(taskId: taskId, userId: currentUser.id)
     $scope.timetrack.startDate = new Date().toLocaleDateString('ca-iso8601')
     $scope.timetrack.comments_attributes = []
     $scope.comment = {}
+    $scope.comment.userId = currentUser.id
     $scope.comment.timetrackId = $scope.timetrack.id
-  
+
   $scope.getTimetracks(projectId, taskId)
   $scope.initTimetrack()
 
   $scope.save = (form)->
-    $scope.$broadcast('runCustomValidations')
-
-    if form.$valid
-      for timetrack in $scope.timetracks
-        timetrack.projectId = projectId
-        timetrack.save().then (response) ->
-          $modalInstance.close(response)
-        , (error) ->
-          $modalInstance.dismiss "error"
+    for timetrack in $scope.timetracks
+      timetrack.projectId = projectId
+      timetrack.save().then (response) ->
+        $modalInstance.close(response)
+      , (error) ->
+        $modalInstance.dismiss "error"
 
   $scope.cancel = ->
     $modalInstance.dismiss "cancel"
@@ -42,7 +40,8 @@ app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, $state, p
 
   $scope.deleteTimetrack = (timetrack) ->
     timetrack.projectId = projectId
-    $scope.timetracks.pop(timetrack)
+    i = $scope.timetracks.indexOf(timetrack)
+    $scope.timetracks.splice(i, 1)
     
     timetrack.delete().then ->
       console.log 'Timetrack successfuly deleted'

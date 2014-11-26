@@ -1,4 +1,7 @@
-app.controller 'TimetracksCtrl', ($scope, $q, Timetrack, $modal) ->
+app.controller 'TimetracksCtrl', ($scope, $q, Timetrack, UserService, $modal) ->
+  
+  UserService.getCurrentUser().success (data) ->
+    $scope.currentUser = data
 
   $scope.openModal = (projectId, taskId) ->
     modalInstance = $modal.open
@@ -9,6 +12,8 @@ app.controller 'TimetracksCtrl', ($scope, $q, Timetrack, $modal) ->
           projectId
         taskId: ->
           taskId
+        currentUser: ->
+          $scope.currentUser
 
     modalInstance.result.then (timetrack) ->
       console.log 'Timetrack successfuly created'

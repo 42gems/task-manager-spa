@@ -20,10 +20,9 @@ class API::TimetracksController < API::BaseController
 
   private
   def timetrack_params
-    params.require(:timetrack).permit(:task_id, :amount, :start_date,
+    params.require(:timetrack).permit(:user_id, :task_id, :amount, :start_date,
                                       comments_attributes: [
-                                        :task_id, :timetrack_id, 
-                                        :id, :body ])
+                                        :user_id, :timetrack_id, :id, :body ])
   end
 
   def fetch_task

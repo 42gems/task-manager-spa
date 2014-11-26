@@ -17,7 +17,9 @@ app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, Project, UserServic
 
   $scope.delete = (task) ->
     task.delete().then (respone) ->
-      $scope.tasks.pop(task)
+      i = $scope.tasks.indexOf(task)
+      $scope.tasks.splice(i, 1)
+
       console.log 'Task successfuly deleted'
     , (error) ->
       console.log 'Could not delete task'

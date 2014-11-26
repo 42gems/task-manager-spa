@@ -1,9 +1,10 @@
 class User < ActiveRecord::Base
   include Authenticable
-  has_many :invites,  dependent: :nullify
-  has_many :projects, foreign_key: 'owner_id', dependent: :nullify
-  has_many :comments, dependent: :destroy
-  has_many :tokens,   dependent: :destroy
+  has_many :tokens,     dependent: :destroy
+  has_many :comments,   dependent: :destroy
+  has_many :timetracks, dependent: :nullify
+  has_many :invites,    dependent: :nullify
+  has_many :projects,   foreign_key: 'owner_id', dependent: :nullify
 
   scope :accepted_invite, -> { where(invites: { accepted: true }) }
   scope :pending_invite,  -> { where(invites: { accepted: false }) }

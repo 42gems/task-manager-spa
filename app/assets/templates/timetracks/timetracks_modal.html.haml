@@ -9,10 +9,10 @@
         %td Start date
         %td Actions
       %tr( ng-repeat='timetrack in timetracks' )
-        %td( ng-hide='timetrack.time' ) 
-          %input.form-control( type='text' ng-model='timetrack.amount' validation-field-required="true" )
+        %td( ng-if='!timetrack.time' ) 
+          %input.form-control( type='text' ng-model='timetrack.amount' )
         %td( ng-if='timetrack.time' )
-          %input.form-control( type='text' ng-model='timetrack.time' validation-field-required="true" )
+          %input.form-control( type='text' ng-model='timetrack.time' )
         %td
           %timetrack-date-dropdown
         %td
@@ -29,5 +29,5 @@
     %br
       %textarea#inputComment.form-control( placeholder='Have some thoughts?' ng-model='comment.body' )
 .modal-footer
-  %button.btn.btn-success( ng-click='save(form)' ) Save
+  %button.btn.btn-success( ng-click='save()' ) Save
   %button.btn.btn-warning( ng-click='cancel()' ) Cancel
