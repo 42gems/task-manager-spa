@@ -9,6 +9,7 @@
         %td Title
         %td Owner #
         %td Tasks
+        %td Timeline
         %td Actions
     %tbody
       %tr( ng-repeat='project in projects' )
@@ -17,6 +18,9 @@
         %td
           %a( ui-sref='projects.tasks({projectId: {{project.id}} })' )
             .btn.btn-primary Taks
+        %td
+          %a( ui-sref='project.timeline({projectId: {{project.id}} })' )
+            .btn.btn-primary Timeline
         %td
           .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
           .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy

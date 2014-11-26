@@ -33,6 +33,10 @@ app.config ($stateProvider, $urlRouterProvider) ->
       url: '/projects/:projectId'
       templateUrl: 'projects/show.html'
       controller: 'ProjectCtrl'
+    .state 'project.timeline',
+      url: '/timeline'
+      templateUrl: 'projects/timeline.html'
+      controller: 'TimelineCtrl'
     .state 'project.edit',
       url: '/edit'
       templateUrl: 'projects/form.html'

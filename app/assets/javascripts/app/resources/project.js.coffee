@@ -6,12 +6,15 @@ app.factory 'Project', (railsResourceFactory) ->
   
   Project.members = (id) ->
     @$get(@$url() + "/#{id}/members")
-  
-  Project.prototype.removeMember = (memberId) ->
-    @$delete(@$url() + "/remove_member/#{memberId}")
-  
+
   Project.usersForInvite = (id) ->
     @$get(@$url() + "/#{id}/users_for_invite")
+  
+  Project.timelineMatrix = (id) ->
+    @$get(@$url() + "/#{id}/timeline_matrix")
+
+  Project.prototype.removeMember = (memberId) ->
+    @$delete(@$url() + "/remove_member/#{memberId}")
   
   Project.prototype.addMember = (memberId) ->
     Project.$patch(@$url() + "/add_member/#{memberId}")

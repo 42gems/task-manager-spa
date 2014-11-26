@@ -1,5 +1,5 @@
 class API::ProjectsController < API::BaseController
-  before_action :fetch_project,     only: [:members, :add_member, :remove_member, :users_for_invite]
+  before_action :fetch_project,     only: [:members, :timeline_matrix, :add_member, :remove_member, :users_for_invite]
   before_action :fetch_user,        only: [:add_member, :send_notification]
   after_action  :send_notification, only: :add_member
 
@@ -13,6 +13,10 @@ class API::ProjectsController < API::BaseController
 
   def users_for_invite
     respond_with @project.select_users_for_invites
+  end
+
+  def timeline_matrix
+    respond_with @project.timeline_matrix
   end
 
   def add_member

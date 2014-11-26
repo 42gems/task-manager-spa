@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       member do
         get :members
         get :users_for_invite
+        get :timeline_matrix
       end
       patch  'add_member/:id',    to: 'projects#add_member',    as: 'add_member'
       delete 'remove_member/:id', to: 'projects#remove_member', as: 'remove_member'

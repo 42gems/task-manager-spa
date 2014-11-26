@@ -1,0 +1,5 @@
+%h4 Timeline of the project
+%h5( ng-if='!matrix.length > 0' ) No one tracked time on this project yet
+%table.table( ng-if='matrix.length > 0' )
+  %tr( ng-repeat='row in matrix' )
+    %td( ng-repeat='data in row' ) {{ data }}
