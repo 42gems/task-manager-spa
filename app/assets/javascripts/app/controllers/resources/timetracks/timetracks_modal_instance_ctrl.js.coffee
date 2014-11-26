@@ -1,20 +1,19 @@
 app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId, taskId, currentUser, Timetrack) ->
   
-  $scope.getTimetracks = (projectId, taskId) ->
-    Timetrack.query({}, projectId: projectId, taskId: taskId).then (results) ->
-      $scope.timetracks = results
-    , ->
-      console.log 'Could not fetch timetracks'
+  Timetrack.query({}, projectId: projectId, taskId: taskId).then (results) ->
+    $scope.timetracks = results
+  , ->
+    console.log 'Could not fetch timetracks'
 
   $scope.initTimetrack = ->
-    $scope.timetrack = new Timetrack(taskId: taskId, userId: currentUser.id)
-    $scope.timetrack.startDate = new Date().toLocaleDateString('ca-iso8601')
+    $scope.timetrack = new Timetrack 
+      taskId: taskId
+      userId: currentUser.id
+      startDate: new Date().toLocaleDateString('ca-iso8601')
+    
     $scope.timetrack.comments_attributes = []
-    $scope.comment = {}
-    $scope.comment.userId = currentUser.id
-    $scope.comment.timetrackId = $scope.timetrack.id
+    $scope.comment = { userId: currentUser.id, timetrackId: $scope.timetrack.id }
 
-  $scope.getTimetracks(projectId, taskId)
   $scope.initTimetrack()
 
   $scope.save = (form)->
@@ -22,7 +21,7 @@ app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId
       timetrack.projectId = projectId
       timetrack.save().then (response) ->
         $modalInstance.close(response)
-      , (error) ->
+      , ->
         $modalInstance.dismiss "error"
 
   $scope.cancel = ->

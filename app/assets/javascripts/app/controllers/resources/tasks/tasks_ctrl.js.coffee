@@ -6,24 +6,22 @@ app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, Project, UserServic
 
   Project.get({ id: $stateParams.projectId }).then (results) ->
     $scope.project = results
-  , (error) ->
+  , ->
     console.log 'Could not fetch project'
   
   Project.members($stateParams.projectId).then (results) ->
     $scope.members = results
     $scope.isManagable()
-  , (error) ->
+  , ->
     console.log 'Could not fetch members of a project'
 
   $scope.delete = (task) ->
     task.delete().then (respone) ->
+      console.log 'Task successfuly deleted'
       i = $scope.tasks.indexOf(task)
       $scope.tasks.splice(i, 1)
-
-      console.log 'Task successfuly deleted'
-    , (error) ->
+    , ->
       console.log 'Could not delete task'
-      console.log error
 
   $scope.updateStatus = (task, state)->
     task.state = state
