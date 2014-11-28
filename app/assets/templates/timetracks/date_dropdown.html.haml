@@ -1,9 +1,9 @@
 .form-group
   .dropdown
-    %a#dropdown1.dropdown-toggle( data-target="#" data-toggle="dropdown" href="#" role="button" )
+    %a.dropdown-toggle( id="{{dpid}}" data-target="#" data-toggle="dropdown" href="#" role="button" )
       .input-group
         .input-group-addon
           %span.glyphicon.glyphicon-calendar
         %input#startDate.form-control( type='text' placeholder="{{timetrack.startDate | date: 'dd/MM/yyyy'}}" disabled='true' )
     %ul.dropdown-menu( aria-labelledby="dLabel" role="menu" )
-      %datetimepicker( data-datetimepicker-config="{ minView: 'day', dropdownSelector: '#dropdown1' }" ng-model="timetrack.startDate" )
+      %datetimepicker( data-datetimepicker-config="{ startView: 'day', minView: 'day', dropdownSelector: ('#' + dpid) }" ng-model="timetrack.startDate" )

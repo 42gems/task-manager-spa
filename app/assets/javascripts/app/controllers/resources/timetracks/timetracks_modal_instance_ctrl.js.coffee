@@ -9,7 +9,7 @@ app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId
     $scope.timetrack = new Timetrack 
       taskId: taskId
       userId: currentUser.id
-      startDate: new Date().toLocaleDateString('ca-iso8601')
+      startDate: new Date()
     
     $scope.timetrack.comments_attributes = []
     $scope.comment = { userId: currentUser.id, timetrackId: $scope.timetrack.id }

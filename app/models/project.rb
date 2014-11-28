@@ -37,7 +37,7 @@ class Project < ActiveRecord::Base
 
         member.timetracks.each do |track|
           date = track.start_date.strftime(date_formatting)
-          i    = matrix[0].index(date)
+          i = matrix[0].index(date)
           
           increase_amount(track.amount, row, i) unless i.nil?
         end
