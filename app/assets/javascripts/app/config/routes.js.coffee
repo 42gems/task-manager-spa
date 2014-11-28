@@ -27,7 +27,7 @@ app.config ($stateProvider, $urlRouterProvider) ->
       controller: 'InvitesCtrl'
     .state 'members',
       url: '/members'
-      templateUrl: 'projects/members.html'
+      templateUrl: 'members.html'
       controller: 'ProjectsCtrl'
     .state 'project',
       url: '/projects/:projectId'

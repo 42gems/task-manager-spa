@@ -15,25 +15,43 @@ class Project < ActiveRecord::Base
     User.where.not(id: user_ids)
   end
 
-  # [ ['', day1, day2, day3], [email, '', 9, ''], ... ]
   def timeline_matrix
+    timetracks.any? ? build_matrix : []
+  end
+
+  private
+
+  # [ ['', day1, day2, day3, ...], [email, '', amount, ''], ... ]
+  def build_matrix
     date_formatting = '%d/%m/%y'
     matrix = []
+    matrix << timetracks.map { |t| t.start_date.strftime(date_formatting) }.uniq.unshift('')
+    members = []
+    members << self.members.includes(:timetracks)
+    members << self.owner
     
-    if timetracks.any?
-      matrix << timetracks.map { |t| t.start_date.strftime(date_formatting) }.uniq.unshift('')
-
-      timetracks.includes(:user).each do |track|
+    members.flatten!.each do |member|
+      if member.timetracks.any?
         row = [''] * matrix[0].length
-        date = track.start_date.strftime(date_formatting)
-        i = matrix[0].index(date)
+        row[0] = member.email
 
-        row[0] = track.user.email
-        row[i] = track.amount
+        member.timetracks.each do |track|
+          date = track.start_date.strftime(date_formatting)
+          i    = matrix[0].index(date)
+          
+          increase_amount(track.amount, row, i) unless i.nil?
+        end
         matrix << row
       end
     end
-
     matrix
+  end
+
+  def increase_amount(amount, row, i)
+    if row[i].is_a? Integer
+      row[i] += amount 
+    else
+      row[i] = amount
+    end
   end
 end

@@ -19,7 +19,7 @@
           %a( ui-sref='projects.tasks({projectId: {{project.id}} })' )
             .btn.btn-primary Taks
         %td
-          %a( ui-sref='project.timeline({projectId: {{project.id}} })' )
+          %a( ng-if='isManagable(project)' ui-sref='project.timeline({projectId: {{project.id}} })' )
             .btn.btn-primary Timeline
         %td
           .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
