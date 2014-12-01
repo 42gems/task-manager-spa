@@ -1,7 +1,7 @@
-app.directive 'timetrackDateDropdown', () ->
+app.directive 'datetimepickerDropdown', () ->
   restrict: 'E'
-  templateUrl: 'timetracks/date_dropdown.html'
-  replace: true
+  templateUrl: 'datetimepicker_dropdown.html'
   scope:
-    timetrack: "="
-    dpid: "@"
+    timeModel: "="
+    config: "@"
+    dateFormatting: "@"
