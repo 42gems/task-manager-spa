@@ -25,7 +25,7 @@ class Project < ActiveRecord::Base
   def build_matrix
     date_formatting = '%d/%m/%y'
     matrix = []
-    matrix << timetracks.map { |t| t.start_date.strftime(date_formatting) }.uniq.unshift('')
+    matrix << timetracks.map { |t| t.start_date }.uniq.unshift('')
     members = []
     members << self.members.includes(:timetracks)
     members << self.owner
@@ -36,7 +36,7 @@ class Project < ActiveRecord::Base
         row[0] = member.email
 
         member.timetracks.each do |track|
-          date = track.start_date.strftime(date_formatting)
+          date = track.start_date
           i = matrix[0].index(date)
           
           increase_amount(track.amount, row, i) unless i.nil?
