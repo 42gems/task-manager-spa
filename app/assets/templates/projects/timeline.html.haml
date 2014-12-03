@@ -4,4 +4,4 @@
 %table.table.table-bordered.table-striped( ng-if='tracks.length > 0' )
   %td( ng-repeat='data in dates track by $index' ) {{ data | date: 'dd/MM/yyyy' }}
   %tr( ng-repeat='row in tracks track by $index' )
-    %td( ng-repeat='data in row track by $index' ) {{ secondsToTime(data) }}
+    %td( ng-repeat='data in row track by $index' ) {{ data | secondsToTime }}

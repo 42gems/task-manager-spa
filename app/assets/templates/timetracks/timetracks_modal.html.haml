@@ -5,14 +5,12 @@
     %h4 Tracked time
     %table.table
       %tr
-        %td Amount/Time
+        %td Amount
         %td Start date
         %td Actions
       %tr( ng-repeat='timetrack in timetracks' )
-        %td( ng-if='!timetrack.time' ) 
-          %input.form-control( type='text' ng-model='timetrack.amount' )
-        %td( ng-if='timetrack.time' )
-          %input.form-control( type='text' ng-model='timetrack.time' )
+        %td
+          %input.form-control( type='text' ng-model='timetrack.amount' humanized-amount )
         %td
           %datetimepicker-dropdown( time-model="timetrack.startDate" config='{minView: "day"}' date-formatting='dd/MM/yyyy' )
         %td
@@ -22,8 +20,8 @@
     .form-inline
       .form-group
         .input-group
-          .input-group-addon Time
-          %input#inputTime.form-control( type='text' placeholder='1d 10h 20m 10s' ng-model='timetrack.time' validation-field-required="true" )
+          .input-group-addon Amount
+          %input.form-control( type='text' placeholder='1d 10h 20m 10s' ng-model='timetrack.amount' humanized-amount )
       %datetimepicker-dropdown( time-model="timetrack.startDate" config='{minView: "day"}' date-formatting='dd/MM/yyyy' )
       .btn.btn-success( ng-click='addTimetrack(form)' ) Add
     %br
