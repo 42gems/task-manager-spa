@@ -1,0 +1,29 @@
+
+[1mFrom:[0m /home/danny/dev/42gems/task-manager-spa/app/models/timeline.rb @ line 17 Timeline#build_matrix:
+
+    [1;34m15[0m: [32mdef[0m [1;34mbuild_matrix[0m
+    [1;34m16[0m:   binding.pry
+ => [1;34m17[0m:   interval = build_interval
+    [1;34m18[0m:   matrix = []
+    [1;34m19[0m:   matrix << @project.timetracks.where([35mstart_date[0m: interval).pluck([33m:start_date[0m).uniq.unshift([31m[1;31m'[0m[31m[1;31m'[0m[31m[0m)
+    [1;34m20[0m:   members = []
+    [1;34m21[0m:   members << @project.members.includes([33m:timetracks[0m)
+    [1;34m22[0m:   members << @project.owner
+    [1;34m23[0m: 
+    [1;34m24[0m:   members.flatten!.each [32mdo[0m |member|
+    [1;34m25[0m:     [32mif[0m member.timetracks.any?
+    [1;34m26[0m:       row = [[31m[1;31m'[0m[31m[1;31m'[0m[31m[0m] * matrix[[1;34m0[0m].length
+    [1;34m27[0m:       row[[1;34m0[0m] = member.email
+    [1;34m28[0m: 
+    [1;34m29[0m:       member.timetracks.each [32mdo[0m |track|
+    [1;34m30[0m:         date = track.start_date
+    [1;34m31[0m:         i = matrix[[1;34m0[0m].index(date)
+    [1;34m32[0m:         
+    [1;34m33[0m:         increase_amount(track.amount, row, i) [32munless[0m i.nil?
+    [1;34m34[0m:       [32mend[0m
+    [1;34m35[0m:       matrix << row
+    [1;34m36[0m:     [32mend[0m
+    [1;34m37[0m:   [32mend[0m
+    [1;34m38[0m:   matrix
+    [1;34m39[0m: [32mend[0m
+

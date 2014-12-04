@@ -16,7 +16,7 @@ class API::ProjectsController < API::BaseController
   end
 
   def timeline_matrix
-    timeline = Timeline.new(@project, params[:opts])
+    timeline = Timeline.new(@project, { from: params[:from], to: params[:to] })
     respond_with timeline.matrix
   end
 
