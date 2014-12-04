@@ -10,7 +10,7 @@
         %td Actions
       %tr( ng-repeat='timetrack in timetracks' )
         %td
-          %input.form-control( type='text' ng-model='timetrack.amount' humanized-amount )
+          %input.form-control.min-width-120( type='text' ng-model='timetrack.amount' humanized-amount )
         %td
           %datetimepicker-dropdown( time-model="timetrack.startDate" config='{minView: "day"}' date-formatting='dd/MM/yyyy' )
         %td
