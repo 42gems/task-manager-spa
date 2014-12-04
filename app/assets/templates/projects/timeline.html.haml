@@ -1,4 +1,13 @@
 %h4 Timeline of the project
+
+%ol.breadcrumb
+  %li
+    %a(  ) last week
+  %li
+    %a(  ) last month
+  %li
+    %a(  ) select interval
+
 %h5( ng-if='!tracks.length > 0' ) No one tracked time on this project yet
 
 %table.table.table-bordered.table-striped( ng-if='tracks.length > 0' )
