@@ -1,5 +1,3 @@
 app.directive 'authLinks', () ->
-  {
-    restrict: 'E',
-    templateUrl: 'authentication/auth_links.html'
-  }
+  restrict: 'E',
+  templateUrl: 'authentication/auth_links.html'

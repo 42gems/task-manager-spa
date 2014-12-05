@@ -1,0 +1,12 @@
+.modal-header
+  %h3.modal-title Custom interval
+
+.modal-body
+  %form( name="form" novalidate )
+    .form-inline
+      %datetimepicker-dropdown( time-model="range.from" config='{minView: "day"}' date-formatting='dd/MM/yyyy' addon='From' )
+      %datetimepicker-dropdown( time-model="range.to"   config='{minView: "day"}' date-formatting='dd/MM/yyyy' addon='To')
+
+.modal-footer
+  %button.btn.btn-success( ng-click='save()' ) Save
+  %button.btn.btn-warning( ng-click='cancel()' ) Cancel

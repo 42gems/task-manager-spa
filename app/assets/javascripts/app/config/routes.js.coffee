@@ -35,7 +35,7 @@ app.config ($stateProvider, $urlRouterProvider) ->
       controller: 'ProjectCtrl'
     .state 'project.timeline',
       url: '/timeline'
-      templateUrl: 'projects/timeline.html'
+      templateUrl: 'timeline/index.html'
       controller: 'TimelineCtrl'
     .state 'project.edit',
       url: '/edit'

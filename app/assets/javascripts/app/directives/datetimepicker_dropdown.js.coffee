@@ -5,3 +5,4 @@ app.directive 'datetimepickerDropdown', () ->
     timeModel: "="
     config: "@"
     dateFormatting: "@"
+    addon: "@"
