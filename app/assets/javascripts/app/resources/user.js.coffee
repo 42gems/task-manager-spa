@@ -1,5 +1,6 @@
-app.factory 'User', (railsResourceFactory) ->
-  railsResourceFactory
-    url: '/api/users'
-    name: 'user'
-    updateMethod: 'patch'
+app.factory 'User', (railsResourceFactory, RailsResource) ->
+  class UserResource extends RailsResource
+    @configure
+      url: '/api/users'
+      name: 'user'
+      updateMethod: 'patch'

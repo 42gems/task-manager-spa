@@ -1,22 +1,21 @@
-app.factory 'Project', (railsResourceFactory) ->
-  Project = railsResourceFactory
-    url: '/api/projects'
-    name: 'project'
-    updateMethod: 'patch'
-  
-  Project.members = (id) ->
-    @$get(@$url() + "/#{id}/members")
+app.factory 'Project', (railsResourceFactory, RailsResource) ->
+  class ProjectResource extends RailsResource
+    @configure
+      url: '/api/projects'
+      name: 'project'
+      updateMethod: 'patch'
 
-  Project.usersForInvite = (id) ->
-    @$get(@$url() + "/#{id}/users_for_invite")
-  
-  Project.timelineMatrix = (id) ->
-    @$get(@$url() + "/#{id}/timeline_matrix")
+    @members = (id) ->
+      @$get(@$url() + "/#{id}/members")
 
-  Project.prototype.removeMember = (memberId) ->
-    @$delete(@$url() + "/remove_member/#{memberId}")
-  
-  Project.prototype.addMember = (memberId) ->
-    Project.$patch(@$url() + "/add_member/#{memberId}")
+    @usersForInvite = (id) ->
+      @$get(@$url() + "/#{id}/users_for_invite")
+    
+    @timelineMatrix = (id) ->
+      @$get(@$url() + "/#{id}/timeline_matrix")
 
-  Project
+    @prototype.removeMember = (memberId) ->
+      @$delete(@$url() + "/remove_member/#{memberId}")
+    
+    @prototype.addMember = (memberId) ->
+      ProjectResource.$patch(@$url() + "/add_member/#{memberId}")
