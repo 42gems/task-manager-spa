@@ -1,10 +1,6 @@
 app.config ($stateProvider, $urlRouterProvider) ->
   $urlRouterProvider.otherwise('/projects')
   $stateProvider
-    .state 'home',
-      url: '/home'
-      templateUrl: 'home.html'
-      controller: 'HomeCtrl'
     .state 'projects',
       url: '/projects'
       templateUrl: 'projects/index.html'
@@ -62,7 +58,7 @@ app.config ($stateProvider, $urlRouterProvider) ->
       onEnter: ($state, AuthenticationService, $timeout) ->
         $timeout ->
           if AuthenticationService.isLoggedIn
-            $state.go('home')
+            $state.go('projects')
 
 app.run ($rootScope, $location, AuthenticationService, $state) ->
   $rootScope.$state = $state
