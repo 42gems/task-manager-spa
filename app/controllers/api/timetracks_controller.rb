@@ -2,7 +2,7 @@ class API::TimetracksController < API::BaseController
   before_action :fetch_task, except: [:edit, :show, :destroy]
 
   def index
-    respond_with @task.timetracks
+    respond_with current_user.timetracks.where(task_id: @task.id)
   end
 
   private
