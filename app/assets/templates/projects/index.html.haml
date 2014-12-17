@@ -17,7 +17,7 @@
         %td {{ project.ownerId }}
         %td
           %a( ui-sref='projects.tasks({projectId: {{project.id}} })' )
-            .btn.btn-primary Taks
+            .btn.btn-primary Tasks
         %td
           %a( ng-if='isManagable(project)' ui-sref='project.timeline({projectId: {{project.id}} })' )
             .btn.btn-primary Timeline
