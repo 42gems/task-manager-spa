@@ -1,6 +1,6 @@
 app.controller 'TimetracksCtrl', ($scope, $q, Timetrack, UserService, $modal) ->
   
-  UserService.getCurrentUser().success (data) ->
+  UserService.fetchCurrentUser().success (data) ->
     $scope.currentUser = data
 
   $scope.openModal = (projectId, taskId) ->

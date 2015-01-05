@@ -1,13 +1,12 @@
 app.controller 'ProjectsCtrl', ($scope, $q, Project, User, UserService, $state) ->
-  $scope.currentUser = {}
+  $scope.currentUser = UserService.getCurrentUser()
 
   Project.query({}).then (results) ->
     $scope.projects = results
-    $scope.getCurrentUser()
   , (error) ->
     console.log 'Could not fetch projects'
   
-  User.query({}, 'invited_members').then (results) ->
+  User.invitedMembers($scope.currentUser.id).then (results) ->
     $scope.members = results
   , (error) ->
     console.log 'Could not fetch invited users'
@@ -37,11 +36,6 @@ app.controller 'ProjectsCtrl', ($scope, $q, Project, User, UserService, $state) 
       console.log 'Member successfuly removed from the project'
     , (error) ->
       console.log 'Could not remove member'
-
-  $scope.getCurrentUser = ->
-    UserService.getCurrentUser()
-      .success (data) ->
-        $scope.currentUser = data
 
   $scope.isManagable = (project) ->
     $scope.currentUser.id == project.ownerId

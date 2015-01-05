@@ -1,4 +1,4 @@
-app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, Project, UserService, $modal) ->
+app.controller 'TasksCtrl', ($scope, $stateParams, Task, Project, UserService, $modal) ->
   $scope.tasks = []
 
   Task.query({}, projectId: $stateParams.projectId).then (tasks) ->
@@ -54,7 +54,7 @@ app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, Project, UserServic
       console.log "Modal dismissed"
 
   $scope.isManagable = ->
-    UserService.getCurrentUser()
+    UserService.fetchCurrentUser()
       .success (currentUser) ->
         isMember = false
         isMember = true for member in $scope.members when member.id == currentUser.id

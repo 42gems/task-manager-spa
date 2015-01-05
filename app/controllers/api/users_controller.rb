@@ -1,12 +1,17 @@
 class API::UsersController < API::BaseController
+  before_action :fetch_user, only: [:projects, :invited_members]
   skip_before_action :authenticate_user, only: [:sign_in, :create]
 
   def current
     render json: current_user
   end
 
+  def projects
+    respond_with @user.projects
+  end
+
   def invited_members
-    respond_with current_user.invited_members
+    respond_with @user.invited_members
   end
 
   def sign_in
@@ -26,5 +31,9 @@ class API::UsersController < API::BaseController
   private
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
+  end
+
+  def fetch_user
+    @user = User.find(params[:id])
   end
 end

@@ -1,0 +1,6 @@
+%div( ng-if='tasks.length > 0' )
+  %h4 Tasks
+  %ul
+    %li( ng-repeat='task in tasks' ) {{ task.title }}
+%div( ng-hide='tasks.length > 0' )
+  %h4 There are no tasks

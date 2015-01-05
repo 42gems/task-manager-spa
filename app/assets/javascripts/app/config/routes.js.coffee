@@ -1,6 +1,10 @@
 app.config ($stateProvider, $urlRouterProvider) ->
-  $urlRouterProvider.otherwise('/projects')
+  $urlRouterProvider.otherwise('/board')
   $stateProvider
+    .state 'board',
+      url: '/board'
+      templateUrl: 'board.html'
+      controller: 'BoardCtrl'
     .state 'projects',
       url: '/projects'
       templateUrl: 'projects/index.html'
@@ -58,11 +62,15 @@ app.config ($stateProvider, $urlRouterProvider) ->
       onEnter: ($state, AuthenticationService, $timeout) ->
         $timeout ->
           if AuthenticationService.isLoggedIn
-            $state.go('projects')
+            $state.go('board')
 
-app.run ($rootScope, $location, AuthenticationService, $state) ->
+app.run ($rootScope, $location, AuthenticationService, $state, UserService) ->
   $rootScope.$state = $state
   $rootScope.$on "$stateChangeStart", (event, toState, toParams, fromState, fromParams) ->
     if !toState.skipLogin && !AuthenticationService.isLoggedIn
       event.preventDefault()
       $state.go('sign_in')
+    else
+      UserService.fetchCurrentUser()
+        .success (data) ->
+          UserService.setCurrentUser(data)
