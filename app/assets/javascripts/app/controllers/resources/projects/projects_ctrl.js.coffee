@@ -1,16 +1,29 @@
 app.controller 'ProjectsCtrl', ($scope, $q, Project, User, UserService, $state) ->
   $scope.currentUser = {}
+  $scope.projects = []
 
   Project.query({}).then (results) ->
     $scope.projects = results
     $scope.getCurrentUser()
   , (error) ->
     console.log 'Could not fetch projects'
-  
+
   User.query({}, 'invited_members').then (results) ->
     $scope.members = results
   , (error) ->
     console.log 'Could not fetch invited users'
+
+  $scope.myProjects = ->
+    $scope.projects.filter (project) ->
+      project.type == 'owner'
+
+  $scope.memberProjects = ->
+    $scope.projects.filter (project) ->
+      project.type == 'member'
+
+  $scope.publicProjects = ->
+    $scope.projects.filter (project) ->
+      project.type == 'public'
 
   $scope.saveProject = ->
     $scope.project.ownerId = $scope.currentUser.id

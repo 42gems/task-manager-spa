@@ -14,4 +14,14 @@ class Project < ActiveRecord::Base
     user_ids = Invite.where(project_id: id).pluck(:user_id) << owner.id
     User.where.not(id: user_ids)
   end
+
+  def type_for(user)
+    if owner == user
+      'owner'
+    elsif members.include? user
+      'member'
+    elsif !private?
+      'public'
+    end
+  end
 end

@@ -1,8 +1,10 @@
-%h2 Projects
+%h2 My Projects
 %a( ui-sref='projects.new' )
   .btn.btn-success New Project
 %div( ui-view='project' )
-%div( ng-if='projects' )
+%div( ng-if='myProjects().length == 0' )
+  %h3.well You have no projects right now
+%div( ng-if='myProjects().length > 0' )
   %table.table.table-hover.table-responsive
     %thead
       %tr
@@ -12,7 +14,7 @@
         %td Timeline
         %td Actions
     %tbody
-      %tr( ng-repeat='project in projects' )
+      %tr( ng-repeat='project in myProjects()' )
         %td {{ project.title }}
         %td {{ project.ownerId }}
         %td
@@ -24,4 +26,54 @@
         %td
           .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
           .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy
+
+%div( ng-if='memberProjects().length > 0')
+  %h2 Collaborated Projects
+  %div
+    %table.table.table-hover.table-responsive
+      %thead
+        %tr
+          %td Title
+          %td Owner #
+          %td Tasks
+          %td Timeline
+          %td Actions
+      %tbody
+        %tr( ng-repeat='project in memberProjects()' )
+          %td {{ project.title }}
+          %td {{ project.ownerId }}
+          %td
+            %a( ui-sref='projects.tasks({projectId: {{project.id}} })' )
+              .btn.btn-primary Tasks
+          %td
+            %a( ng-if='isManagable(project)' ui-sref='project.timeline({projectId: {{project.id}} })' )
+              .btn.btn-primary Timeline
+          %td
+            .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
+            .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy
+
+%div( ng-if='publicProjects().length > 0')
+  %h2 Public Projects
+  %div
+    %table.table.table-hover.table-responsive
+      %thead
+        %tr
+          %td Title
+          %td Owner #
+          %td Tasks
+          %td Timeline
+          %td Actions
+      %tbody
+        %tr( ng-repeat='project in publicProjects()' )
+          %td {{ project.title }}
+          %td {{ project.ownerId }}
+          %td
+            %a( ui-sref='projects.tasks({projectId: {{project.id}} })' )
+              .btn.btn-primary Tasks
+          %td
+            %a( ng-if='isManagable(project)' ui-sref='project.timeline({projectId: {{project.id}} })' )
+              .btn.btn-primary Timeline
+          %td
+            .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
+            .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy
 %div( ui-view='tasks' )

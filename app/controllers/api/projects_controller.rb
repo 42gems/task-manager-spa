@@ -4,7 +4,7 @@ class API::ProjectsController < API::BaseController
   after_action  :send_notification, only: :add_member
 
   def index
-    respond_with current_user.all_projects
+    respond_with current_user.all_projects_json
   end
 
   def members

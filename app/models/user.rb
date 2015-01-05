@@ -34,4 +34,11 @@ class User < ActiveRecord::Base
     project_ids = Invite.where(user_id: self.id).pluck :project_id
     Project.where(id: project_ids)
   end
+
+  def all_projects_json
+    all_projects.map do |project|
+      project.as_json.merge(type: project.type_for(self))
+    end
+  end
+
 end
