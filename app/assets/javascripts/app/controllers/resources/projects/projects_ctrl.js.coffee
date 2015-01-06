@@ -1,4 +1,4 @@
-app.controller 'ProjectsCtrl', ($scope, $q, Project, User, UserService, $state) ->
+app.controller 'ProjectsCtrl', ($scope, $q, Project, User, UserService, $state, $modal) ->
   $scope.currentUser = {}
   $scope.projects = []
 
@@ -36,12 +36,20 @@ app.controller 'ProjectsCtrl', ($scope, $q, Project, User, UserService, $state) 
       console.log error
 
   $scope.deleteProject = (projct) ->
-    project = new Project(projct)
-    project.delete().then (response) ->
-      $state.go('projects', {}, { reload: true })
-      console.log 'Project successfuly deleted'
-    , (error) ->
-      console.log 'Could not remove project'
+    modalInstance = $modal.open(
+      templateUrl: 'modal/confirm.html'
+      controller: 'ModalConfirmCtrl'
+      size: 'sm'
+      resolve:
+        caption: -> "Delete project #{ projct.title }?"
+    );
+    modalInstance.result.then ->
+      project = new Project(projct)
+      project.delete().then (response) ->
+        $state.go('projects', {}, { reload: true })
+        console.log 'Project successfuly deleted'
+      , (error) ->
+        console.log 'Could not remove project'
 
   $scope.removeMember = (projct, member_id) ->
     project = new Project(projct)
