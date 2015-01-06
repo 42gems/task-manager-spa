@@ -4,3 +4,6 @@ app.factory 'Invite', (railsResourceFactory, RailsResource) ->
       url: '/api/invites/{{inviteId}}'
       name: 'invite'
       updateMethod: 'patch'
+
+    @pendingProjects = ->
+      @$get('/api/invites/pending_invites')
