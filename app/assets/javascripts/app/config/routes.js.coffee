@@ -15,12 +15,6 @@ app.config ($stateProvider, $urlRouterProvider) ->
         'project':
           templateUrl: 'projects/form.html'
           controller: 'ProjectsCtrl'
-    .state 'projects.tasks',
-      url: '/:projectId/tasks-drag'
-      views:
-        'tasks':
-          templateUrl: 'tasks/index.html'
-          controller: 'TasksCtrl'
     .state 'invites',
       url: '/invites'
       templateUrl: 'invites.html'

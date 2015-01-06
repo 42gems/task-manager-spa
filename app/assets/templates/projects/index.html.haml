@@ -73,4 +73,3 @@
           %td
             .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
             .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy
-%div( ui-view='tasks' )
