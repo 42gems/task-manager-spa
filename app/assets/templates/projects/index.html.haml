@@ -18,8 +18,7 @@
         %td {{ project.title }}
         %td {{ project.ownerId }}
         %td
-          %a( ui-sref='projects.tasks({projectId: {{project.id}} })' )
-            .btn.btn-primary Tasks
+          .btn.btn-primary( ng-click='changeContext(project)' ) Tasks
         %td
           %a( ng-if='isManagable(project)' ui-sref='project.timeline({projectId: {{project.id}} })' )
             .btn.btn-primary Timeline
@@ -43,8 +42,7 @@
           %td {{ project.title }}
           %td {{ project.ownerId }}
           %td
-            %a( ui-sref='projects.tasks({projectId: {{project.id}} })' )
-              .btn.btn-primary Tasks
+            .btn.btn-primary( ng-click='changeContext(project)' ) Tasks
           %td
             %a( ng-if='isManagable(project)' ui-sref='project.timeline({projectId: {{project.id}} })' )
               .btn.btn-primary Timeline
@@ -68,8 +66,7 @@
           %td {{ project.title }}
           %td {{ project.ownerId }}
           %td
-            %a( ui-sref='projects.tasks({projectId: {{project.id}} })' )
-              .btn.btn-primary Tasks
+            .btn.btn-primary( ng-click='changeContext(project)' ) Tasks
           %td
             %a( ng-if='isManagable(project)' ui-sref='project.timeline({projectId: {{project.id}} })' )
               .btn.btn-primary Timeline

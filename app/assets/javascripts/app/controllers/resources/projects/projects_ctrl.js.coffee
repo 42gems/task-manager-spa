@@ -1,4 +1,4 @@
-app.controller 'ProjectsCtrl', ($scope, $q, Project, User, UserService, $state) ->
+app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, CurrentProject) ->
   $scope.projects = []
   $scope.currentUser = UserService.getCurrentUser()
 
@@ -52,3 +52,7 @@ app.controller 'ProjectsCtrl', ($scope, $q, Project, User, UserService, $state) 
 
   $scope.isManagable = (project) ->
     $scope.currentUser.id == project.ownerId
+
+  $scope.changeContext = (project) ->
+    CurrentProject.set(project)
+    $state.go('board')
