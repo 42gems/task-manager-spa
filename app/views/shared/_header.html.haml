@@ -20,7 +20,9 @@
         %li
           %a( ui-sref='members' )
             Members
-        %li
+        %li( ng-show='pendingInvites > 0' )
           %a( ui-sref='invites' )
             Invites
+            %span.badge
+              {{ pendingInvites }}
       %auth_links
