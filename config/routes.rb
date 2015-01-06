@@ -3,9 +3,12 @@ Rails.application.routes.draw do
 
   namespace 'api' do
     resources :users do
+      member do
+        get :projects
+        get :invited_members
+      end
       collection do
         get    :current
-        get    :invited_members
         post   :sign_in
         delete :sign_out
       end

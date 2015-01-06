@@ -1,6 +1,10 @@
 app.config ($stateProvider, $urlRouterProvider) ->
-  $urlRouterProvider.otherwise('/projects')
+  $urlRouterProvider.otherwise('/board')
   $stateProvider
+    .state 'board',
+      url: '/board'
+      templateUrl: 'board.html'
+      controller: 'BoardCtrl'
     .state 'projects',
       url: '/projects'
       templateUrl: 'projects/index.html'
@@ -11,12 +15,6 @@ app.config ($stateProvider, $urlRouterProvider) ->
         'project':
           templateUrl: 'projects/form.html'
           controller: 'ProjectsCtrl'
-    .state 'projects.tasks',
-      url: '/:projectId/tasks-drag'
-      views:
-        'tasks':
-          templateUrl: 'tasks/index.html'
-          controller: 'TasksCtrl'
     .state 'invites',
       url: '/invites'
       templateUrl: 'invites.html'
@@ -58,4 +56,4 @@ app.config ($stateProvider, $urlRouterProvider) ->
       onEnter: ($state, AuthenticationService, $timeout) ->
         $timeout ->
           if AuthenticationService.isLoggedIn
-            $state.go('projects')
+            $state.go('board')

@@ -5,7 +5,7 @@ app.controller 'SignInCtrl', ($scope, $window, $state, UserService, Authenticati
         .success (data) ->
           AuthenticationService.isLoggedIn = true
           $window.localStorage.taskManagerSpaToken = data.auth_token
-          $state.go('projects')
+          $state.go('board')
         .error (status, data) ->
           console.log data
           console.log status

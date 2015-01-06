@@ -5,6 +5,6 @@
         .input-group-addon
           %span( ng-if='addon' ) {{ addon }}
           %span.glyphicon.glyphicon-calendar( ng-hide='addon' )
-        %input.form-control( type='text' placeholder="{{ timeModel | date: dateFormatting}}" disabled='true' )
+        %input.form-control( type='text' placeholder="{{timeModel | date: dateFormatting}}" disabled='true' )
     %ul.dropdown-menu( aria-labelledby="dLabel" role="menu" )
       %datetimepicker( data-datetimepicker-config="{{config}}" ng-model="timeModel" )

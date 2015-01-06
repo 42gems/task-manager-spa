@@ -1,19 +1,29 @@
-app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, Project, UserService, $modal) ->
+app.controller 'TasksCtrl', ($scope, $modal, Task, Project, UserService, CurrentProject) ->
   $scope.tasks = []
+  $scope.currentProject = CurrentProject.get()
 
-  Task.query({}, projectId: $stateParams.projectId).then (tasks) ->
-    $scope.tasks = tasks
+  $scope.fetchProjects = ->
+    Project.get({ id: $scope.currentProject.id }).then (results) ->
+      $scope.project = results
+    , ->
+      console.log 'Could not fetch project'
 
-  Project.get({ id: $stateParams.projectId }).then (results) ->
-    $scope.project = results
-  , ->
-    console.log 'Could not fetch project'
-  
-  Project.members($stateParams.projectId).then (results) ->
-    $scope.members = results
-    $scope.isManagable()
-  , ->
-    console.log 'Could not fetch members of a project'
+  $scope.fetchTasks = ->
+    Task.query({}, projectId: $scope.currentProject.id).then (tasks) ->
+      $scope.tasks = tasks
+
+  $scope.fetchMembers = ->
+    Project.members($scope.currentProject.id).then (results) ->
+      $scope.members = results
+      $scope.isManagable()
+    , ->
+      console.log 'Could not fetch members of a project'
+
+  $scope.updateContext = ->
+    $scope.currentProject = CurrentProject.get()
+    $scope.fetchProjects()
+    $scope.fetchTasks()
+    $scope.fetchMembers()
 
   $scope.delete = (task) ->
     task.delete().then (respone) ->
@@ -54,9 +64,14 @@ app.controller 'TasksCtrl', ($scope, $q, $stateParams, Task, Project, UserServic
       console.log "Modal dismissed"
 
   $scope.isManagable = ->
-    UserService.getCurrentUser()
+    UserService.fetchCurrentUser()
       .success (currentUser) ->
         isMember = false
         isMember = true for member in $scope.members when member.id == currentUser.id
         isOwner  = currentUser.id == $scope.project.ownerId
         $scope.tasks.isManagable = isOwner or isMember
+
+  $scope.$on 'currentProject:updated', (event, data) ->
+   $scope.updateContext()
+
+  $scope.updateContext()

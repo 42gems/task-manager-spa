@@ -1,12 +1,23 @@
-app.factory 'UserService', ($http) ->
-  logIn: (email, password) ->
-    $http.post '/api/users/sign_in',
-      user:
-        email: email
-        password: password
-  
-  logOut: ->
-    $http.delete "/api/users/sign_out"
-  
-  getCurrentUser: ->
-    $http.get "/api/users/current"
+app.factory 'UserService', ($http, $rootScope) ->
+  currentUser = {}
+  service = 
+    getCurrentUser: ->
+      currentUser
+
+    setCurrentUser: (val) ->
+      currentUser = val
+      $rootScope.$broadcast('currentUser:updated', val)
+
+    fetchCurrentUser: ->
+      $http.get "/api/users/current"
+
+    logIn: (email, password) ->
+      $http.post '/api/users/sign_in',
+        user:
+          email: email
+          password: password
+
+    logOut: ->
+      $http.delete "/api/users/sign_out"
+
+  service

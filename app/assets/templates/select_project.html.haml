@@ -1,0 +1,4 @@
+%form( ng-show="$state.is('board')" )
+  .navbar-form.navbar-left
+    .form-group
+      %select.form-control( ng-model='selected' ng-options='project.title for project in projects' )
