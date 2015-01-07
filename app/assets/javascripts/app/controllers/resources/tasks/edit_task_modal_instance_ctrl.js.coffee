@@ -1,6 +1,6 @@
-app.controller "EditTaskModalInstanceCtrl", ($scope, $modalInstance, $stateParams, Task, id) ->
+app.controller "EditTaskModalInstanceCtrl", ($scope, $modalInstance, Task, CurrentProject, id) ->
 
-  Task.get({ projectId: $stateParams.projectId, id: id }).then (result) ->
+  Task.get({ projectId: CurrentProject.get().id, id: id }).then (result) ->
     $scope.task = result
   , ->
     console.log 'Could not fetch project'

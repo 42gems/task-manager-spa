@@ -1,10 +1,10 @@
-.col-md-3.list( ng-drop='{{tasks.isManagable}}' ng-drop-success='updateStatus($data, state)' )
-  .title {{stateTitle}}
+.col-md-3.list( ng-drop='{{ tasks.isManagable }}' ng-drop-success='updateStatus($data, state)' )
+  .title {{ stateTitle }}
   .pull-right( ng-if='state == "todo"' )
     #create_btn.small-caps.btn.btn-success( ng-disabled='!tasks.isManagable' ng-click="newTaskModal()" ) add task
   %div( ng-repeat="task in tasks | filter:{ state: state }" )
     .task( ng-drag='tasks.isManagable' ng-drag-data='task' draggable='false' )
-      %span {{task.title}}
+      %span {{ task.title }}
       %span.pull-right( ng-if='tasks.isManagable' ng-drag='false' )
         %span.glyphicon.glyphicon-edit( ng-click="editTaskModal(task.id)" )
         %span.glyphicon.glyphicon-time.mgl( ng-controller='TimetracksCtrl' ng-click='openModal(task.projectId, task.id)' )
