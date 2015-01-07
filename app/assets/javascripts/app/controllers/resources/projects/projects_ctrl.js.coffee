@@ -1,4 +1,4 @@
-app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, CurrentProject) ->
+app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, CurrentProject, $modal) ->
   $scope.projects = []
   $scope.currentUser = UserService.getCurrentUser()
 
@@ -6,7 +6,7 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
     $scope.projects = results
   , (error) ->
     console.log 'Could not fetch projects'
-  
+
   User.invitedMembers($scope.currentUser.id).then (results) ->
     $scope.members = results
   , (error) ->
@@ -35,12 +35,20 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
       console.log error
 
   $scope.deleteProject = (projct) ->
-    project = new Project(projct)
-    project.delete().then (response) ->
-      $state.go('projects', {}, { reload: true })
-      console.log 'Project successfuly deleted'
-    , (error) ->
-      console.log 'Could not remove project'
+    modalInstance = $modal.open(
+      templateUrl: 'modal/confirm.html'
+      controller: 'ModalConfirmCtrl'
+      size: 'sm'
+      resolve:
+        caption: -> "Delete project #{ projct.title }?"
+    );
+    modalInstance.result.then ->
+      project = new Project(projct)
+      project.delete().then (response) ->
+        $state.go('projects', {}, { reload: true })
+        console.log 'Project successfuly deleted'
+      , (error) ->
+        console.log 'Could not remove project'
 
   $scope.removeMember = (projct, member_id) ->
     project = new Project(projct)
