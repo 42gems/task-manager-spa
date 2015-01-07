@@ -8,6 +8,8 @@ app.run ($rootScope, AuthenticationService, $state, Invite, UserService) ->
       UserService.fetchCurrentUser()
         .success (data) ->
           UserService.setCurrentUser(data)
+        , ->
+          console.log 'Could not fetch current user'
 
   $rootScope.$on "$stateChangeSuccess", () ->
     if !AuthenticationService.isLoggedIn
