@@ -3,13 +3,13 @@ app.controller 'ProjectCtrl', ($scope, $q, Project, UserService, $stateParams, $
 
   Project.get({ id: $stateParams.projectId }).then (results) ->
     $scope.project = results
-    $scope.isOwner()
-    $scope.isMember()
   , ->
     console.log 'Could not fetch project'
 
   Project.members($stateParams.projectId).then (results) ->
     $scope.members = results
+    $scope.isOwner()
+    $scope.isMember()
   , ->
     console.log 'Could not fetch members of a project'
 
