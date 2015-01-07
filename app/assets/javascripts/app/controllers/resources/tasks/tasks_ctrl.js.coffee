@@ -13,7 +13,7 @@ app.controller 'TasksCtrl', ($scope, $modal, Task, Project, UserService, Current
   $scope.fetchMembers = ->
     Project.members($scope.currentProject.id).then (results) ->
       $scope.members = results
-      $scope.isManagable()
+      $scope.checkIfManagable()
     , ->
       console.log 'Could not fetch members of a project'
 
@@ -61,13 +61,12 @@ app.controller 'TasksCtrl', ($scope, $modal, Task, Project, UserService, Current
     , ->
       console.log "Modal dismissed"
 
-  $scope.isManagable = ->
-    UserService.fetchCurrentUser()
-      .success (currentUser) ->
-        isMember = false
-        isMember = true for member in $scope.members when member.id == currentUser.id
-        isOwner  = currentUser.id == $scope.project.ownerId
-        $scope.tasks.isManagable = isOwner or isMember
+  $scope.checkIfManagable = ->
+    currentUser = UserService.getCurrentUser()
+    isMember = false
+    isMember = true for member in $scope.members when member.id == currentUser.id
+    isOwner  = currentUser.id == $scope.project.ownerId
+    $scope.isManagable = isOwner or isMember
 
   $scope.$on 'currentProject:updated', (event, data) ->
    $scope.updateContext()

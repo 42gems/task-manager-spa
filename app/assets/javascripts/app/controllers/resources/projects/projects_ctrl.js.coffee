@@ -1,16 +1,14 @@
-app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, CurrentProject, ModalService) ->
+app.controller 'ProjectsCtrl', ($scope, $state, $timeout, Project, User, UserService, CurrentProject, ModalService) ->
   $scope.projects = []
-  $scope.currentUser = UserService.getCurrentUser()
+
+  $timeout ->
+    $scope.currentUser = UserService.getCurrentUser()
+  , 300
 
   Project.query({}).then (results) ->
     $scope.projects = results
   , (error) ->
     console.log 'Could not fetch projects'
-
-  User.invitedMembers($scope.currentUser.id).then (results) ->
-    $scope.members = results
-  , (error) ->
-    console.log 'Could not fetch invited users'
 
   $scope.myProjects = ->
     $scope.projects.filter (project) ->
@@ -42,14 +40,6 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
         console.log 'Project successfuly deleted'
       , (error) ->
         console.log 'Could not remove project'
-
-  $scope.removeMember = (projct, member_id) ->
-    project = new Project(projct)
-    project.removeMember(member_id).then (response) ->
-      $state.go('members', {}, { reload: true })
-      console.log 'Member successfuly removed from the project'
-    , (error) ->
-      console.log 'Could not remove member'
 
   $scope.isManagable = (project) ->
     $scope.currentUser.id == project.ownerId

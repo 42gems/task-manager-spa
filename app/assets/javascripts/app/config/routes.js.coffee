@@ -22,7 +22,7 @@ app.config ($stateProvider, $urlRouterProvider) ->
     .state 'members',
       url: '/members'
       templateUrl: 'members.html'
-      controller: 'ProjectsCtrl'
+      controller: 'MembersCtrl'
     .state 'project',
       url: '/projects/:projectId'
       templateUrl: 'projects/show.html'
