@@ -1,6 +1,4 @@
 app.controller 'TasksCtrl', ($scope, $modal, Task, Project, UserService, CurrentProject) ->
-  $scope.tasks = []
-  $scope.currentProject = CurrentProject.get()
 
   $scope.fetchProjects = ->
     Project.get({ id: $scope.currentProject.id }).then (results) ->

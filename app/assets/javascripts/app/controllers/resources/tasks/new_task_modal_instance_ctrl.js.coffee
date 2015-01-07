@@ -1,7 +1,7 @@
-app.controller "NewTaskModalInstanceCtrl", ($scope, $modalInstance, $stateParams, Task) ->
-  $scope.task = new Task(projectId: $stateParams.projectId)
+app.controller "NewTaskModalInstanceCtrl", ($scope, $modalInstance, Task, CurrentProject) ->
+  $scope.task = new Task( projectId: CurrentProject.get().id )
+
   $scope.save = (taskForm)->
-    #running super validations
     $scope.$broadcast('runCustomValidations')
 
     if taskForm.$valid

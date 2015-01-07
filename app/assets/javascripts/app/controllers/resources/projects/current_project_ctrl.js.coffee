@@ -1,6 +1,5 @@
 app.controller 'CurrentProjectCtrl', ($scope, Project, UserService, CurrentProject) ->
   $scope.updateCurrentProject = ->
-    console.log 'updating currentProject...'
     CurrentProject.set($scope.selected)
 
   $scope.updateContext = ->
