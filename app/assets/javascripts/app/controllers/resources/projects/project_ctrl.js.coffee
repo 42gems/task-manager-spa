@@ -1,4 +1,4 @@
-app.controller 'ProjectCtrl', ($scope, $q, Project, UserService, $stateParams, $state, $modal) ->
+app.controller 'ProjectCtrl', ($scope, $q, Project, UserService, $stateParams, $state, ModalService) ->
   $scope.currentUser = UserService.getCurrentUser()
 
   Project.get({ id: $stateParams.projectId }).then (results) ->
@@ -27,14 +27,7 @@ app.controller 'ProjectCtrl', ($scope, $q, Project, UserService, $stateParams, $
       console.log 'Could not update the project'
 
   $scope.delete = ->
-    modalInstance = $modal.open(
-      templateUrl: 'modal/confirm.html'
-      controller: 'ModalConfirmCtrl'
-      size: 'sm'
-      resolve:
-        caption: -> "Delete project #{ $scope.project.title }?"
-    );
-    modalInstance.result.then ->
+    ModalService.confirm("Delete project #{ $scope.project.title }?").then ->
       $scope.project.delete().then (respone) ->
         console.log 'Project successfuly deleted'
         $state.go 'projects'

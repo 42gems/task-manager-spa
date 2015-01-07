@@ -1,4 +1,4 @@
-app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, CurrentProject, $modal) ->
+app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, CurrentProject, ModalService) ->
   $scope.projects = []
   $scope.currentUser = UserService.getCurrentUser()
 
@@ -35,14 +35,7 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
       console.log error
 
   $scope.deleteProject = (projct) ->
-    modalInstance = $modal.open(
-      templateUrl: 'modal/confirm.html'
-      controller: 'ModalConfirmCtrl'
-      size: 'sm'
-      resolve:
-        caption: -> "Delete project #{ projct.title }?"
-    );
-    modalInstance.result.then ->
+    ModalService.confirm("Delete project #{ projct.title }?").then ->
       project = new Project(projct)
       project.delete().then (response) ->
         $state.go('projects', {}, { reload: true })
