@@ -1,6 +1,6 @@
 app.directive 'datetimepickerDropdown', () ->
   restrict: 'E'
-  templateUrl: 'datetimepicker_dropdown.html'
+  templateUrl: 'directives/datetimepicker_dropdown.html'
   scope:
     timeModel: "="
     config: "@"
