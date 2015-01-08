@@ -36,7 +36,7 @@ class User < ActiveRecord::Base
 
   def all_projects_json
     all_projects.map do |project|
-      project.as_json.merge(type: project.type_for(self))
+      project.as_json.merge({ type: project.type_for(self), owner_email: project.owner.email })
     end
   end
 

@@ -9,12 +9,12 @@
     %thead
       %tr
         %td Title
-        %td Owner #
+        %td Owner Email
         %td Actions
     %tbody
       %tr( ng-repeat='project in myProjects()' )
         %td {{ project.title }}
-        %td {{ project.ownerId }}
+        %td {{ project.ownerEmail }}
         %td
           .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
           .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy
@@ -26,12 +26,12 @@
       %thead
         %tr
           %td Title
-          %td Owner #
+          %td Owner Email
           %td Actions
       %tbody
         %tr( ng-repeat='project in memberProjects()' )
           %td {{ project.title }}
-          %td {{ project.ownerId }}
+          %td {{ project.ownerEmail }}
           %td
             .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
             .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy
@@ -43,12 +43,12 @@
       %thead
         %tr
           %td Title
-          %td Owner #
+          %td Owner Email
           %td Actions
       %tbody
         %tr( ng-repeat='project in publicProjects()' )
           %td {{ project.title }}
-          %td {{ project.ownerId }}
+          %td {{ project.ownerEmail }}
           %td
             .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
             .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy
