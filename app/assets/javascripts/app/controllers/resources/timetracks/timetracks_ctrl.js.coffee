@@ -1,5 +1,7 @@
-app.controller 'TimetracksCtrl', ($scope, $q, Timetrack, UserService, $modal) ->
-  $scope.currentUser = UserService.getCurrentUser()
+app.controller 'TimetracksCtrl', ($scope, Timetrack, $modal) ->
+
+  $scope.$on 'currentUser:updated', (event, data) ->
+    $scope.currentUser = data
 
   $scope.openModal = (projectId, taskId) ->
     modalInstance = $modal.open
