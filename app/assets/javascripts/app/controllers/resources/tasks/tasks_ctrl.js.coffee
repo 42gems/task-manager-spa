@@ -1,4 +1,4 @@
-app.controller 'TasksCtrl', ($scope, $modal, Task, Project, UserService, CurrentProject) ->
+app.controller 'TasksCtrl', ($scope, $modal, Task, Project) ->
 
   $scope.fetchProjects = ->
     Project.get({ id: $scope.currentProject.id }).then (results) ->
@@ -18,7 +18,6 @@ app.controller 'TasksCtrl', ($scope, $modal, Task, Project, UserService, Current
       console.log 'Could not fetch members of a project'
 
   $scope.updateContext = ->
-    $scope.currentProject = CurrentProject.get()
     $scope.fetchProjects()
     $scope.fetchTasks()
     $scope.fetchMembers()
@@ -34,10 +33,7 @@ app.controller 'TasksCtrl', ($scope, $modal, Task, Project, UserService, Current
   $scope.updateStatus = (task, state)->
     task.state = state
     task.save()
-    
-    tsk = $scope.tasks.filter (tsk) ->
-      tsk.id == task.id
-    i = $scope.tasks.indexOf(tsk[0])
+    i = $scope.tasks.indexOf(tsk) for tsk in $scope.tasks when tsk.id == task.id
     $scope.tasks[i].state = state
 
   $scope.newTaskModal = ->
@@ -67,11 +63,14 @@ app.controller 'TasksCtrl', ($scope, $modal, Task, Project, UserService, Current
       console.log "Modal dismissed"
 
   $scope.checkIfManagable = ->
-    currentUser = UserService.getCurrentUser()
     isMember = false
-    isMember = true for member in $scope.members when member.id == currentUser.id
-    isOwner  = currentUser.id == $scope.project.ownerId
+    isMember = true for member in $scope.members when member.id == $scope.currentUser.id
+    isOwner  = $scope.currentUser.id == $scope.project.ownerId
     $scope.isManagable = isOwner or isMember
 
   $scope.$on 'currentProject:updated', (event, data) ->
+   $scope.currentProject = data
    $scope.updateContext()
+
+  $scope.$on 'currentUser:updated', (event, data) ->
+   $scope.currentUser = data
