@@ -1,17 +1,20 @@
-app.controller 'ProjectCtrl', ($scope, $q, Project, UserService, $stateParams, $state, ModalService) ->
-  $scope.currentUser = UserService.getCurrentUser()
+app.controller 'ProjectCtrl', ($scope, Project, $stateParams, $state, ModalService) ->
+
+  $scope.$on 'currentUser:updated', (event, data) ->
+    $scope.currentUser = data
+
+    Project.members($stateParams.projectId).then (results) ->
+      $scope.members = results
+      $scope.isOwner()
+      $scope.isMember()
+    , ->
+      console.log 'Could not fetch members of a project'
 
   Project.get({ id: $stateParams.projectId }).then (results) ->
     $scope.project = results
   , ->
     console.log 'Could not fetch project'
 
-  Project.members($stateParams.projectId).then (results) ->
-    $scope.members = results
-    $scope.isOwner()
-    $scope.isMember()
-  , ->
-    console.log 'Could not fetch members of a project'
 
   Project.usersForInvite($stateParams.projectId).then (results) ->
     $scope.usersForInvite = results

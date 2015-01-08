@@ -1,9 +1,8 @@
-app.controller 'ProjectsCtrl', ($scope, $state, $timeout, Project, User, UserService, CurrentProject, ModalService) ->
+app.controller 'ProjectsCtrl', ($scope, $state, $timeout, Project, User, CurrentProject, ModalService) ->
   $scope.projects = []
 
-  $timeout ->
-    $scope.currentUser = UserService.getCurrentUser()
-  , 300
+  $scope.$on 'currentUser:updated', (event, data) ->
+    $scope.currentUser = data
 
   Project.query({}).then (results) ->
     $scope.projects = results
