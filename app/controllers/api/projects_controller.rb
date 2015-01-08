@@ -1,6 +1,6 @@
 class API::ProjectsController < API::BaseController
-  before_action :fetch_project,     only: [:members, :timeline_matrix, :add_member, :remove_member, :users_for_invite]
   before_action :fetch_user,        only: [:add_member, :send_notification]
+  before_action :fetch_project,     except: :index
   after_action  :send_notification, only: :add_member
 
   def index
@@ -9,6 +9,10 @@ class API::ProjectsController < API::BaseController
 
   def members
     respond_with @project.members.accepted_invite
+  end
+
+  def members_with_user_rights
+    respond_with @project.members_with_user_rights_of current_user
   end
 
   def users_for_invite

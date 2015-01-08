@@ -8,6 +8,9 @@ app.factory 'Project', (railsResourceFactory, RailsResource) ->
     @members = (id) ->
       @$get(@$url() + "/#{id}/members")
 
+    @membersWithUserRights = (id) ->
+      @$get(@$url() + "/#{id}/members_with_user_rights")
+
     @usersForInvite = (id) ->
       @$get(@$url() + "/#{id}/users_for_invite")
 

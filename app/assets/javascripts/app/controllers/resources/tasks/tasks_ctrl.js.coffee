@@ -11,9 +11,9 @@ app.controller 'TasksCtrl', ($scope, $modal, Task, Project) ->
       $scope.tasks = tasks
 
   $scope.fetchMembers = ->
-    Project.members($scope.currentProject.id).then (results) ->
-      $scope.members = results
-      $scope.checkIfManagable()
+    Project.membersWithUserRights($scope.currentProject.id).then (results) ->
+      $scope.members = results.members
+      $scope.isManagable = results.userRights isnt 'public'
     , ->
       console.log 'Could not fetch members of a project'
 
@@ -61,12 +61,6 @@ app.controller 'TasksCtrl', ($scope, $modal, Task, Project) ->
       $scope.tasks.push(task)
     , ->
       console.log "Modal dismissed"
-
-  $scope.checkIfManagable = ->
-    isMember = false
-    isMember = true for member in $scope.members when member.id == $scope.currentUser.id
-    isOwner  = $scope.currentUser.id == $scope.project.ownerId
-    $scope.isManagable = isOwner or isMember
 
   $scope.$on 'currentProject:updated', (event, data) ->
    $scope.currentProject = data

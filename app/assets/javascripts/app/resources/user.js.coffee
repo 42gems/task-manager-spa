@@ -8,8 +8,5 @@ app.factory 'User', (railsResourceFactory, RailsResource) ->
     @projects = (id) ->
       @$get(@$url() + "/#{id}/projects")
 
-    @invitedMembers = (id) ->
-      @$get(@$url() + "/#{id}/invited_members")
-
     @current = ->
       @$get(@$url() + "/current")

@@ -9,12 +9,6 @@ class User < ActiveRecord::Base
   scope :accepted_invite, -> { where(invites: { accepted: true }) }
   scope :pending_invite,  -> { where(invites: { accepted: false }) }
 
-  def invited_members
-    projects.map do |project|
-      { project: project, users: project.members.accepted_invite } if project.members.accepted_invite.any?
-    end.compact
-  end
-
   def pending_invites
     invites.pending.includes(:project).map do |invite|
       { project: invite.project, invite: invite }

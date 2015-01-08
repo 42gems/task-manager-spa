@@ -15,10 +15,6 @@ class API::UsersController < API::BaseController
     respond_with @user.projects
   end
 
-  def invited_members
-    respond_with @user.invited_members
-  end
-
   def sign_in
     token = User.authenticate(params[:user][:email], params[:user][:password])
     if token
