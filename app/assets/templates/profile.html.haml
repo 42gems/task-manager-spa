@@ -1,0 +1,15 @@
+%form.form-horizontal(role='form')
+  .form-group
+    %label.col-sm-4.control-label{:for => "name"} First Name
+    .col-sm-4
+      %input#name.form-control{"ng-model" => "user.firstName", :placeholder => "name", :type => "text"}
+  .form-group
+    %label.col-sm-4.control-label{:for => "inputLastName"} Last Name
+    .col-sm-4
+      %input#inputLastName.form-control{"ng-model" => "user.lastName", :placeholder => "surname", :type => "text"}
+  .form-group
+    .col-sm-4
+    .col-sm-4
+      .btn.btn-success.btn-sm( ng-click='saveProfile()' ) Save
+      %a( ng-click='goBack()' )
+        .btn.btn-warning.btn-sm Cancel

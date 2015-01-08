@@ -1,6 +1,10 @@
 app.config ($stateProvider, $urlRouterProvider) ->
   $urlRouterProvider.otherwise('/board')
   $stateProvider
+    .state 'profile',
+      url: '/profile'
+      templateUrl: 'profile.html'
+      controller: 'ProfileCtrl'
     .state 'board',
       url: '/board'
       templateUrl: 'board.html'
