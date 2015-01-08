@@ -1,18 +1,17 @@
-%ul.nav.navbar-nav.navbar-right( ng-if="$state.is('sign_in')" )
-  %li
+%ul.nav.navbar-nav.navbar-right
+  %li( ng-if="$state.is('sign_in') || $state.is('sign_up')" )
     %a( ui-sref='sign_in' )
       Log In
-  %li
+  %li( ng-if="$state.is('sign_in') || $state.is('sign_up')" )
     %a( ui-sref='sign_up' )
       Register
-%ul.nav.navbar-nav.navbar-right( ng-if="$state.is('sign_up')" )
-  %li
-    %a( ui-sref='sign_in' )
-      Log In
-  %li
-    %a( ui-sref='sign_up' )
-      Register
-%ul.nav.navbar-nav.navbar-right( ng-hide="$state.is('sign_in')" )
-  %li( ng-hide="$state.is('sign_up')" ng-controller='SignOutCtrl' )
-    %a( href='#' ng-click='logOut()' )
-      Sign Out
+  %li.dropdown( dropdown ng-if="!($state.is('sign_in') || $state.is('sign_up'))" )
+    %a.dropdown-toggle( href dropdown-toggle )
+      Profile
+    %ul.dropdown-menu
+      %li
+        %a( ui-sref='profile' href='#/profile' )
+          Profile
+      %li( ng-controller='SignOutCtrl' )
+        %a( href='#' ng-click='logOut()' )
+          Sign Out

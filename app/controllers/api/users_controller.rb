@@ -6,6 +6,11 @@ class API::UsersController < API::BaseController
     render json: current_user
   end
 
+  def update
+    current_user.update_attributes(params.require(:user).permit(:first_name, :last_name))
+    head 200
+  end
+
   def projects
     respond_with @user.projects
   end
