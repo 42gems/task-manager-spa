@@ -1,4 +1,4 @@
-app.controller 'ProjectsCtrl', ($scope, $state, $timeout, Project, User, CurrentProject, ModalService) ->
+app.controller 'ProjectsCtrl', ($scope, $state, Project, User, CurrentProject, ModalService) ->
   $scope.projects = []
 
   $scope.$on 'currentUser:updated', (event, data) ->

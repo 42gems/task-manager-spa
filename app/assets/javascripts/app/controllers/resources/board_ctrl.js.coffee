@@ -1,4 +1,4 @@
-app.controller 'BoardCtrl', ($scope, $timeout, Task) ->
+app.controller 'BoardCtrl', ($scope, Task) ->
   $scope.tasks = []
 
   $scope.fetchTasks = ->

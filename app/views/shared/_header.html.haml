@@ -1,5 +1,5 @@
 %nav.navbar.navbar-default( role="navigation" )
-  .container
+  .container( ng-controller='NavigationCtrl' )
     .navbar-header
       %button.navbar-toggle( data-target="#collapsable" data-toggle="collapse" type="button" )
         %span.sr-only Toggle navigation
@@ -26,4 +26,8 @@
             %span.badge
               {{ pendingInvites }}
       %select-project
+      %ul.nav.navbar-nav.navbar-left
+        %li
+          %a( ui-sref='project.timeline({ projectId: selected.id })' )
+            Timeline
       %auth_links

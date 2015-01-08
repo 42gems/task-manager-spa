@@ -1,4 +1,5 @@
-app.controller 'CurrentProjectCtrl', ($scope, Project, UserService, CurrentProject) ->
+app.controller 'NavigationCtrl', ($scope, Project, CurrentProject) ->
+
   $scope.updateCurrentProject = ->
     CurrentProject.set($scope.selected)
 

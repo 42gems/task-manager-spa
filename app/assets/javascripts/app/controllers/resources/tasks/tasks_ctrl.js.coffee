@@ -70,5 +70,3 @@ app.controller 'TasksCtrl', ($scope, $modal, Task, Project, UserService, Current
 
   $scope.$on 'currentProject:updated', (event, data) ->
    $scope.updateContext()
-
-  $scope.updateContext()
