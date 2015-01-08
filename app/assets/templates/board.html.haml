@@ -1,9 +1,5 @@
-%div( ng-if='tasks.length > 0' )
-  .tasks
-    %tasks-column( tasks="tasks" state-title="Todo" state="todo" )
-    %tasks-column( tasks="tasks" state-title="In Progress" state="in_progress" )
-    %tasks-column( tasks="tasks" state-title="Done" state="done" )
-    %tasks-column( tasks="tasks" state-title="Approved" state="approved" )
-
-%div( ng-hide='tasks.length > 0' )
-  %h4 There are no tasks
+.tasks
+  %tasks-column( state-title="Todo" state="todo" )
+  %tasks-column( state-title="In Progress" state="in_progress" )
+  %tasks-column( state-title="Done" state="done" )
+  %tasks-column( state-title="Approved" state="approved" )

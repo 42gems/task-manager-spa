@@ -3,7 +3,6 @@ app.directive 'tasksColumn', () ->
   templateUrl: 'directives/tasks_column.html'
   controller: "TasksCtrl"
   scope:
-    tasks: "="
     state: "@"
     stateTitle: "@"
   replace: true

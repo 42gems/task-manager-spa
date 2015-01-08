@@ -34,25 +34,30 @@ app.controller 'TasksCtrl', ($scope, $modal, Task, Project, UserService, Current
   $scope.updateStatus = (task, state)->
     task.state = state
     task.save()
+    
+    tsk = $scope.tasks.filter (tsk) ->
+      tsk.id == task.id
+    i = $scope.tasks.indexOf(tsk[0])
+    $scope.tasks[i].state = state
 
   $scope.newTaskModal = ->
-    modalInstance = $modal.open(
+    modalInstance = $modal.open
       templateUrl: "tasks/modal_form.html"
       controller: "NewTaskModalInstanceCtrl"
-    )
+    
     modalInstance.result.then (task) ->
       $scope.tasks.push(task)
     , ->
       console.log "Modal dismissed"
 
   $scope.editTaskModal = (id) ->
-    modalInstance = $modal.open(
+    modalInstance = $modal.open
       templateUrl: "tasks/modal_form.html"
       controller: "EditTaskModalInstanceCtrl"
       resolve:
         id: ->
           id
-    )
+    
     modalInstance.result.then (task) ->
       console.log 'Task has been successfuly updated'
       i = $scope.tasks.indexOf(tsk) for tsk in $scope.tasks when tsk.id == task.id

@@ -25,9 +25,8 @@
             Invites
             %span.badge
               {{ pendingInvites }}
-      %select-project
-      %ul.nav.navbar-nav.navbar-left
         %li
-          %a( ui-sref='project.timeline({ projectId: selected.id })' )
+          %a( ui-sref='timeline' )
             Timeline
+      %select-project
       %auth_links

@@ -10,18 +10,11 @@
       %tr
         %td Title
         %td Owner #
-        %td Tasks
-        %td Timeline
         %td Actions
     %tbody
       %tr( ng-repeat='project in myProjects()' )
         %td {{ project.title }}
         %td {{ project.ownerId }}
-        %td
-          .btn.btn-primary( ng-click='changeContext(project)' ) Tasks
-        %td
-          %a( ng-if='isManagable(project)' ui-sref='project.timeline({projectId: {{project.id}} })' )
-            .btn.btn-primary Timeline
         %td
           .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
           .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy
@@ -34,18 +27,11 @@
         %tr
           %td Title
           %td Owner #
-          %td Tasks
-          %td Timeline
           %td Actions
       %tbody
         %tr( ng-repeat='project in memberProjects()' )
           %td {{ project.title }}
           %td {{ project.ownerId }}
-          %td
-            .btn.btn-primary( ng-click='changeContext(project)' ) Tasks
-          %td
-            %a( ng-if='isManagable(project)' ui-sref='project.timeline({projectId: {{project.id}} })' )
-              .btn.btn-primary Timeline
           %td
             .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
             .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy
@@ -58,18 +44,11 @@
         %tr
           %td Title
           %td Owner #
-          %td Tasks
-          %td Timeline
           %td Actions
       %tbody
         %tr( ng-repeat='project in publicProjects()' )
           %td {{ project.title }}
           %td {{ project.ownerId }}
-          %td
-            .btn.btn-primary( ng-click='changeContext(project)' ) Tasks
-          %td
-            %a( ng-if='isManagable(project)' ui-sref='project.timeline({projectId: {{project.id}} })' )
-              .btn.btn-primary Timeline
           %td
             .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
             .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy

@@ -1,4 +1,5 @@
-%form( ng-hide="$state.is('sign_in')" )
-  .navbar-form.navbar-left( ng-hide="$state.is('sign_up')" )
-    .form-group( ng-hide="projects.length < 2" )
-      %select.form-control( ng-model='selected' ng-options='project.title for project in projects' )
+%div( ng-hide="$state.is('sign_in')" )
+  %div( ng-hide="$state.is('sign_up')" )
+    %form.navbar-form.navbar-left
+      .form-group( ng-hide="projects.length < 2" )
+        %select.form-control( ng-model='selected' ng-options='project.title for project in projects' )

@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
   scope :pending_invite,  -> { where(invites: { accepted: false }) }
 
   def invited_members
-    #TODO avoid N+1 select. You can use includes for relation
     projects.map do |project|
       { project: project, users: project.members.accepted_invite } if project.members.accepted_invite.any?
     end.compact
