@@ -24,11 +24,4 @@ class Project < ActiveRecord::Base
       'public'
     end
   end
-
-  def members_with_user_rights_of(user)
-    data = {}
-    data[:user_rights] = type_for(user)
-    data[:members] = members.accepted_invite.as_json
-    data
-  end
 end

@@ -1,8 +1,10 @@
 app.directive 'tasksColumn', () ->
   restrict: 'E'
   templateUrl: 'directives/tasks_column.html'
-  controller: "TasksCtrl"
+  controller: 'TasksColumnCtrl'
   scope:
-    state: "@"
-    stateTitle: "@"
+    tasks: '='
+    state: '@'
+    stateTitle: '@'
+    isManagable: '='
   replace: true

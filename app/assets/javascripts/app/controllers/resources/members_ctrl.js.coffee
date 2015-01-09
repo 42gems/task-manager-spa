@@ -3,9 +3,13 @@ app.controller 'MembersCtrl', ($scope, $state, Project, CurrentProject) ->
   $scope.$on 'currentProject:updated', (event, data) ->
     $scope.currentProject = data
 
-    Project.membersWithUserRights($scope.currentProject.id).then (results) ->
-      $scope.isManagable = results.userRights is 'owner'
-      $scope.members = results.members
+    Project.members($scope.currentProject.id).then (results) ->
+      $scope.members = results
+    , (error) ->
+      console.log 'Could not fetch members of a project'
+    
+    Project.userRights($scope.currentProject.id).then (results) ->
+      $scope.isManagable = results is 'owner'
     , (error) ->
       console.log 'Could not fetch members of a project'
 

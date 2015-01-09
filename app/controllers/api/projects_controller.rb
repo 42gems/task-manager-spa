@@ -11,8 +11,8 @@ class API::ProjectsController < API::BaseController
     respond_with @project.members.accepted_invite
   end
 
-  def members_with_user_rights
-    respond_with @project.members_with_user_rights_of current_user
+  def user_rights
+    respond_with @project.type_for current_user
   end
 
   def users_for_invite
