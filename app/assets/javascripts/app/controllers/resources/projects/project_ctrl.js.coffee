@@ -1,26 +1,40 @@
-app.controller 'ProjectCtrl', ($scope, Project, $stateParams, $state, ModalService) ->
+app.controller 'ProjectCtrl', ($scope, $state, Project, ModalService) ->
+  $scope.currentUser = {}
 
-  $scope.$on 'currentUser:updated', (event, data) ->
-    $scope.currentUser = data
-
-    Project.members($stateParams.projectId).then (results) ->
-      $scope.members = results
-      $scope.isOwner()
-      $scope.isMember()
+  $scope.fetchMembers = ->
+    Project.members($scope.currentProject.id).then (response) ->
+      $scope.members = response
     , ->
       console.log 'Could not fetch members of a project'
 
-  Project.get({ id: $stateParams.projectId }).then (results) ->
-    $scope.project = results
-  , ->
-    console.log 'Could not fetch project'
+  $scope.fetchProjects = ->
+    Project.get({ id: $scope.currentProject.id }).then (response) ->
+      $scope.project = response
+    , ->
+      console.log 'Could not fetch project'
 
+  $scope.fetchUsersForInvite = ->
+    Project.usersForInvite($scope.currentProject.id).then (response) ->
+      $scope.usersForInvite = response
+      $scope.selected = $scope.usersForInvite[0]
+    , ->
+      console.log 'Could not fetch users for invite'
 
-  Project.usersForInvite($stateParams.projectId).then (results) ->
-    $scope.usersForInvite = results
-    $scope.selected = $scope.usersForInvite[0]
-  , ->
-    console.log 'Could not fetch users for invite'
+  $scope.checkUserRights = ->
+    Project.userRights($scope.currentProject.id).then (response) ->
+      $scope.currentUser.isOwner = response is 'owner'
+      $scope.currentUser.isMember = response is 'member'
+      $scope.isManagable = response isnt 'public'
+
+  $scope.updateContext = ->
+    $scope.fetchMembers()
+    $scope.fetchProjects()
+    $scope.fetchUsersForInvite()
+    $scope.checkUserRights()
+
+  $scope.$on 'currentProject:updated', (event, data) ->
+    $scope.currentProject = data
+    $scope.updateContext()
 
   $scope.saveProject = ->
     $scope.project.save().then (response) ->
@@ -31,7 +45,7 @@ app.controller 'ProjectCtrl', ($scope, Project, $stateParams, $state, ModalServi
 
   $scope.delete = ->
     ModalService.confirm("Delete project #{ $scope.project.title }?").then ->
-      $scope.project.delete().then (respone) ->
+      $scope.project.delete().then (response) ->
         console.log 'Project successfuly deleted'
         $state.go 'projects'
       , ->
@@ -52,14 +66,3 @@ app.controller 'ProjectCtrl', ($scope, Project, $stateParams, $state, ModalServi
       $scope.selected = $scope.usersForInvite[0]
     , ->
       console.log 'Could not send an invitation'
-
-  $scope.isOwner = ->
-    $scope.currentUser.isOwner = $scope.currentUser.id == $scope.project.ownerId
-
-  $scope.isMember = ->
-    isMember = false
-    isMember = true for member in $scope.members when member.id == $scope.currentUser.id
-    $scope.currentUser.isMember = isMember
-
-  $scope.isManagable = ->
-    $scope.currentUser.isOwner or $scope.currentUser.isMember

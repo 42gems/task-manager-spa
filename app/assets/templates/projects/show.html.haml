@@ -6,7 +6,7 @@
         %td Description
         %td Owner #
         %td Private
-        %td( ng-if='currentUser.isMember' ) Tasks
+        %td( ng-if='currentUser.isMember || currentUser.isOwner' ) Tasks
         %td( ng-if='currentUser.isOwner' ) Actions
       %tr
         %td( ng-if='project.description')
@@ -15,7 +15,7 @@
           No description given
         %td {{ project.ownerId }}
         %td {{ project.private }}
-        %td( ng-if='currentUser.isMember' )
+        %td( ng-if='currentUser.isMember || currentUser.isOwner' )
           %a( ui-sref='project.tasks' )
             .btn.btn-primary.btn-sm Edit Tasks
         %td( ng-if='currentUser.isOwner' )
