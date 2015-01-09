@@ -1,6 +1,6 @@
 app.factory 'CurrentProject', ($rootScope) ->
   currentProject = {}
-  service = 
+  service =
     get: ->
       currentProject
 

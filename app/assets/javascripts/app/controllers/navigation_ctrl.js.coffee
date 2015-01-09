@@ -22,5 +22,5 @@ app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, Authenticatio
     $scope.updateCurrentProject()
 
   $scope.$on 'currentUser:updated', (event, data) ->
-    $scope.currentUser = data
+    $scope.userFullName = "#{data.firstName} #{data.lastName}"
     $scope.updateContext()

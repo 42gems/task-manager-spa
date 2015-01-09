@@ -7,7 +7,7 @@ app.controller 'MembersCtrl', ($scope, $state, Project, CurrentProject) ->
       $scope.members = results
     , (error) ->
       console.log 'Could not fetch members of a project'
-    
+
     Project.userRights($scope.currentProject.id).then (results) ->
       $scope.isManagable = results is 'owner'
     , (error) ->

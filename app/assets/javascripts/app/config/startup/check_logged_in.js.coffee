@@ -1,4 +1,4 @@
-app.run ($rootScope, AuthenticationService, $state, Invite, UserService) ->
+app.run ($rootScope, AuthenticationService, $state, UserService) ->
   $rootScope.$state = $state
   $rootScope.$on "$stateChangeStart", (event, toState, toParams, fromState, fromParams) ->
     if !toState.skipLogin && !AuthenticationService.isLoggedIn

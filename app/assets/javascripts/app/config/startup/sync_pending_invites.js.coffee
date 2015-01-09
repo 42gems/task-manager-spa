@@ -1,4 +1,4 @@
-app.run ($rootScope, AuthenticationService, $state, Invite, UserService) ->
+app.run ($rootScope, AuthenticationService, $state, Invite) ->
   $rootScope.$on "$stateChangeSuccess", () ->
     if !AuthenticationService.isLoggedIn
       $rootScope.pendingInvites = 0
