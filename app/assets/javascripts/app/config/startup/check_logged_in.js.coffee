@@ -10,13 +10,3 @@ app.run ($rootScope, AuthenticationService, $state, Invite, UserService) ->
           UserService.setCurrentUser(data)
         , ->
           console.log 'Could not fetch current user'
-
-  $rootScope.$on "$stateChangeSuccess", () ->
-    if !AuthenticationService.isLoggedIn
-      $rootScope.pendingInvites = 0
-    else
-      Invite.pendingProjects().then (count) ->
-        $rootScope.pendingInvites = count
-      , (error) ->
-        console.log 'Could not fetch invites'
-

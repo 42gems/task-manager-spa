@@ -1,10 +1,11 @@
 app.factory 'UserService', ($http, $rootScope, User) ->
+  currentUser = {}
   service =
     getCurrentUser: ->
-      $rootScope.currentUser
+      currentUser
 
     setCurrentUser: (val) ->
-      $rootScope.currentUser = val
+      currentUser = val
       $rootScope.$broadcast('currentUser:updated', val)
 
     fetchCurrentUser: ->
