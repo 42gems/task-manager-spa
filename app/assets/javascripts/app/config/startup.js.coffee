@@ -4,9 +4,9 @@ app.run ($rootScope, AuthenticationService, $state, Invite, UserService) ->
     if !toState.skipLogin && !AuthenticationService.isLoggedIn
       event.preventDefault()
       $state.go('sign_in')
-    else
+    else if AuthenticationService.isLoggedIn
       UserService.fetchCurrentUser()
-        .success (data) ->
+        .then (data) ->
           UserService.setCurrentUser(data)
         , ->
           console.log 'Could not fetch current user'

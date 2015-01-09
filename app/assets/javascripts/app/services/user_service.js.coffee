@@ -1,15 +1,14 @@
-app.factory 'UserService', ($http, $rootScope) ->
-  currentUser = {}
+app.factory 'UserService', ($http, $rootScope, User) ->
   service =
     getCurrentUser: ->
-      currentUser
+      $rootScope.currentUser
 
     setCurrentUser: (val) ->
-      currentUser = val
+      $rootScope.currentUser = val
       $rootScope.$broadcast('currentUser:updated', val)
 
     fetchCurrentUser: ->
-      $http.get "/api/users/current"
+      User.current()
 
     logIn: (email, password) ->
       $http.post '/api/users/sign_in',
