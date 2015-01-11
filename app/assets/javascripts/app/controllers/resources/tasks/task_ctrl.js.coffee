@@ -1,9 +1,10 @@
-app.controller 'TaskCtrl', ($scope, $q, $stateParams, Task, $state) ->
+app.controller 'TaskCtrl', ($scope, $state, $stateParams, Task) ->
 
-  Task.get({ projectId: $stateParams.projectId, id: $stateParams.taskId }).then (task) ->
-    $scope.task = task
-  , ->
-    console.log 'Could not fetch the task'
+  $scope.fetchTask = ->
+    Task.get({ projectId: $scope.currentProject.id, id: $stateParams.taskId }).then (task) ->
+      $scope.task = task
+    , ->
+      console.log 'Could not fetch the task'
 
   $scope.save = (taskForm)->
     $scope.$broadcast('runCustomValidations')
@@ -14,3 +15,7 @@ app.controller 'TaskCtrl', ($scope, $q, $stateParams, Task, $state) ->
         console.log 'Successfuly updated the task'
       , ->
         console.log 'Could not save the task'
+
+  $scope.$on 'currentProject:updated', (event, data) ->
+    $scope.currentProject = data
+    $scope.fetchTask()

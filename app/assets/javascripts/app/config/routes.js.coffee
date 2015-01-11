@@ -9,6 +9,18 @@ app.config ($stateProvider, $urlRouterProvider) ->
       url: '/board'
       templateUrl: 'board.html'
       controller: 'BoardCtrl'
+    .state 'invites',
+      url: '/invites'
+      templateUrl: 'invites.html'
+      controller: 'InvitesCtrl'
+    .state 'members',
+      url: '/members'
+      templateUrl: 'members.html'
+      controller: 'MembersCtrl'
+    .state 'timeline',
+      url: '/timeline'
+      templateUrl: 'timeline/index.html'
+      controller: 'TimelineCtrl'
     .state 'projects',
       url: '/projects'
       templateUrl: 'projects/index.html'
@@ -19,22 +31,10 @@ app.config ($stateProvider, $urlRouterProvider) ->
         'project':
           templateUrl: 'projects/form.html'
           controller: 'ProjectsCtrl'
-    .state 'invites',
-      url: '/invites'
-      templateUrl: 'invites.html'
-      controller: 'InvitesCtrl'
-    .state 'members',
-      url: '/members'
-      templateUrl: 'members.html'
-      controller: 'MembersCtrl'
     .state 'project',
-      url: '/project/'
+      url: '/project'
       templateUrl: 'projects/show.html'
       controller: 'ProjectCtrl'
-    .state 'timeline',
-      url: '/timeline'
-      templateUrl: 'timeline/index.html'
-      controller: 'TimelineCtrl'
     .state 'project.edit',
       url: '/edit'
       templateUrl: 'projects/form.html'
