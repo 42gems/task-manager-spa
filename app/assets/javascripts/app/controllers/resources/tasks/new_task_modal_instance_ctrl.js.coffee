@@ -5,8 +5,8 @@ app.controller "NewTaskModalInstanceCtrl", ($scope, $modalInstance, Task, Curren
     $scope.$broadcast('runCustomValidations')
 
     if taskForm.$valid
-      $scope.task.create().then (response) ->
-        $modalInstance.close response
+      $scope.task.create().then (task) ->
+        $modalInstance.close(task)
       , (error) ->
         $modalInstance.dismiss "error"
 

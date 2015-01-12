@@ -9,9 +9,10 @@ app.controller 'TasksColumnCtrl', ($scope, $modal) ->
       console.log 'Could not delete task'
 
   $scope.updateStatus = (task, state)->
-    task.state = state
-    task.save()
-    i = $scope.tasks.indexOf(tsk) for tsk in $scope.tasks when tsk.id == task.id
+    updated_task.state = state
+    updated_task.save()
+    # finding an index of corresponding task from current scope
+    i = $scope.tasks.indexOf(task) for task in $scope.tasks when task.id == updated_task.id
     $scope.tasks[i].state = state
 
   $scope.newTaskModal = ->
@@ -32,10 +33,11 @@ app.controller 'TasksColumnCtrl', ($scope, $modal) ->
         id: ->
           id
     
-    modalInstance.result.then (task) ->
+    modalInstance.result.then (edited_task) ->
       console.log 'Task has been successfuly updated'
-      i = $scope.tasks.indexOf(tsk) for tsk in $scope.tasks when tsk.id == task.id
+      # finding an index of corresponding task from current scope
+      i = $scope.tasks.indexOf(task) for task in $scope.tasks when task.id == edited_task.id
       $scope.tasks.splice(i, 1)
-      $scope.tasks.push(task)
+      $scope.tasks.push(edited_task)
     , ->
       console.log "Modal dismissed"

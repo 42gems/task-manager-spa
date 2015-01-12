@@ -1,7 +1,7 @@
 app.controller "EditTaskModalInstanceCtrl", ($scope, $modalInstance, Task, CurrentProject, id) ->
 
-  Task.get({ projectId: CurrentProject.get().id, id: id }).then (result) ->
-    $scope.task = result
+  Task.get({ projectId: CurrentProject.get().id, id: id }).then (task) ->
+    $scope.task = task
   , ->
     console.log 'Could not fetch project'
 
@@ -9,8 +9,8 @@ app.controller "EditTaskModalInstanceCtrl", ($scope, $modalInstance, Task, Curre
     $scope.$broadcast('runCustomValidations')
 
     if taskForm.$valid
-      $scope.task.save().then (response) ->
-        $modalInstance.close response
+      $scope.task.save().then (task) ->
+        $modalInstance.close(task)
       , ->
         $modalInstance.dismiss "error"
 

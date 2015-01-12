@@ -1,2 +1,2 @@
 app.controller 'ModalConfirmCtrl', ($scope, $modalInstance, caption) ->
-  $scope.caption = caption;
+  $scope.caption = caption

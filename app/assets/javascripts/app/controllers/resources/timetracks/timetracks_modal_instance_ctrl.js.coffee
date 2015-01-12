@@ -1,7 +1,7 @@
 app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId, taskId, currentUser, Timetrack) ->
   
-  Timetrack.query({}, projectId: projectId, taskId: taskId).then (results) ->
-    $scope.timetracks = results
+  Timetrack.query({}, projectId: projectId, taskId: taskId).then (timetracks) ->
+    $scope.timetracks = timetracks
   , ->
     console.log 'Could not fetch timetracks'
 
@@ -19,8 +19,8 @@ app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId
   $scope.save = (form)->
     for timetrack in $scope.timetracks
       timetrack.projectId = projectId
-      timetrack.save().then (response) ->
-        $modalInstance.close(response)
+      timetrack.save().then (timetrack) ->
+        $modalInstance.close(timetrack)
       , ->
         $modalInstance.dismiss "error"
 

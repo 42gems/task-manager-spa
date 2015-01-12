@@ -4,13 +4,13 @@ app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, Authenticatio
     CurrentProject.set($scope.selected)
 
   $scope.updateContext = ->
-    Project.query({}).then (data) ->
-      $scope.projects = data
+    Project.query({}).then (projects) ->
+      $scope.projects = projects
       if CurrentProject.get()
-        i = data.indexOf(project) for project in data when project.id == CurrentProject.get().id
-        $scope.selected = data[i]
+        i = projects.indexOf(project) for project in projects when project.id == CurrentProject.get().id
+        $scope.selected = projects[i]
       else
-        $scope.selected = data[0]
+        $scope.selected = projects[0]
       $scope.updateCurrentProject()
     , ->
       console.log 'Could not fetch projects'

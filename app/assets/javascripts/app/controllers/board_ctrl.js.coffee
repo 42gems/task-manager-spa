@@ -1,8 +1,8 @@
 app.controller 'BoardCtrl', ($scope, Task, Project) ->
 
   $scope.fetchProjects = ->
-    Project.get({ id: $scope.currentProject.id }).then (results) ->
-      $scope.project = results
+    Project.get({ id: $scope.currentProject.id }).then (project) ->
+      $scope.project = project
     , ->
       console.log 'Could not fetch project'
 
@@ -11,8 +11,8 @@ app.controller 'BoardCtrl', ($scope, Task, Project) ->
       $scope.tasks = tasks
 
   $scope.checkUserRights = ->
-    Project.userRights($scope.currentProject.id).then (results) ->
-      $scope.isManagable = results isnt 'public'
+    Project.userRights($scope.currentProject.id).then (rights) ->
+      $scope.isManagable = rights isnt 'public'
     , ->
       console.log 'Could not fetch members of a project'
 

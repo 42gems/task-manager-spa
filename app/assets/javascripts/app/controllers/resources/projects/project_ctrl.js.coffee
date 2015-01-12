@@ -2,29 +2,29 @@ app.controller 'ProjectCtrl', ($scope, $state, Project, ModalService) ->
   $scope.currentUser = {}
 
   $scope.fetchMembers = ->
-    Project.members($scope.currentProject.id).then (response) ->
-      $scope.members = response
+    Project.members($scope.currentProject.id).then (members) ->
+      $scope.members = members
     , ->
       console.log 'Could not fetch members of a project'
 
   $scope.fetchProjects = ->
-    Project.get({ id: $scope.currentProject.id }).then (response) ->
-      $scope.project = response
+    Project.get({ id: $scope.currentProject.id }).then (project) ->
+      $scope.project = project
     , ->
       console.log 'Could not fetch project'
 
   $scope.fetchUsersForInvite = ->
-    Project.usersForInvite($scope.currentProject.id).then (response) ->
-      $scope.usersForInvite = response
+    Project.usersForInvite($scope.currentProject.id).then (users) ->
+      $scope.usersForInvite = users
       $scope.selected = $scope.usersForInvite[0]
     , ->
       console.log 'Could not fetch users for invite'
 
   $scope.checkUserRights = ->
-    Project.userRights($scope.currentProject.id).then (response) ->
-      $scope.currentUser.isOwner = response is 'owner'
-      $scope.currentUser.isMember = response is 'member'
-      $scope.isManagable = response isnt 'public'
+    Project.userRights($scope.currentProject.id).then (rights) ->
+      $scope.currentUser.isOwner = rights is 'owner'
+      $scope.currentUser.isMember = rights is 'member'
+      $scope.isManagable = rights isnt 'public'
 
   $scope.updateContext = ->
     $scope.fetchMembers()
@@ -61,6 +61,7 @@ app.controller 'ProjectCtrl', ($scope, $state, Project, ModalService) ->
   $scope.addMember = (member_id) ->
     $scope.project.addMember(member_id).then (response) ->
       console.log 'Invitation has been sent'
+      # getting index of corresponding member from local scope 
       i = $scope.usersForInvite.indexOf(user) for user in $scope.usersForInvite when user.id == member_id
       $scope.usersForInvite.splice(i, 1)
       $scope.selected = $scope.usersForInvite[0]
