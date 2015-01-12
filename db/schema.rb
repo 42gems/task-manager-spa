@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150108132603) do
+ActiveRecord::Schema.define(version: 20150112140630) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,11 +47,12 @@ ActiveRecord::Schema.define(version: 20150108132603) do
     t.string   "title"
     t.string   "description"
     t.string   "state"
-    t.datetime "estimated_time"
-    t.datetime "time_spent"
+    t.datetime "estimated_date"
     t.datetime "deadline"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "estimated_time"
+    t.integer  "time_spent"
   end
 
   create_table "timetracks", force: true do |t|

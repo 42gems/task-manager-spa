@@ -11,9 +11,17 @@
       .col-sm-6
         %textarea#inputDesc.form-control( placeholder='Description of the task' ng-model='task.description' validation-field-required="false" )
     .form-group
-      %label.col-sm-4.control-label( for='estimatedTime' ) Estimated time
+      %label.col-sm-4.control-label( for='inputEstimatedTime' ) Estimated Time
       .col-sm-6
-        %datetimepicker-dropdown( time-model="task.estimatedTime" config="{minView: 'minute'}" date-formatting='dd/MM/yyyy hh:mm')
+        %input#inputEstimatedTime.form-control( placeholder='3d 2h 1m 10s' ng-model='task.estimatedTime' humanized-amount validation-field-required="false" )
+    .form-group
+      %label.col-sm-4.control-label( for='inputTimeSpent' ) Time Spent
+      .col-sm-6
+        %input#inputTimeSpent.form-control( placeholder='3d 2h 1m 10s' ng-model='task.timeSpent' humanized-amount validation-field-required="false" )
+    .form-group
+      %label.col-sm-4.control-label( for='estimatedDate' ) Estimated date
+      .col-sm-6
+        %datetimepicker-dropdown( time-model="task.estimatedDate" config="{minView: 'minute'}" date-formatting='dd/MM/yyyy hh:mm')
     .form-group
       %label.col-sm-4.control-label( for='deadline' ) Deadline
       .col-sm-6
