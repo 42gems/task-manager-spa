@@ -8,7 +8,7 @@ app.controller 'TasksColumnCtrl', ($scope, $modal) ->
     , ->
       console.log 'Could not delete task'
 
-  $scope.updateStatus = (task, state)->
+  $scope.updateStatus = (updated_task, state)->
     updated_task.state = state
     updated_task.save()
     # finding an index of corresponding task from current scope
