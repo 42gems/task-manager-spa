@@ -41,3 +41,9 @@ app.controller 'TasksColumnCtrl', ($scope, $modal) ->
       $scope.tasks.push(edited_task)
     , ->
       console.log "Modal dismissed"
+
+  $scope.timeLeft = (task) ->
+    if task.estimatedTime > task.timeSpent
+      task.estimatedTime - task.timeSpent
+    else
+      0

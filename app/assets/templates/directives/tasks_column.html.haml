@@ -8,3 +8,4 @@
       %span.pull-right( ng-if='isManagable' ng-drag='false' )
         %span.glyphicon.glyphicon-edit( ng-click="editTaskModal(task.id)" )
         %span.glyphicon.glyphicon-time.mgl( ng-controller='TimetracksCtrl' ng-click='openModal(task.projectId, task.id)' )
+      %div( ng-if='task.estimatedTime' ) Time left: {{ timeLeft(task) | secondsToTime }}
