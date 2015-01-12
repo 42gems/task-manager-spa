@@ -21,6 +21,10 @@
       %input#confirmPassword.form-control{"ng-model" => "user.password_confirmation", :placeholder => "Repeat Password", :type => "password", "name" => "confirmPassword", "validation-field-required" => "true", "validation-confirm-password" => "true"}
   .form-group
     .col-sm-offset-4.col-sm-10
-      %button.btn.btn-default{"ng-click" => "signUp(SignUpForm)", :type => "submit"} Sign Up
-      %a( ui-sref='sign_in' )
-        %button.btn.btn-default Log In
+      %button.btn.btn-success{"ng-click" => "signUp(SignUpForm)", :type => "submit"} Sign Up
+  .form-group
+    .col-sm-4.col-sm-offset-4.small
+      .text-center
+        Have an account?
+        %a( ui-sref='sign_in' )
+          Login Here
