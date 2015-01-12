@@ -4,6 +4,14 @@
     .col-sm-4
       %input#inputEmail.form-control{"ng-model" => "user.email", :placeholder => "Email", :type => "text", "validation-field-required" => "true", "name" => "email", "validation-email" => "true"}
   .form-group
+    %label.col-sm-4.control-label{:for => "firstName"} First Name
+    .col-sm-4
+      %input#firstName.form-control{"ng-model" => "user.firstName", :placeholder => "First Name", :type => "text", "validation-field-required" => "true", "name" => "firstName"}
+  .form-group
+    %label.col-sm-4.control-label{:for => "lastName"} Last Name
+    .col-sm-4
+      %input#lastName.form-control{"ng-model" => "user.lastName", :placeholder => "Last Name", :type => "text", "validation-field-required" => "true", "name" => "lastName"}
+  .form-group
     %label.col-sm-4.control-label{:for => "inputPassword"} Password
     .col-sm-4
       %input#inputPassword.form-control{"ng-model" => "user.password", :placeholder => "Password", :type => "password", "name" => "password","validation-field-required" => "true", "validation-min-length" => "8"}
