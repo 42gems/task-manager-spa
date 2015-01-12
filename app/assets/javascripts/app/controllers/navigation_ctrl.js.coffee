@@ -15,9 +15,6 @@ app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, Authenticatio
     , ->
       console.log 'Could not fetch projects'
 
-  if AuthenticationService.isLoggedIn
-    $scope.updateContext()
-
   $scope.$watch 'selected', ->
     $scope.updateCurrentProject()
 
