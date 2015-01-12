@@ -1,6 +1,6 @@
 class API::ProjectsController < API::BaseController
   before_action :fetch_user,        only: [:add_member, :send_notification]
-  before_action :fetch_project,     except: :index
+  before_action :fetch_project,     except: [:index, :create]
   after_action  :send_notification, only: :add_member
 
   def index
@@ -22,6 +22,10 @@ class API::ProjectsController < API::BaseController
   def timeline_matrix
     timeline = Timeline.new(@project, { from: params[:from], to: params[:to] })
     respond_with timeline.matrix
+  end
+
+  def time_spent
+    respond_with @project.time_spent
   end
 
   def add_member

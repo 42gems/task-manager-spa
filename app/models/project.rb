@@ -24,4 +24,8 @@ class Project < ActiveRecord::Base
       'public'
     end
   end
+
+  def time_spent
+    tasks.pluck(:time_spent).compact.reduce :+
+  end
 end
