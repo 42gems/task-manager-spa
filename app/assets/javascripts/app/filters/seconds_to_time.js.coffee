@@ -1,6 +1,5 @@
 app.filter 'secondsToTime', () ->
-
-  (data) ->
+  (data, precision) ->
     if data == parseInt(data)
       days = Math.floor(data / (60 * 60 * 24))
       
@@ -13,6 +12,10 @@ app.filter 'secondsToTime', () ->
       divisor_for_seconds = divisor_for_minutes % 60
       seconds = Math.ceil(divisor_for_seconds)
       
-      days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's'
+      result = switch precision
+        when 'd' then days + 'd '
+        when 'h' then days + 'd ' + hours + 'h '
+        when 'm' then days + 'd ' + hours + 'h ' + minutes + 'm '
+        else days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's '
     else
       data

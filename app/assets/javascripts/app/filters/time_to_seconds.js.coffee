@@ -1,5 +1,4 @@
 app.filter 'timeToSeconds', () ->
-
   (data) ->
     if typeof data is 'string' or data instanceof String
       timings = data.match /\d+/g

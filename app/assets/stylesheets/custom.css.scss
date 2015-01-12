@@ -59,6 +59,15 @@ a:hover {
   }
 }
 
+.badge.quad {
+  padding: 3px 5px;
+  background-color: #f8f8f8;
+  font-weight: 200;
+  color: #428bca;
+  border-radius: 0px;
+  /*border: 1px solid #428bca;*/
+}
+
 /* Tasks
 *******************************************/
 #create_btn {
