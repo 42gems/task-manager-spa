@@ -11,7 +11,7 @@ app.controller 'TaskCtrl', ($scope, $state, $stateParams, Task) ->
 
     if taskForm.$valid
       $scope.task.save().then (response) ->
-        $state.go('project.tasks', {}, { reload: true })
+        $state.go('tasks', {}, { reload: true })
         console.log 'Successfuly updated the task'
       , ->
         console.log 'Could not save the task'

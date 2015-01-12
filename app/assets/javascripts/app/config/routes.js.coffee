@@ -39,11 +39,11 @@ app.config ($stateProvider, $urlRouterProvider) ->
       url: '/edit'
       templateUrl: 'projects/form.html'
       controller: 'ProjectCtrl'
-    .state 'project.tasks',
+    .state 'tasks',
       url: '/tasks'
-      templateUrl: 'tasks/tasks_list.html'
+      templateUrl: 'tasks/index.html'
       controller: 'TasksCtrl'
-    .state 'project.tasks.edit',
+    .state 'tasks.edit',
       url: '/:taskId/edit'
       templateUrl: 'tasks/edit.html'
       controller: 'TaskCtrl'

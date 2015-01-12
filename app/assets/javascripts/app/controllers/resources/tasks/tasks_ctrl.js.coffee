@@ -1,25 +1,8 @@
-app.controller 'TasksCtrl', ($scope, $modal, Task, Project) ->
-
-  $scope.fetchProjects = ->
-    Project.get({ id: $scope.currentProject.id }).then (results) ->
-      $scope.project = results
-    , ->
-      console.log 'Could not fetch project'
+app.controller 'TasksCtrl', ($scope, Task, CurrentProject) ->
 
   $scope.fetchTasks = ->
     Task.query({}, projectId: $scope.currentProject.id).then (tasks) ->
       $scope.tasks = tasks
-
-  $scope.checkUserRights = ->
-    Project.userRights($scope.currentProject.id).then (results) ->
-      $scope.isManagable = results isnt 'public'
-    , ->
-      console.log 'Could not fetch members of a project'
-
-  $scope.updateContext = ->
-    $scope.fetchProjects()
-    $scope.fetchTasks()
-    $scope.checkUserRights()
 
   $scope.delete = (task) ->
     task.delete().then (respone) ->
@@ -29,41 +12,6 @@ app.controller 'TasksCtrl', ($scope, $modal, Task, Project) ->
     , ->
       console.log 'Could not delete task'
 
-  $scope.updateStatus = (task, state)->
-    task.state = state
-    task.save()
-    i = $scope.tasks.indexOf(tsk) for tsk in $scope.tasks when tsk.id == task.id
-    $scope.tasks[i].state = state
-
-  $scope.newTaskModal = ->
-    modalInstance = $modal.open
-      templateUrl: "tasks/modal_form.html"
-      controller: "NewTaskModalInstanceCtrl"
-    
-    modalInstance.result.then (task) ->
-      $scope.tasks.push(task)
-    , ->
-      console.log "Modal dismissed"
-
-  $scope.editTaskModal = (id) ->
-    modalInstance = $modal.open
-      templateUrl: "tasks/modal_form.html"
-      controller: "EditTaskModalInstanceCtrl"
-      resolve:
-        id: ->
-          id
-    
-    modalInstance.result.then (task) ->
-      console.log 'Task has been successfuly updated'
-      i = $scope.tasks.indexOf(tsk) for tsk in $scope.tasks when tsk.id == task.id
-      $scope.tasks.splice(i, 1)
-      $scope.tasks.push(task)
-    , ->
-      console.log "Modal dismissed"
-
   $scope.$on 'currentProject:updated', (event, data) ->
    $scope.currentProject = data
-   $scope.updateContext()
-
-  $scope.$on 'currentUser:updated', (event, data) ->
-   $scope.currentUser = data
+   $scope.fetchTasks()

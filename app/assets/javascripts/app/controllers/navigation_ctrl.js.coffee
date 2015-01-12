@@ -1,4 +1,4 @@
-app.controller 'NavigationCtrl', ($scope, Project, CurrentProject) ->
+app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, AuthenticationService) ->
 
   $scope.updateCurrentProject = ->
     CurrentProject.set($scope.selected)
@@ -15,11 +15,12 @@ app.controller 'NavigationCtrl', ($scope, Project, CurrentProject) ->
     , ->
       console.log 'Could not fetch projects'
 
-  $scope.updateContext()
+  if AuthenticationService.isLoggedIn
+    $scope.updateContext()
 
   $scope.$watch 'selected', ->
     $scope.updateCurrentProject()
 
   $scope.$on 'currentUser:updated', (event, data) ->
-    $scope.currentUser = data
+    $scope.userFullName = "#{data.firstName} #{data.lastName}"
     $scope.updateContext()

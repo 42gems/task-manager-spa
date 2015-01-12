@@ -1,4 +1,4 @@
-app.factory 'UserService', ($http, $rootScope) ->
+app.factory 'UserService', ($http, $rootScope, User) ->
   currentUser = {}
   service =
     getCurrentUser: ->
