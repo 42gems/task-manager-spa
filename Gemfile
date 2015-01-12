@@ -8,6 +8,7 @@ gem 'devise'
 gem 'bcrypt', require: 'bcrypt'
 gem 'aasm'
 gem 'inherited_resources'
+gem 'rabl'
 
 # front end
 gem 'haml'
