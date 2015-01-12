@@ -26,6 +26,22 @@ class Project < ActiveRecord::Base
   end
 
   def time_spent
-    tasks.pluck(:time_spent).compact.reduce :+
+    tasks.pluck(:time_spent).compact.reduce(:+) || 0
+  end
+
+  def time_left
+    estimated_time > time_spent ? estimated_time - time_spent : 0
+  end
+
+  def estimated_time
+    tasks.pluck(:estimated_time).compact.reduce(:+) || 0
+  end
+
+  def time_stats
+    {
+      time_spent: time_spent,
+      time_left:  time_left,
+      estimated_time: estimated_time
+    }
   end
 end

@@ -17,6 +17,9 @@ app.factory 'Project', (railsResourceFactory, RailsResource) ->
     @timelineMatrix = (id) ->
       @$get(@$url() + "/#{id}/timeline_matrix")
 
+    @timeStats = (id) ->
+      @$get(@$url() + "/#{id}/time_stats")
+
     @prototype.removeMember = (memberId) ->
       @$delete(@$url() + "/remove_member/#{memberId}")
 

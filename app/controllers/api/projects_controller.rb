@@ -24,8 +24,8 @@ class API::ProjectsController < API::BaseController
     respond_with timeline.matrix
   end
 
-  def time_spent
-    respond_with @project.time_spent
+  def time_stats
+    respond_with @project.time_stats
   end
 
   def add_member

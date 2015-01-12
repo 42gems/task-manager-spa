@@ -28,5 +28,8 @@
         %li
           %a( ui-sref='timeline' )
             Timeline
+            %span.badge {{ projectTimeStats.estimatedTime | secondsToTime }}
+            %span.badge {{ projectTimeStats.timeSpent | secondsToTime }}
+            %span.badge {{ projectTimeStats.timeLeft  | secondsToTime }}
       %select-project
       %auth_links
