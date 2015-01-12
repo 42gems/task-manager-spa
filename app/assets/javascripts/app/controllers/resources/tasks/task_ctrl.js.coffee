@@ -1,4 +1,4 @@
-app.controller 'TaskCtrl', ($scope, $state, $stateParams, Task) ->
+app.controller 'TaskCtrl', ($scope, $state, $stateParams, Task, CurrentProject) ->
 
   $scope.fetchTask = ->
     Task.get({ projectId: $scope.currentProject.id, id: $stateParams.taskId }).then (task) ->
@@ -18,4 +18,8 @@ app.controller 'TaskCtrl', ($scope, $state, $stateParams, Task) ->
 
   $scope.$on 'currentProject:updated', (event, data) ->
     $scope.currentProject = data
+    $scope.fetchTask()
+
+  if CurrentProject.get()
+    $scope.currentProject = CurrentProject.get()
     $scope.fetchTask()

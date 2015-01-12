@@ -1,10 +1,4 @@
-app.controller 'BoardCtrl', ($scope, Task, Project) ->
-
-  $scope.fetchProjects = ->
-    Project.get({ id: $scope.currentProject.id }).then (project) ->
-      $scope.project = project
-    , ->
-      console.log 'Could not fetch project'
+app.controller 'BoardCtrl', ($scope, Task, Project, CurrentProject) ->
 
   $scope.fetchTasks = ->
     Task.query({}, projectId: $scope.currentProject.id).then (tasks) ->
@@ -17,10 +11,13 @@ app.controller 'BoardCtrl', ($scope, Task, Project) ->
       console.log 'Could not fetch members of a project'
 
   $scope.updateContext = ->
-    $scope.fetchProjects()
     $scope.fetchTasks()
     $scope.checkUserRights()
 
   $scope.$on 'currentProject:updated', (event, data) ->
    $scope.currentProject = data
    $scope.updateContext()
+
+  if CurrentProject.get()
+    $scope.currentProject = CurrentProject.get()
+    $scope.updateContext()

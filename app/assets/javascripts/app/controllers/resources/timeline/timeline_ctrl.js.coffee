@@ -1,4 +1,4 @@
-app.controller 'TimelineCtrl', ($scope, $modal, Timeline) ->
+app.controller 'TimelineCtrl', ($scope, $modal, Timeline, CurrentProject) ->
 
   $scope.parseData = (timelineMatrix) ->
     matrix = timelineMatrix
@@ -36,4 +36,8 @@ app.controller 'TimelineCtrl', ($scope, $modal, Timeline) ->
 
   $scope.$on 'currentProject:updated', (event, data) ->
     $scope.currentProject = data
+    $scope.updateContext()
+
+  if CurrentProject.get()
+    $scope.currentProject = CurrentProject.get()
     $scope.updateContext()
