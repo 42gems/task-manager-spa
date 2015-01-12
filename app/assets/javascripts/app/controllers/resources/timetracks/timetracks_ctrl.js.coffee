@@ -1,4 +1,5 @@
-app.controller 'TimetracksCtrl', ($scope, Timetrack, $modal) ->
+app.controller 'TimetracksCtrl', ($scope, $modal, Timetrack, UserService) ->
+  $scope.currentUser = UserService.getCurrentUser() if UserService.getCurrentUser()
 
   $scope.$on 'currentUser:updated', (event, data) ->
     $scope.currentUser = data

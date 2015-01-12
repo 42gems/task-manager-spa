@@ -1,8 +1,6 @@
 app.controller 'MembersCtrl', ($scope, $state, Project, CurrentProject) ->
 
-  $scope.$on 'currentProject:updated', (event, data) ->
-    $scope.currentProject = data
-
+  $scope.updateContext = ->
     Project.members($scope.currentProject.id).then (members) ->
       $scope.members = members
     , (error) ->
@@ -21,3 +19,11 @@ app.controller 'MembersCtrl', ($scope, $state, Project, CurrentProject) ->
       console.log 'Member successfuly removed from the project'
     , (error) ->
       console.log 'Could not remove member'
+
+  $scope.$on 'currentProject:updated', (event, data) ->
+    $scope.currentProject = data
+    $scope.updateContext()
+
+  if CurrentProject.get()
+    $scope.currentProject = CurrentProject.get()
+    $scope.updateContext()

@@ -1,4 +1,4 @@
-app.controller 'ProjectCtrl', ($scope, $state, Project, ModalService) ->
+app.controller 'ProjectCtrl', ($scope, $state, Project, ModalService, CurrentProject) ->
   $scope.currentUser = {}
 
   $scope.fetchMembers = ->
@@ -34,6 +34,10 @@ app.controller 'ProjectCtrl', ($scope, $state, Project, ModalService) ->
 
   $scope.$on 'currentProject:updated', (event, data) ->
     $scope.currentProject = data
+    $scope.updateContext()
+
+  if CurrentProject.get()
+    $scope.currentProject = CurrentProject.get()
     $scope.updateContext()
 
   $scope.saveProject = ->

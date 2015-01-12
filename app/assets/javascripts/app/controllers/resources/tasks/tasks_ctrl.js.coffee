@@ -15,3 +15,7 @@ app.controller 'TasksCtrl', ($scope, Task, CurrentProject) ->
   $scope.$on 'currentProject:updated', (event, data) ->
    $scope.currentProject = data
    $scope.fetchTasks()
+
+  if CurrentProject.get()
+    $scope.currentProject = CurrentProject.get()
+    $scope.fetchTasks()
