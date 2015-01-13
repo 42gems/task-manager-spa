@@ -28,7 +28,7 @@
         %li
           %a( ui-sref='timeline' )
             Timeline
-            %span.badge.quad( ng-if='selected.timeStats' )
+            %span.badge.quad( ng-if='selected.timeStats.estimatedTime > 0' )
               %span {{ selected.timeStats.estimatedTime | secondsToTime : 'h' }} :
               %span {{ selected.timeStats.timeSpent | secondsToTime : 'h' }} :
               %span {{ selected.timeStats.timeLeft  | secondsToTime : 'h' }}
