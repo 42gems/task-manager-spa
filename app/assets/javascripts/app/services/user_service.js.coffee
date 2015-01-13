@@ -8,6 +8,9 @@ app.factory 'UserService', ($http, $rootScope) ->
       currentUser = val
       $rootScope.$broadcast('currentUser:updated', val)
 
+    signup: (user) ->
+      user.create()
+
     logIn: (email, password) ->
       $http.post '/api/users/sign_in',
         user:

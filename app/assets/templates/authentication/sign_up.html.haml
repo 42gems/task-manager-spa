@@ -1,3 +1,7 @@
+.alert.alert-danger( ng-repeat='error in errors' )
+  %span.glyphicon.glyphicon-exclamation-sign
+  {{ error }}
+
 %form.form-horizontal(role='form' name='SignUpForm' novalidate)
   .form-group
     %label.col-sm-4.control-label{:for => "inputEmail"} Email
