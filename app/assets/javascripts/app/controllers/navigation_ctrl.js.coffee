@@ -1,4 +1,4 @@
-app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, AuthenticationService) ->
+app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, ProjectsService, AuthenticationService) ->
 
   $scope.fetchProjectTimeStats = ->
     Project.timeStats($scope.selected.id).then (timeStats) ->
@@ -9,18 +9,28 @@ app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, Authenticatio
   $scope.updateCurrentProject = ->
     CurrentProject.set($scope.selected)
 
+  $scope.setSelected = ->
+    if CurrentProject.get()
+      i = $scope.projects.indexOf(project) for project in $scope.projects when project.id == CurrentProject.get().id
+      $scope.selected = $scope.projects[i]
+    else
+      $scope.selected = $scope.projects[0]
+
   $scope.updateContext = ->
-    Project.query({}).then (projects) ->
-      $scope.projects = projects
-      if CurrentProject.get()
-        i = projects.indexOf(project) for project in projects when project.id == CurrentProject.get().id
-        $scope.selected = projects[i]
-      else
-        $scope.selected = projects[0]
+    if ProjectsService.get()
+      $scope.projects = ProjectsService.get()
+      $scope.setSelected()
       $scope.updateCurrentProject()
       $scope.fetchProjectTimeStats()
-    , ->
-      console.log 'Could not fetch projects'
+    else
+      Project.query({}).then (projects) ->
+        $scope.projects = projects
+        $scope.setSelected()
+        $scope.updateCurrentProject()
+        $scope.fetchProjectTimeStats()
+        ProjectsService.set(projects)
+      , ->
+        console.log 'Could not fetch projects'
 
   $scope.$watch 'selected', ->
     $scope.updateCurrentProject()
@@ -29,3 +39,4 @@ app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, Authenticatio
   $scope.$on 'currentUser:updated', (event, data) ->
     $scope.userFullName = "#{data.firstName} #{data.lastName}"
     $scope.updateContext()
+

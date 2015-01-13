@@ -1,13 +1,21 @@
-app.controller 'ProjectsCtrl', ($scope, $state, Project, User, CurrentProject, ModalService) ->
+app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, CurrentProject, ProjectsService, ModalService) ->
   $scope.projects = []
+  $scope.currentUser = UserService.getCurrentUser() if UserService.getCurrentUser()
 
   $scope.$on 'currentUser:updated', (event, data) ->
     $scope.currentUser = data
 
-  Project.query({}).then (results) ->
-    $scope.projects = results
-  , (error) ->
-    console.log 'Could not fetch projects'
+  $scope.fetchProjects = ->
+    if ProjectsService.get()
+      $scope.projects = ProjectsService.get()
+    else
+      Project.query({}).then (projects) ->
+        $scope.projects = projects
+        ProjectsService.set(projects)
+      , (error) ->
+        console.log 'Could not fetch projects'
+
+  $scope.fetchProjects()
 
   $scope.myProjects = ->
     $scope.projects.filter (project) ->
