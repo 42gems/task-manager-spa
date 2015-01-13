@@ -7,7 +7,7 @@ app.controller 'ProjectCtrl', ($scope, $state, Project, ModalService, CurrentPro
     , ->
       console.log 'Could not fetch members of a project'
 
-  $scope.fetchProjects = ->
+  $scope.fetchProject = ->
     Project.get({ id: $scope.currentProject.id }).then (project) ->
       $scope.project = project
     , ->
@@ -28,7 +28,7 @@ app.controller 'ProjectCtrl', ($scope, $state, Project, ModalService, CurrentPro
 
   $scope.updateContext = ->
     $scope.fetchMembers()
-    $scope.fetchProjects()
+    $scope.fetchProject()
     $scope.fetchUsersForInvite()
     $scope.checkUserRights()
 

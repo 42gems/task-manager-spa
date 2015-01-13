@@ -4,10 +4,10 @@ app.factory 'ProjectsService', ($rootScope) ->
     get: ->
       projects
 
-    set: (projects) ->
-      unless angular.equals(projects, projects)
-        projects = projects
-        $rootScope.$broadcast('projects:updated', projects)
+    set: (val) ->
+      unless angular.equals(projects, val)
+        projects = val
+        $rootScope.$broadcast('projects:updated', val)
 
     add: (project) ->
       projects.push(project)

@@ -18,20 +18,14 @@ app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, ProjectsServi
       $scope.selected = $scope.projects[0]
 
   $scope.updateContext = ->
-    if ProjectsService.get()
-      $scope.projects = ProjectsService.get()
+    Project.query({}).then (projects) ->
+      $scope.projects = projects
       $scope.setSelected()
       $scope.updateCurrentProject()
       $scope.fetchProjectTimeStats()
-    else
-      Project.query({}).then (projects) ->
-        $scope.projects = projects
-        $scope.setSelected()
-        $scope.updateCurrentProject()
-        $scope.fetchProjectTimeStats()
-        ProjectsService.set(projects)
-      , ->
-        console.log 'Could not fetch projects'
+      ProjectsService.set(projects)
+    , ->
+      console.log 'Could not fetch projects'
 
   $scope.$watch 'selected', ->
     $scope.updateCurrentProject()
