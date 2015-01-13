@@ -6,6 +6,16 @@ class API::UsersController < API::BaseController
     render json: current_user
   end
 
+  def create
+    user = User.new(user_params)
+    if user.save
+      token = user.tokens.create
+      render json: { auth_token: token.token }
+    else
+      render json: user.errors.full_messages, status: :bad_request
+    end
+  end
+
   def update
     current_user.update_attributes(params.require(:user).permit(:first_name, :last_name))
     head 200

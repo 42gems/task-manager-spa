@@ -1,12 +1,13 @@
-app.controller 'SignUpCtrl', ($scope, User, $state) ->
+app.controller 'SignUpCtrl', ($scope, User, $state, UserService, AuthenticationService, $window) ->
   $scope.user = new User()
 
   $scope.signUp = (form) ->
     $scope.$broadcast('runCustomValidations')
 
     if form.$valid
-      $scope.user.create().then (response) ->
-        console.log 'User successfully created'
-        $state.go 'sign_in'
-      , (error) ->
-        console.log 'Could not create user'
+      UserService.signup($scope.user).then (data) ->
+        AuthenticationService.isLoggedIn = true
+        $window.localStorage.taskManagerSpaToken = data.authToken
+        $state.go('board')
+      , (response) ->
+        $scope.errors = response.data
