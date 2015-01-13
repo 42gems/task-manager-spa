@@ -7,7 +7,7 @@ class API::TimetracksController < API::BaseController
 
   def create
     timetrack = Timetrack.new(timetrack_params)
-    
+
     if timetrack.save
       @task.time_spent += timetrack.amount if timetrack.amount
       @task.save

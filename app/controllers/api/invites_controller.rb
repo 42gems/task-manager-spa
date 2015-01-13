@@ -1,6 +1,6 @@
 class API::InvitesController < API::BaseController
   def index
-    respond_with current_user.pending_invites
+    @invites = current_user.pending_invites
   end
 
   def pending_invites

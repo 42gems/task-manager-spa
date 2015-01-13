@@ -13,7 +13,7 @@
         %td {{ invite.project.title }}
         %td {{ invite.project.description }}
         %td
-          .btn.btn-sm.btn-success.small-caps( ng-click='accept(invite.invite)' ) accept
-          .btn.btn-sm.btn-danger.small-caps( ng-click='decline(invite.invite)' ) decline
+          .btn.btn-sm.btn-success.small-caps( ng-click='accept(invite)' ) accept
+          .btn.btn-sm.btn-danger.small-caps( ng-click='decline(invite)' ) decline
 %div( ng-hide='invites' )
   %h3(style="text-align: center;") You do not have invites

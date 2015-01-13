@@ -1,5 +1,5 @@
 class API::BaseController < InheritedResources::Base
-  include AuthLogic
+  include API::AuthLogic
 
   after_filter :set_csrf_cookie_for_ng
 

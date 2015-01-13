@@ -10,9 +10,7 @@ class User < ActiveRecord::Base
   scope :pending_invite,  -> { where(invites: { accepted: false }) }
 
   def pending_invites
-    invites.pending.includes(:project).map do |invite|
-      { project: invite.project, invite: invite }
-    end
+    invites.pending.includes(:project)
   end
 
   def all_projects
