@@ -4,7 +4,7 @@
     %table.table.table-responsive
       %thead
         %td Description
-        %td Owner #
+        %td Owner Email
         %td Private
         %td( ng-if='currentUser.isMember || currentUser.isOwner' ) Tasks
         %td( ng-if='currentUser.isOwner' ) Actions
@@ -13,7 +13,7 @@
           {{ project.description }}
         %td( ng-if='!project.description')
           No description given
-        %td {{ project.ownerId }}
+        %td {{ project.ownerEmail }}
         %td {{ project.private }}
         %td( ng-if='currentUser.isMember || currentUser.isOwner' )
           %a( ui-sref='tasks' )
