@@ -33,6 +33,10 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
     $scope.project.ownerId = $scope.currentUser.id
     project = new Project($scope.project)
     project.save().then (response) ->
+      if ProjectsService.get()
+        ProjectsService.add(project)
+      else
+        ProjectsService.set([project])
       $state.go('projects', {}, { reload: true })
       console.log 'Project successfuly created'
     , (error) ->

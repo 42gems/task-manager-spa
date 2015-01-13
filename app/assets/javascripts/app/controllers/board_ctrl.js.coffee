@@ -1,4 +1,14 @@
-app.controller 'BoardCtrl', ($scope, Task, Project, CurrentProject) ->
+app.controller 'BoardCtrl', ($scope, $state, Task, Project, CurrentProject, ProjectsService) ->
+
+  if ProjectsService.get()
+    $scope.projects = ProjectsService.get()
+    $state.go('projects.new') if $scope.projects.length == 0
+  else
+    Project.query({}).then (projects) ->
+      $scope.projects = projects
+      $state.go('projects.new') if $scope.projects.length == 0
+    , ->
+      console.log 'Could not fetch projects'
 
   $scope.fetchTasks = ->
     Task.query({}, projectId: $scope.currentProject.id).then (tasks) ->

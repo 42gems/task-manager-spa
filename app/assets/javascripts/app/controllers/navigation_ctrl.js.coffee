@@ -1,10 +1,11 @@
 app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, ProjectsService, AuthenticationService) ->
 
   $scope.fetchProjectTimeStats = ->
-    Project.timeStats($scope.selected.id).then (timeStats) ->
-      $scope.projectTimeStats = timeStats
-    , ->
-      console.log 'Could not fetch time stats on current project'
+   if $scope.selected
+      Project.timeStats($scope.selected.id).then (timeStats) ->
+        $scope.projectTimeStats = timeStats
+      , ->
+        console.log 'Could not fetch time stats on current project'
 
   $scope.updateCurrentProject = ->
     CurrentProject.set($scope.selected)
@@ -34,7 +35,7 @@ app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, ProjectsServi
 
   $scope.$watch 'selected', ->
     $scope.updateCurrentProject()
-    $scope.fetchProjectTimeStats() if $scope.selected
+    $scope.fetchProjectTimeStats()
 
   $scope.$on 'currentUser:updated', (event, data) ->
     $scope.userFullName = "#{data.firstName} #{data.lastName}"
