@@ -122,10 +122,14 @@ a:hover {
         width: 100%;
       }
     } 
+    
+    &.drag-enter {
+      transition: box-shadow 140ms ease;
+      transition: min-height 200ms ease;
+
+      box-shadow: 3px 3px 0 1px $link_blue;
+      min-height: 111px;
+    }
   }
 }
 
-.drag-enter {
-  transition: box-shadow 140ms ease;
-  box-shadow: 3px 3px 0 1px $link_blue;
-}
