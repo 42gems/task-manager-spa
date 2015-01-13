@@ -1,12 +1,16 @@
-%form.form-horizontal(role='form')
+.alert.alert-danger( ng-repeat='error in errors' )
+  %span.glyphicon.glyphicon-exclamation-sign
+  {{ error }}
+
+%form.form-horizontal(role='form' name='SignInForm' novalidate)
   .form-group
     %label.col-sm-4.control-label{:for => "inputEmail"} Email
     .col-sm-4
-      %input#inputEmail.form-control{"ng-model" => "user.email", :placeholder => "Email", :type => "text"}/
+      %input#inputEmail.form-control{"ng-model" => "user.email", :placeholder => "Email", :type => "text", "validation-field-required" => "true"}
   .form-group
     %label.col-sm-4.control-label{:for => "inputPassword"} Password
     .col-sm-4
-      %input#inputPassword.form-control{"ng-model" => "user.password", :placeholder => "Password", :type => "password"}
+      %input#inputPassword.form-control{"ng-model" => "user.password", :placeholder => "Password", :type => "password", "validation-field-required" => "true"}
   .form-group
     .col-sm-offset-4.col-sm-10
       %button.btn.btn-success{"ng-click" => "logIn(user.email, user.password)", :type => "submit"} Log In
