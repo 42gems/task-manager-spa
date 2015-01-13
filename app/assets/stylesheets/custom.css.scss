@@ -67,6 +67,13 @@ a:hover {
   border-radius: 0px;
 }
 
+.hoverable {
+  transition: all 0.2s ease;
+  &:hover{
+    font-size: 16px;
+  }
+}
+
 /* Tasks
 *******************************************/
 #create_btn {
@@ -83,6 +90,8 @@ a:hover {
     border-radius: 10px;
 
     .task {
+      transition: all 0.2s ease;
+
       cursor: pointer;
       margin: 8px 0;
       margin-bottom: 10px;
