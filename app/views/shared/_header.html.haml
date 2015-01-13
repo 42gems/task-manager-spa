@@ -28,9 +28,9 @@
         %li
           %a( ui-sref='timeline' )
             Timeline
-            %span.badge.quad( ng-if='projectTimeStats.timeLeft' )
-              %span {{ projectTimeStats.estimatedTime | secondsToTime : 'h' }} :
-              %span {{ projectTimeStats.timeSpent | secondsToTime : 'h' }} :
-              %span {{ projectTimeStats.timeLeft  | secondsToTime : 'h' }}
+            %span.badge.quad( ng-if='selected.timeStats' )
+              %span {{ selected.timeStats.estimatedTime | secondsToTime : 'h' }} :
+              %span {{ selected.timeStats.timeSpent | secondsToTime : 'h' }} :
+              %span {{ selected.timeStats.timeLeft  | secondsToTime : 'h' }}
       %select-project
       %auth_links

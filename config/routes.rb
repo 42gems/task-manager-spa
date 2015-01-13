@@ -19,7 +19,6 @@ Rails.application.routes.draw do
       end
       member do
         get :members
-        get :time_stats
         get :user_rights
         get :users_for_invite
         get :timeline_matrix
