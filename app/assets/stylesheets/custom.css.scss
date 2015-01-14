@@ -1,7 +1,11 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400italic);
+
 /* Variables
 *******************************************/
 $dark_grey: #B3B3B3;
 $darker_grey: #8C8C8C;
+$med_grey: #D6D6D6;
+$med_light_grey: #DBDBDB;
 $light_grey: #E8E8E8;
 $lighter_grey: #F5F5F5;
 $link_blue: #428bca;
@@ -23,9 +27,6 @@ a:hover {
   display: inline-block;
   margin: 10px 0;
   font-size: 26px;
-  font-weight: 600;
-  color: $dark_grey;
-  text-shadow: 1px 1px 0px $darker_grey;
 }
 
 .small-caps {
@@ -107,6 +108,88 @@ a:hover {
 
       box-shadow: 3px 3px 0 1px $link_blue;
       min-height: 111px;
+    }
+    
+    .title {
+      font-weight: 600;
+      color: $dark_grey;
+      text-shadow: 1px 1px 0px $darker_grey;
+    }
+  }
+}
+
+/* Projects
+*******************************************/
+.project {
+  vertical-align: top;
+  display: inline-block;
+  width: 340px;
+  padding: 0px;
+
+  background-color: $light_grey;
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 1px $link_blue;
+
+  margin: 15px 10px;
+  &:first-child {
+    margin-left: 0px;
+  }
+
+  .title {
+    display: block;
+    padding: 0px 15px;
+  }
+
+  .description {
+    padding: 0px 15px;
+    max-height: 97px;
+    overflow: hidden;
+
+    font-size: 16px;
+    font-family: "Open Sans", "Helvetica Neue", ​Helvetica, ​Arial, ​sans-serif;
+  }
+
+  .footer {
+    bottom: 0;
+
+    .owner {
+      display: inline-block;
+      padding: 5px 15px;
+      width: 100%;
+
+      background-image: linear-gradient(to bottom, $light_grey 75%, $med_grey 100%);
+      border-bottom: 1px solid $dark_grey;
+
+      font-size: 12px;
+      color: $darker_grey;
+    }
+
+    .buttons {
+
+      .btn {
+        border: none;
+
+        min-width: 50%;
+        max-width: 100%;
+
+        background-color: $med_grey;
+
+        &:hover {
+          background-color: $med_light_grey;
+        }
+
+        &.pull-left {
+          border-radius: 0px 0px 0px 8px;
+        }
+        
+        &.pull-right {
+          border-radius: 0px 0px 8px 0px;
+        }
+
+        &.btn-full {
+          min-width: 100%;
+        }
+      }
     }
   }
 }

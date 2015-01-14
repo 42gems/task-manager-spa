@@ -8,17 +8,20 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
 
   $scope.$on 'projects:updated', (event, data) ->
     $scope.projects = data
+    $scope.myProjects     = $scope.myProjects(data)
+    $scope.memberProjects = $scope.memberProjects(data)
+    $scope.publicProjects = $scope.publicProjects(data)
 
-  $scope.myProjects = ->
-    $scope.projects.filter (project) ->
+  $scope.myProjects = (projects) ->
+    projects.filter (project) ->
       project.type == 'owner'
 
-  $scope.memberProjects = ->
-    $scope.projects.filter (project) ->
+  $scope.memberProjects = (projects) ->
+    projects.filter (project) ->
       project.type == 'member'
 
-  $scope.publicProjects = ->
-    $scope.projects.filter (project) ->
+  $scope.publicProjects = (projects) ->
+    projects.filter (project) ->
       project.type == 'public'
 
   $scope.saveProject = ->

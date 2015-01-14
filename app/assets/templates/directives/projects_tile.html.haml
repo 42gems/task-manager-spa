@@ -1,0 +1,14 @@
+.project( ng-repeat='project in projects' )
+  .title {{ project.title }}
+  .description( ng-if='project.description' ) {{ project.description }}
+  .description( ng-if='!project.description' ) There is no description
+  .footer
+    .owner Owner is: {{ project.ownerEmail }}
+    .buttons
+      .btn.btn-full.pull-left( ng-if='!isManagable(project)' ng-click='gotoDetails(project)' )
+        Details
+      %div( ng-if='isManagable(project)' )
+        .btn.pull-left( ng-click='gotoDetails(project)' )
+          Details
+        .btn.pull-right( ng-click='deleteProject(project)' )
+          Destroy
