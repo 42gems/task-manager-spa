@@ -1,0 +1,9 @@
+%div( ng-hide='dates.length > 1' )
+  %br
+  .well.well-sm
+    %h4 No one tracked time on this time interval
+%br
+%table.table.table-bordered.table-striped( ng-if='dates.length > 1' )
+  %td( ng-repeat='data in dates track by $index' ) {{ data | date: 'dd/MM/yyyy' }}
+  %tr( ng-repeat='row in tracks track by $index' )
+    %td( ng-repeat='data in row track by $index' ) {{ data | secondsToTime }}

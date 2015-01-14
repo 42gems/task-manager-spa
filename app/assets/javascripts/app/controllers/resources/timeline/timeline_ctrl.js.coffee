@@ -1,4 +1,8 @@
 app.controller 'TimelineCtrl', ($scope, $modal, Timeline, CurrentProject) ->
+  $scope.currentProject = CurrentProject.get() if CurrentProject.get()
+  $scope.range =
+    from: new Date()
+    to:   new Date()
 
   $scope.parseData = (timelineMatrix) ->
     matrix = timelineMatrix
@@ -20,24 +24,14 @@ app.controller 'TimelineCtrl', ($scope, $modal, Timeline, CurrentProject) ->
     Timeline.query({ from: from }, { id: $scope.currentProject.id }).then (timelineMatrix) ->
       $scope.parseData(timelineMatrix)
 
-  $scope.getCustomTimeline = (range) ->
-    Timeline.query( range, { id: $scope.currentProject.id }).then (timelineMatrix) ->
+  $scope.getCustomTimeline = ->
+    Timeline.query( $scope.range, { id: $scope.currentProject.id }).then (timelineMatrix) ->
       $scope.parseData(timelineMatrix)
-
-  $scope.openModal = ->
-    modalInstance = $modal.open
-      templateUrl: "timeline/datetime_range_modal.html"
-      controller: "DatetimeRangeModalInstanceCtrl"
-
-    modalInstance.result.then (chosen_range) ->
-      $scope.getCustomTimeline(chosen_range)
-    , ->
-      console.log "Modal dismissed"
 
   $scope.$on 'currentProject:updated', (event, data) ->
     $scope.currentProject = data
     $scope.updateContext()
 
-  if CurrentProject.get()
-    $scope.currentProject = CurrentProject.get()
-    $scope.updateContext()
+  $scope.$watch 'range', ->
+    $scope.getCustomTimeline() if $scope.currentProject
+  , true

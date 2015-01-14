@@ -1,16 +1,19 @@
-%h4 Timeline of the project
+%tabset( ng-if='currentProject' )
+  %tab( select="getLastWeekTimeline()" heading='Last week' )
+    %timeline-table
 
-%ol.breadcrumb
-  %li
-    %a( ng-click='getLastWeekTimeline()' ) last week
-  %li
-    %a( ng-click='getLastMonthTimeline()' ) last month
-  %li
-    %a( ng-click='openModal()' ) select interval
+  %tab( select="getLastMonthTimeline()" heading='Last month' )
+    %timeline-table
 
-%h5( ng-hide='dates.length > 1' ) No one tracked time on this time interval
+  %tab( select='getCustomTimeline()' heading='Custom range' )
+    %br
+    .row
+      %form( name="form" novalidate )
+        .form-inline
+          .col-sm-3
+          .col-sm-3
+            %datetimepicker-dropdown( time-model="range.from" config='{minView: "day"}' date-formatting='dd/MM/yyyy' addon='From' )
+          .col-sm-3
+            %datetimepicker-dropdown( time-model="range.to"   config='{minView: "day"}' date-formatting='dd/MM/yyyy' addon='To')
 
-%table.table.table-bordered.table-striped( ng-if='dates.length > 1' )
-  %td( ng-repeat='data in dates track by $index' ) {{ data | date: 'dd/MM/yyyy' }}
-  %tr( ng-repeat='row in tracks track by $index' )
-    %td( ng-repeat='data in row track by $index' ) {{ data | secondsToTime }}
+    %timeline-table
