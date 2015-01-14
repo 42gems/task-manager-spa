@@ -10,7 +10,11 @@ class Timeline
 
   private
 
-    # [ ['', day1, day2, day3, ...], [email, '', amount, ''], ... ]
+    # First row of the matrix consists only from dates where first element is always empty string.
+    # Other rows corresponds to the members of a project, that tracked some time on it.
+    # First element of user's row is their email.
+    # Other elements contains total amount of tracked time at corresponding day on this project.
+    # Matrix looks like: [ ['', day1, day2, day3, ...], [email, '', amount, ''], ... ]
     def build_matrix
       interval = build_interval
       matrix = []
@@ -28,7 +32,7 @@ class Timeline
             date = track.start_date
             i = matrix[0].index(date)
             
-            increase_amount(track.amount, row, i) unless i.nil?
+            increase_tracked_amount(track.amount, row, i) unless i.nil?
           end
           matrix << row
         end
@@ -53,12 +57,11 @@ class Timeline
       end
     end
 
-    def increase_amount(amount, row, i)
+    def increase_tracked_amount(amount, row, i)
       if row[i].is_a? Integer
         row[i] += amount 
       else
         row[i] = amount
       end
     end
-
 end
