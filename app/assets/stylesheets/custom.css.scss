@@ -74,12 +74,16 @@ a:hover {
 }
 
 .hoverable {
-  transition: all 0.2s ease;
+  transition: color 0.2s ease;
   
   &:hover {
     cursor: pointer;
     color: $link_blue;
   }
+}
+
+.icons {
+  font-size: 16px;
 }
 
 /* Tasks
@@ -132,4 +136,3 @@ a:hover {
     }
   }
 }
-

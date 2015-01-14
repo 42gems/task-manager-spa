@@ -1,9 +1,11 @@
 %ul.nav.navbar-nav.navbar-right
   %li( ng-if="$state.is('sign_in') || $state.is('sign_up')" )
     %a( ui-sref='sign_in' )
+      %i.fa.fa-sign-in
       Log In
   %li( ng-if="$state.is('sign_in') || $state.is('sign_up')" )
     %a( ui-sref='sign_up' )
+      %i.fa.fa-check-square-o
       Register
   %li.dropdown( dropdown ng-if="!($state.is('sign_in') || $state.is('sign_up'))" )
     %a.dropdown-toggle( href dropdown-toggle )
@@ -11,7 +13,9 @@
     %ul.dropdown-menu
       %li
         %a( ui-sref='profile' href='#/profile' )
+          %i.fa.fa-pencil
           Profile
       %li( ng-controller='SignOutCtrl' )
         %a( href='#' ng-click='logOut()' )
+          %i.fa.fa-sign-out
           Sign Out
