@@ -1,16 +1,6 @@
 app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, CurrentProject, ProjectsService, ModalService) ->
   $scope.projects = []
-  $scope.projects = ProjectsService.get() if ProjectsService.get()
   $scope.currentUser = UserService.getCurrentUser() if UserService.getCurrentUser()
-
-  $scope.$on 'currentUser:updated', (event, data) ->
-    $scope.currentUser = data
-
-  $scope.$on 'projects:updated', (event, data) ->
-    $scope.projects = data
-    $scope.myProjects     = $scope.myProjects(data)
-    $scope.memberProjects = $scope.memberProjects(data)
-    $scope.publicProjects = $scope.publicProjects(data)
 
   $scope.myProjects = (projects) ->
     projects.filter (project) ->
@@ -23,6 +13,11 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
   $scope.publicProjects = (projects) ->
     projects.filter (project) ->
       project.type == 'public'
+
+  $scope.filterProjects = (projects) ->
+    $scope.myProjects = $scope.myProjects(projects)
+    $scope.memberProjects = $scope.memberProjects(projects)
+    $scope.publicProjects = $scope.publicProjects(projects)
 
   $scope.saveProject = ->
     $scope.project.ownerId = $scope.currentUser.id
@@ -38,18 +33,13 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
       console.log 'Could not create a project'
       console.log error
 
-  $scope.deleteProject = (projct) ->
-    ModalService.confirm("Delete project #{ projct.title }?").then ->
-      project = new Project(projct)
-      project.delete().then (response) ->
-        $state.go('projects', {}, { reload: true })
-        console.log 'Project successfuly deleted'
-      , (error) ->
-        console.log 'Could not remove project'
+  if ProjectsService.get()
+    $scope.projects = ProjectsService.get() 
+    $scope.filterProjects($scope.projects)
 
-  $scope.isManagable = (project) ->
-    $scope.currentUser.id == project.ownerId
+  $scope.$on 'currentUser:updated', (event, data) ->
+    $scope.currentUser = data
 
-  $scope.gotoDetails = (project) ->
-    CurrentProject.set(project)
-    $state.go('project')
+  $scope.$on 'projects:updated', (event, data) ->
+    $scope.projects = data
+    $scope.filterProjects($scope.projects)
