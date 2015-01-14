@@ -16,7 +16,7 @@
         %td {{ project.title }}
         %td {{ project.ownerEmail }}
         %td
-          .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
+          .btn.btn-info( ng-click='gotoDetails(project)' ) Details
           .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy
 
 %div( ng-if='memberProjects().length > 0')
@@ -33,7 +33,7 @@
           %td {{ project.title }}
           %td {{ project.ownerEmail }}
           %td
-            .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
+            .btn.btn-info( ng-click='gotoDetails(project)' ) Details
             .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy
 
 %div( ng-if='publicProjects().length > 0')
@@ -50,5 +50,5 @@
           %td {{ project.title }}
           %td {{ project.ownerEmail }}
           %td
-            .btn.btn-info( ui-sref='project({projectId: {{project.id}} })' ) Details
+            .btn.btn-info( ng-click='gotoDetails(project)' ) Details
             .btn.btn-danger( ng-if='isManagable(project)' ng-click='deleteProject(project)' ) Destroy

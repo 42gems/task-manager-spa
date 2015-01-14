@@ -47,6 +47,6 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
   $scope.isManagable = (project) ->
     $scope.currentUser.id == project.ownerId
 
-  $scope.changeContext = (project) ->
+  $scope.gotoDetails = (project) ->
     CurrentProject.set(project)
-    $state.go('board')
+    $state.go('project')
