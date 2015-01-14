@@ -23,5 +23,5 @@
 //= require libs/form-validation
 //= require_tree ./app
 //= require libs/ui-bootstrap
-//= require libs/moment
+//= require libs/moment.min
 //= require libs/datetimepicker
