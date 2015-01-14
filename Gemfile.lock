@@ -71,6 +71,8 @@ GEM
     eventmachine (1.0.4)
     execjs (2.2.2)
     ffi (1.9.6)
+    font-awesome-rails (4.2.0.0)
+      railties (>= 3.2, < 5.0)
     formatador (0.2.5)
     guard (2.10.5)
       formatador (>= 0.2.4)
@@ -242,6 +244,7 @@ DEPENDENCIES
   bootstrap-sass (~> 3.2.0)
   coffee-rails (~> 4.0.0)
   devise
+  font-awesome-rails
   guard-bundler
   guard-livereload
   guard-rails

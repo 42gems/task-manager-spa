@@ -11,22 +11,26 @@
       %ul.nav.navbar-nav
         %li
           %a( ui-sref='board' )
-            %i.icon-aktivity
+            %i.fa.fa-tasks
             Board
       %ul.nav.navbar-nav.navbar-left
         %li
           %a( ui-sref='projects' )
+            %i.fa.fa-th-list
             Projects
         %li
           %a( ui-sref='members' )
+            %i.fa.fa-users
             Members
         %li( ng-show='pendingInvites > 0' )
           %a( ui-sref='invites' )
+            %i.fa.fa-reply-all
             Invites
             %span.badge
               {{ pendingInvites }}
         %li
           %a( ui-sref='timeline' )
+            %i.fa.fa-bar-chart
             Timeline
             %span.badge.quad( ng-if='selected.timeStats.estimatedTime > 0' )
               %span {{ selected.timeStats.estimatedTime | secondsToTime : 'h' }} :
