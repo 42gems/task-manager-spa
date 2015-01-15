@@ -2,22 +2,22 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
   $scope.projects = []
   $scope.currentUser = UserService.getCurrentUser() if UserService.getCurrentUser()
 
-  $scope.myProjects = (projects) ->
+  $scope.filterMyProjects = (projects) ->
     projects.filter (project) ->
       project.type == 'owner'
 
-  $scope.memberProjects = (projects) ->
+  $scope.filterMemberProjects = (projects) ->
     projects.filter (project) ->
       project.type == 'member'
 
-  $scope.publicProjects = (projects) ->
+  $scope.filterPublicProjects = (projects) ->
     projects.filter (project) ->
       project.type == 'public'
 
   $scope.filterProjects = (projects) ->
-    $scope.myProjects = $scope.myProjects(projects)
-    $scope.memberProjects = $scope.memberProjects(projects)
-    $scope.publicProjects = $scope.publicProjects(projects)
+    $scope.myProjects = $scope.filterMyProjects(projects)
+    $scope.memberProjects = $scope.filterMemberProjects(projects)
+    $scope.publicProjects = $scope.filterPublicProjects(projects)
 
   $scope.saveProject = ->
     $scope.project.ownerId = $scope.currentUser.id
@@ -27,7 +27,7 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
         ProjectsService.add(project)
       else
         ProjectsService.set([project])
-      $state.go('projects', {}, { reload: true })
+      $state.go('projects')
       console.log 'Project successfuly created'
     , (error) ->
       console.log 'Could not create a project'
