@@ -9,13 +9,14 @@ app.filter 'secondsToTime', () ->
       divisor_for_minutes = data % (60 * 60)
       minutes = Math.floor(divisor_for_minutes / 60)
       
-      divisor_for_seconds = divisor_for_minutes % 60
-      seconds = Math.ceil(divisor_for_seconds)
+      time = 
+        days:    if days > 0 then days + 'd ' else ''
+        hours:   if hours > 0 then hours + 'h ' else ''
+        minutes: if minutes > 0 then minutes + 'm ' else ''
       
       result = switch precision
-        when 'd' then days + 'd '
-        when 'h' then days + 'd ' + hours + 'h '
-        when 'm' then days + 'd ' + hours + 'h ' + minutes + 'm '
-        else days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's '
+        when 'd' then time.days
+        when 'h' then time.days + time.hours
+        else time.days + time.hours + time.minutes
     else
       data

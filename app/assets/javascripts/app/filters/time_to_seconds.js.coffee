@@ -1,17 +1,20 @@
 app.filter 'timeToSeconds', () ->
   (data) ->
     if typeof data is 'string' or data instanceof String
-      timings = data.match /\d+/g
-      unless timings is null
-        timings = timings.map Number
+      timings =
+        days: data.match /(\d+)d/i
+        hours: data.match /(\d+)h/i
+        minutes: data.match /(\d+)m/i
 
-        days    = (timings[0] * (24 * 60 * 60)) || 0
-        hours   = (timings[1] * (60 * 60))      || 0
-        minutes = (timings[2] * 60)             || 0
-        seconds =  timings[3]                   || 0
+      for key of timings
+        data = 0
+        data = timings[key][1] if timings[key]
+        timings[key] = parseInt(data, 10)
 
-        days + hours + minutes + seconds
-      else
-        0
+      days    = (timings.days * (24 * 60 * 60)) || 0
+      hours   = (timings.hours * (60 * 60))     || 0
+      minutes = (timings.minutes * 60)          || 0
+
+      days + hours + minutes
     else
       data
