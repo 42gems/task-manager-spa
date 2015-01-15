@@ -3,7 +3,11 @@
   .description( ng-if='project.description' ) {{ project.description }}
   .description( ng-if='!project.description' ) There is no description
   .footer
-    .owner Owner is: {{ project.ownerEmail }}
+    .owner
+      %i.fa.fa-user
+      {{ project.owner.firstName }}
+      {{ project.owner.lastName }}
+      %span( ng-hide='project.owner.firstName && project.owner.lastName' ) {{ project.owner.email }}
     .buttons
       .btn.btn-full.pull-left( ng-if='!isManagable(project)' ng-click='gotoDetails(project)' )
         Details

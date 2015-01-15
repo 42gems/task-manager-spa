@@ -32,9 +32,9 @@
           %a( ui-sref='timeline' )
             %i.fa.fa-bar-chart
             Timeline
-            %span.badge.quad( ng-if='selected.timeStats.estimatedTime > 0' )
-              %span {{ selected.timeStats.estimatedTime | secondsToTime : 'h' }} :
-              %span {{ selected.timeStats.timeSpent | secondsToTime : 'h' }} :
-              %span {{ selected.timeStats.timeLeft  | secondsToTime : 'h' }}
+            %span( ng-if='selected.timeStats.estimatedTime > 0' )
+              .badge {{ selected.timeStats.estimatedTime | secondsToTime : 'h' }}
+              .badge {{ selected.timeStats.timeSpent | secondsToTime : 'h' }}
+              .badge {{ selected.timeStats.timeLeft  | secondsToTime : 'h' }}
       %select-project
       %auth_links

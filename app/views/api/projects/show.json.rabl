@@ -1,4 +1,6 @@
 object @project
 attributes :id, :owner_id, :title, :description, :private
 
-node(:owner_email) { |project| project.owner.email }
+child owner: :owner do
+  attributes :id, :email, :first_name, :last_name
+end

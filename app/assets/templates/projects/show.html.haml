@@ -13,7 +13,7 @@
           {{ project.description }}
         %td( ng-if='!project.description')
           No description given
-        %td {{ project.ownerEmail }}
+        %td {{ project.owner.email }}
         %td {{ project.private }}
         %td( ng-if='currentUser.isMember || currentUser.isOwner' )
           %a( ui-sref='tasks' )
