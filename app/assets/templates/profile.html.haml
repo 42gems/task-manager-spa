@@ -8,6 +8,9 @@
     .col-sm-4
       %input#inputLastName.form-control{"ng-model" => "user.lastName", :placeholder => "surname", :type => "text"}
   .form-group
+    .col-sm-4.col-sm-offset-4
+      %file{ "user" => "user" }
+  .form-group
     .col-sm-4
     .col-sm-4
       .btn.btn-success.btn-sm( ng-click='saveProfile()' ) Save

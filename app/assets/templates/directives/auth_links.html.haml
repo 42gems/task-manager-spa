@@ -10,6 +10,7 @@
   %li.dropdown( dropdown ng-if="!($state.is('sign_in') || $state.is('sign_up'))" )
     %a.dropdown-toggle( href dropdown-toggle )
       {{ userFullName }}
+      %img( ng-src="{{ avatarUrl }}" width= "auto" height="30px")
     %ul.dropdown-menu
       %li
         %a( ui-sref='profile' href='#/profile' )

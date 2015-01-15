@@ -9,6 +9,8 @@ gem 'bcrypt', require: 'bcrypt'
 gem 'aasm'
 gem 'inherited_resources'
 gem 'rabl'
+gem 'carrierwave'
+gem 'cloudinary'
 
 # front end
 gem 'haml'

@@ -1,6 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'carrierwave'
+require 'carrierwave/orm/activerecord'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -11,7 +13,7 @@ module TaskManagerSpa
     # for heroku
     config.serve_static_assets = true
     config.assets.js_compressor = Uglifier.new(mangle: false)
-    
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

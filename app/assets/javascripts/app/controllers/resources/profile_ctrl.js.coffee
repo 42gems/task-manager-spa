@@ -1,5 +1,4 @@
 app.controller 'ProfileCtrl', ($scope, UserService) ->
-
   $scope.saveProfile = ->
     $scope.user.save().then (response) ->
       UserService.setCurrentUser($scope.user)

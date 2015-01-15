@@ -17,7 +17,9 @@ class API::UsersController < API::BaseController
   end
 
   def update
-    current_user.update_attributes(params.require(:user).permit(:first_name, :last_name))
+    attrs = params.require(:user).permit(:first_name, :last_name)
+    attrs[:image] = converted_image if params[:user][:image] =~ /^data:image\/jpeg;base64/
+    current_user.update_attributes(attrs)
     head 200
   end
 
@@ -40,11 +42,16 @@ class API::UsersController < API::BaseController
   end
 
   private
-  def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name)
-  end
+    def converted_image
+      base64_string = params[:user][:image].split('base64,')[1]
+      CarrierStringIO.new(Base64.decode64(base64_string))
+    end
 
-  def fetch_user
-    @user = User.find(params[:id])
-  end
+    def user_params
+      params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name)
+    end
+
+    def fetch_user
+      @user = User.find(params[:id])
+    end
 end
