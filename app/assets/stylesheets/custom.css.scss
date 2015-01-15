@@ -40,7 +40,7 @@ a:hover {
 
 .mgl { margin-left: 5px; }
 .mgr { margin-right: 5px; }
-
+.mgl-15 { margin-left: 25px; }
 .min-width-120 { min-width: 120px; }
 
 .badge.quad {
@@ -139,15 +139,18 @@ a:hover {
 .project {
   vertical-align: top;
   display: inline-block;
-  width: 340px;
+  width: 350px;
   padding: 0px;
 
   background-color: $light_grey;
   border-radius: 8px;
   box-shadow: 3px 3px 0 1px $link_blue;
 
-  margin: 15px 0px;
-  margin-right: 20px;
+  margin: 15px auto;
+  margin-right: 25px;
+  &:last-child {
+    margin-right: 0px;
+  }
 
   .title {
     display: block;

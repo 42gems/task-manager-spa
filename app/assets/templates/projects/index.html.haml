@@ -1,19 +1,22 @@
 %tabset
   %tab( heading='My Projects' )
-    %br
-    %a( ui-sref='projects.new' )
-      .btn.btn-success Add Project
+    %div.mgl-15
+      %br
+      %a( ui-sref='projects.new' )
+        .btn.btn-success Add Project
 
-    %div( ui-view='project' )
+      %div( ui-view='project' )
 
-    %div( ng-if='myProjects.length == 0' )
-      %h3.well You have no projects right now
-    
-    %div( ng-if='myProjects.length > 0' )
-      %projects-tile( projects='myProjects' )
+      %div( ng-if='myProjects.length == 0' )
+        %h3.well You have no projects right now
+      
+      %div( ng-if='myProjects.length > 0' )
+        %projects-tile( projects='myProjects' )
 
   %tab( ng-if='memberProjects.length > 0' heading='Collaborated Projects' )
-    %projects-tile( projects='memberProjects' )
+    %div.mgl-15
+      %projects-tile( projects='memberProjects' )
 
   %tab( ng-if='publicProjects.length > 0' heading='Public Projects' )
-    %projects-tile( projects='publicProjects' )
+    %div.mgl-15
+      %projects-tile( projects='publicProjects' )
