@@ -1,5 +1,10 @@
 .project( ng-repeat='project in projects' )
-  .title {{ project.title }}
+  .header
+    .title {{ project.title }}
+    .pull-right( ng-if='project.private' )
+      %i.fa.fa-lock( tooltip='This project is private' )
+    .pull-right( ng-if='!project.private' )
+      %i.fa.fa-unlock-alt( tooltip="It's a public project" )
   .description( ng-if='project.description' ) {{ project.description }}
   .description( ng-if='!project.description' ) There is no description
   .footer

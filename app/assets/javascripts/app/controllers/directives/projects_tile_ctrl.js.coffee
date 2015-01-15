@@ -1,4 +1,4 @@
-app.controller 'ProjectsTileCtrl', ($scope, $state, Project, UserService, CurrentProject, ModalService) ->
+app.controller 'ProjectsTileCtrl', ($scope, $state, $position, Project, UserService, CurrentProject, ModalService) ->
   $scope.currentUser = UserService.getCurrentUser() if UserService.getCurrentUser()
 
   $scope.$on 'currentUser:updated', (event, data) ->
