@@ -65,6 +65,18 @@ a:hover {
   font-size: 16px;
 }
 
+.reverse-indent {
+  display: inline-block;
+  text-indent: -9999px;
+}
+
+.badge {
+  &.warning {
+    font-size: 11px;
+    background-color: #F24438;
+  }
+}
+
 /* Tasks
 *******************************************/
 #create_btn {

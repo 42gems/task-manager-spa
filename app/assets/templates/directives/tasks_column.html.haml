@@ -8,4 +8,8 @@
       %span.pull-right.icons( ng-if='isManagable' ng-drag='false' )
         %i.fa.fa-edit.hoverable( ng-click="editTaskModal(task.id)" )
         %i.fa.fa-clock-o.mgl.hoverable( ng-controller='TimetracksCtrl' ng-click='openModal(task.projectId, task.id)' )
-      %div( ng-if='task.estimatedTime' ) Time left: {{ timeLeft(task) | secondsToTime }}
+      .clearfix
+      %div( ng-if='task.estimatedTime' )
+        %span.reverse-indent Time left
+        %span.pull-right
+          .badge.warning.small-caps {{ timeLeft(task) | secondsToTime }}
