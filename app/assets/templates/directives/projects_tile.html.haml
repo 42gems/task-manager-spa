@@ -14,10 +14,12 @@
       {{ project.owner.lastName }}
       %span( ng-hide='project.owner.firstName && project.owner.lastName' ) {{ project.owner.email }}
     .buttons
-      .btn.btn-full.pull-left( ng-if='!isManagable(project)' ng-click='gotoDetails(project)' )
-        Details
+      .btn.btn-full.btn-edit.pull-left( ng-if='!isManagable(project)' )
+        Edit
       %div( ng-if='isManagable(project)' )
-        .btn.pull-left( ng-click='gotoDetails(project)' )
-          Details
-        .btn.pull-right( ng-click='deleteProject(project)' )
+        .btn.btn-edit.pull-left
+          %i.fa.fa-pencil
+          Edit
+        .btn.btn-destroy.pull-right( ng-click='deleteProject(project)' )
+          %i.fa.fa-trash
           Destroy

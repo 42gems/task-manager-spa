@@ -15,7 +15,3 @@ app.controller 'ProjectsTileCtrl', ($scope, $state, $position, Project, UserServ
 
   $scope.isManagable = (project) ->
     $scope.currentUser.id == project.ownerId
-
-  $scope.gotoDetails = (project) ->
-    CurrentProject.set(project)
-    $state.go('project')
