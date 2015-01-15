@@ -2,9 +2,10 @@
   .dropdown( dropdown )
     %a.dropdown-toggle( href dropdown-toggle )
       .input-group
-        .input-group-addon
-          %span( ng-if='addon' ) {{ addon }}
-          %span.glyphicon.glyphicon-calendar( ng-hide='addon' )
+        .input-group-btn( ng-if='addon' )
+          .btn.btn-default {{ addon }}
+        .input-group-addon( ng-if='!addon' )
+          %span.glyphicon.glyphicon-calendar
         %input.form-control( type='text' placeholder="{{timeModel | date: dateFormatting}}" disabled='true' )
     %ul.dropdown-menu
       %datetimepicker( data-datetimepicker-config="{{config}}" ng-model="timeModel" )
