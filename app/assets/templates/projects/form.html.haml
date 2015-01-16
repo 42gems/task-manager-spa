@@ -1,12 +1,12 @@
+%br
 .row
-  .col-sm-3
   .col-sm-6
     .well
       %form.form-horizontal( role='form' )
         .form-group
           %label.col-sm-3.control-label( for='inputTitle' ) Title
           .col-sm-8
-            %input#inputTitle.form-control( type='text' placeholder='Title of the project' ng-model='project.title' )
+            %input#inputTitle.form-control( type='text' placeholder='Title of the project' ng-model='project.title' autofocus )
         .form-group
           %label.col-sm-3.control-label( for='inputDesc' ) Description
           .col-sm-8
@@ -18,7 +18,9 @@
         .form-group
           %label.col-sm-3.control-label( for='inputPrivate' ) Private
           .col-sm-8
-            %input#inputPrivate( type='checkbox' ng-model='project.private' )
+            .checkbox
+              %label
+                %input#blankCheckbox.relative( type="checkbox" ng-model='project.private' )
         .form-group
           .col-sm-3
           .col-sm-8

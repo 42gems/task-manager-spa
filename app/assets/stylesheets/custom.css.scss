@@ -72,17 +72,9 @@ a:hover {
 
 .mgl { margin-left: 5px; }
 .mgr { margin-right: 5px; }
-.mgl-15 { margin-left: 25px; }
 .min-width-120 { min-width: 120px; }
-
-.badge.quad {
-  min-width: 130px;
-  padding: 3px 5px;
-  background-color: #f8f8f8;
-  font-weight: 200;
-  color: $link_blue;
-  border-radius: 0px;
-}
+.relative { position: relative !important; }
+.center { text-align: center; }
 
 .hoverable {
   transition: color 0.2s ease;
@@ -109,6 +101,9 @@ a:hover {
   }
 }
 
+.addon-on-the-right {
+  border-radius: 4px 0 0 4px;
+}
 /* Tasks
 *******************************************/
 #create_btn {
