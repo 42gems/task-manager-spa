@@ -14,6 +14,7 @@ module TaskManagerSpa
     config.serve_static_assets = true
     config.filter_parameters += [:image_data, :password, :password_confirmation]
     config.assets.js_compressor = Uglifier.new(mangle: false)
+    config.autoload_paths += %W(#{config.root}/lib)
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
