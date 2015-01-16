@@ -16,6 +16,16 @@ class User < ActiveRecord::Base
     invites.pending.includes(:project)
   end
 
+  def image_data=(value)
+    return unless value.present?
+    if value.is_a? String then
+      base64_string = value.split('base64,')[1]
+      self.image = CarrierStringIO.new(Base64.decode64(base64_string))
+    else
+      self.image = value
+    end
+  end
+
   def all_projects
     data = []
     data << self.projects

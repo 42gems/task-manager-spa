@@ -24,6 +24,6 @@ app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, ProjectsServi
 
   $scope.$on 'currentUser:updated', (event, data) ->
     $scope.userFullName = "#{data.firstName} #{data.lastName}"
-    $scope.avatarUrl = data.image.url
+    $scope.avatarUrl = data.imageUrl
     $scope.updateContext()
 
