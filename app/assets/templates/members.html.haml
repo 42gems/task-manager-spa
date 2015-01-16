@@ -6,7 +6,7 @@
     .col-sm-4
       .well.well-sm
         .input-group
-          %select.form-control( ng-model="selected" ng-options="user.email for user in usersForInvite" )
+          %select.form-control.addon-on-the-right( ng-model="selected" ng-options="user.email for user in usersForInvite" )
           .input-group-btn
             .btn.btn-default( ng-click='addMember(selected.id)' ) invite
 
