@@ -34,8 +34,8 @@
               %a( ui-sref='timeline' )
                 %i.fa.fa-bar-chart
                 Timeline
-            %li.margin15
-              %div( ng-if='selected.timeStats.estimatedTime > 0' )
+            %li
+              %div.timeline-badges
                 .badge.badge-success(tooltip-placement="bottom" tooltip="time spent") {{ selected.timeStats.timeSpent | secondsToTime : 'h' }}
                 .badge.badge-warning(tooltip-placement="bottom" tooltip="time left") {{ selected.timeStats.timeLeft  | secondsToTime : 'h' }}
       %select-project
