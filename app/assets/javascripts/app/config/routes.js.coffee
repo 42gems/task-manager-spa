@@ -31,22 +31,6 @@ app.config ($stateProvider, $urlRouterProvider) ->
         'project':
           templateUrl: 'projects/form.html'
           controller: 'ProjectsCtrl'
-    .state 'project',
-      url: '/project'
-      templateUrl: 'projects/show.html'
-      controller: 'ProjectCtrl'
-    .state 'project.edit',
-      url: '/edit'
-      templateUrl: 'projects/form.html'
-      controller: 'ProjectCtrl'
-    .state 'tasks',
-      url: '/tasks'
-      templateUrl: 'tasks/index.html'
-      controller: 'TasksCtrl'
-    .state 'tasks.edit',
-      url: '/:taskId/edit'
-      templateUrl: 'tasks/edit.html'
-      controller: 'TaskCtrl'
     .state 'sign_up',
       url: '/sign_up'
       templateUrl: 'authentication/sign_up.html'
