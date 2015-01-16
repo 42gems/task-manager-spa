@@ -61,7 +61,7 @@ a:hover {
 
 .hoverable {
   transition: color 0.2s ease;
-  
+
   &:hover {
     cursor: pointer;
     color: $link_blue;
@@ -123,8 +123,8 @@ a:hover {
         max-width: 230px;
         width: 100%;
       }
-    } 
-    
+    }
+
     &.drag-enter {
       transition: box-shadow 140ms ease;
       transition: min-height 200ms ease;
@@ -132,7 +132,7 @@ a:hover {
       box-shadow: 3px 3px 0 1px $link_blue;
       min-height: 111px;
     }
-    
+
     .title {
       font-weight: 600;
       color: $dark_grey;
@@ -225,7 +225,7 @@ a:hover {
         &.pull-left {
           border-radius: 0px 0px 0px 7px;
         }
-        
+
         &.pull-right {
           border-radius: 0px 0px 7px 0px;
         }
@@ -237,4 +237,14 @@ a:hover {
       }
     }
   }
+}
+
+// Forms validation
+.form-control.ng-invalid {
+  border-color: #843534;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
+}
+.CustomValidationError {
+  color: #a94442;
 }
