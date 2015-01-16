@@ -11,9 +11,9 @@ app.filter 'timeToSeconds', () ->
         data = timings[key][1] if timings[key]
         timings[key] = parseInt(data, 10)
 
-      days    = (timings.days * (24 * 60 * 60)) || 0
-      hours   = (timings.hours * (60 * 60))     || 0
-      minutes = (timings.minutes * 60)          || 0
+      days    = (timings.days * (8 * 60 * 60)) || 0
+      hours   = (timings.hours * (60 * 60))    || 0
+      minutes = (timings.minutes * 60)         || 0
 
       days + hours + minutes
     else

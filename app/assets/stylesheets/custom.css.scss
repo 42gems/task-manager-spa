@@ -17,6 +17,9 @@ $dark_orange_light: rgba(225, 135, 40, 0.9);
 $dark_red: rgba(143, 14, 14, 0.85);
 $dark_red_light: rgba(143, 14, 14, 0.75);
 
+/*project border radius*/
+$pbr: 8px;
+
 /* General
 *******************************************/
 .col-md-3 {
@@ -150,7 +153,7 @@ a:hover {
   padding: 0px;
 
   background-color: $light_grey;
-  border-radius: 8px;
+  border-radius: $pbr;
   box-shadow: 3px 3px 0 1px $darkest_red;
 
   margin: 15px auto;
@@ -190,6 +193,10 @@ a:hover {
 
       font-size: 12px;
       color: $darker_grey;
+      
+      &.rounded {
+        border-radius: 0 0 $pbr $pbr;
+      }
     }
 
     .buttons {
@@ -223,16 +230,11 @@ a:hover {
         }
 
         &.pull-left {
-          border-radius: 0px 0px 0px 7px;
+          border-radius: 0px 0px 0px ($pbr - 1);
         }
 
         &.pull-right {
-          border-radius: 0px 0px 7px 0px;
-        }
-
-        &.btn-full {
-          border-radius: 0px 0px 7px 7px;
-          min-width: 100%;
+          border-radius: 0px 0px ($pbr - 1) 0px;
         }
       }
     }
