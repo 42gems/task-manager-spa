@@ -1,9 +1,9 @@
 app.filter 'secondsToTime', () ->
   (data, precision) ->
     if data == parseInt(data)
-      days = Math.floor(data / (60 * 60 * 24))
+      days = Math.floor(data / (60 * 60 * 8))
       
-      divisor_for_hours = data % (60 * 60 * 24)
+      divisor_for_hours = data % (60 * 60 * 8)
       hours = Math.floor(divisor_for_hours / (60 * 60))
       
       divisor_for_minutes = data % (60 * 60)
