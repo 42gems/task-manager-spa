@@ -12,6 +12,7 @@ module TaskManagerSpa
   class Application < Rails::Application
     # for heroku
     config.serve_static_assets = true
+    config.filter_parameters += [:image_data, :password, :password_confirmation]
     config.assets.js_compressor = Uglifier.new(mangle: false)
 
     # Settings in config/environments/* take precedence over those specified here.
