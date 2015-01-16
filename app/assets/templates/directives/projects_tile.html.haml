@@ -8,18 +8,15 @@
   .description( ng-if='project.description' ) {{ project.description }}
   .description( ng-if='!project.description' ) There is no description
   .footer
-    .owner
+    .owner( ng-class='isRounded(project)' )
       %i.fa.fa-user
       {{ project.owner.firstName }}
       {{ project.owner.lastName }}
       %span( ng-hide='project.owner.firstName && project.owner.lastName' ) {{ project.owner.email }}
-    .buttons
-      .btn.btn-full.btn-edit.pull-left( ng-if='!isManagable(project)' )
+    .buttons( ng-if='isManagable(project)' )
+      .btn.btn-edit.pull-left
+        %i.fa.fa-pencil
         Edit
-      %div( ng-if='isManagable(project)' )
-        .btn.btn-edit.pull-left
-          %i.fa.fa-pencil
-          Edit
-        .btn.btn-destroy.pull-right( ng-click='deleteProject(project)' )
-          %i.fa.fa-trash
-          Destroy
+      .btn.btn-destroy.pull-right( ng-click='deleteProject(project)' )
+        %i.fa.fa-trash
+        Destroy
