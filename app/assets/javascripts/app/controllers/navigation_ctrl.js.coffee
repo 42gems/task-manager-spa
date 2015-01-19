@@ -1,4 +1,8 @@
 app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, ProjectsService, AuthenticationService) ->
+  groups =
+      owner: 'My Projects'
+      member: 'Collaborated Projects'
+      public: 'Public Projects'
 
   $scope.updateCurrentProject = ->
     CurrentProject.set($scope.selected)
@@ -18,6 +22,9 @@ app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, ProjectsServi
       ProjectsService.set(projects)
     , ->
       console.log 'Could not fetch projects'
+
+  $scope.groupNameFor = (type) ->
+    groups[type]
 
   $scope.$watch 'selected', ->
     $scope.updateCurrentProject()

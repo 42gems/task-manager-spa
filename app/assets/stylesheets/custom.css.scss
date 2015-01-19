@@ -52,6 +52,9 @@ a:hover {
 
 .select-project {
   margin-left: -50px;
+  select {
+    position: relative;
+  }
 }
 
 .badge-success {
