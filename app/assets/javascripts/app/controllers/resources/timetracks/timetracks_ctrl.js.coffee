@@ -4,15 +4,15 @@ app.controller 'TimetracksCtrl', ($scope, $modal, Timetrack, UserService) ->
   $scope.$on 'currentUser:updated', (event, data) ->
     $scope.currentUser = data
 
-  $scope.openModal = (projectId, taskId) ->
+  $scope.openModal = (projectId, task) ->
     modalInstance = $modal.open
       templateUrl: "timetracks/timetracks_modal.html"
       controller: "TimetracksModalInstanceCtrl"
       resolve:
         projectId: ->
           projectId
-        taskId: ->
-          taskId
+        task: ->
+          task
         currentUser: ->
           $scope.currentUser
 

@@ -19,7 +19,7 @@ app.controller 'TasksColumnCtrl', ($scope, $modal) ->
     modalInstance = $modal.open
       templateUrl: "tasks/modal_form.html"
       controller: "NewTaskModalInstanceCtrl"
-    
+
     modalInstance.result.then (task) ->
       $scope.tasks.push(task)
     , ->
@@ -32,7 +32,7 @@ app.controller 'TasksColumnCtrl', ($scope, $modal) ->
       resolve:
         id: ->
           id
-    
+
     modalInstance.result.then (edited_task) ->
       console.log 'Task has been successfuly updated'
       # finding an index of corresponding task from current scope

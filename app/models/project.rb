@@ -9,7 +9,6 @@ class Project < ActiveRecord::Base
   validates_length_of :description, maximum: 255
 
   scope :is_public, -> { where private: false }
-  scope :open, -> { where state: ['todo', 'in_progress'] }
 
   def select_users_for_invites
     user_ids = Invite.where(project_id: id).pluck(:user_id) << owner.id
@@ -27,11 +26,11 @@ class Project < ActiveRecord::Base
   end
 
   def time_spent
-    tasks.open.pluck(:time_spent).compact.reduce(:+) || 0
+    tasks.open.pluck(:time_spent).compact.sum
   end
 
   def time_spent_all
-    tasks.pluck(:time_spent).compact.reduce(:+) || 0
+    tasks.pluck(:time_spent).compact.sum
   end
 
   def time_left
@@ -39,7 +38,7 @@ class Project < ActiveRecord::Base
   end
 
   def estimated_time
-    tasks.open.pluck(:estimated_time).compact.reduce(:+) || 0
+    tasks.open.pluck(:estimated_time).compact.sum
   end
 
   def time_stats
