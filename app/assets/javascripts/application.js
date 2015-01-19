@@ -25,3 +25,4 @@
 //= require libs/ui-bootstrap
 //= require libs/moment.min
 //= require libs/datetimepicker
+//= require libs/spin
