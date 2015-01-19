@@ -27,3 +27,5 @@ app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, ProjectsServi
     $scope.avatarUrl = data.imageUrl
     $scope.updateContext()
 
+  $scope.$on 'currentProject:updateTimetracks', (event, data) ->
+    $scope.updateContext()

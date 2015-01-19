@@ -8,5 +8,7 @@ app.factory 'CurrentProject', ($rootScope) ->
       unless angular.equals(currentProject, val)
         currentProject = val
         $rootScope.$broadcast('currentProject:updated', val)
+    updateTimetracks: ->
+      $rootScope.$broadcast('currentProject:updateTimetracks')
 
   service

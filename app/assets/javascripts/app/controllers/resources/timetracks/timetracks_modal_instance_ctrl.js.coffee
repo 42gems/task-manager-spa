@@ -1,4 +1,4 @@
-app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId, task, currentUser, Timetrack) ->
+app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId, task, currentUser, Timetrack, CurrentProject, $q) ->
 
   Timetrack.query({}, projectId: projectId, taskId: task.id).then (timetracks) ->
     $scope.timetracks = timetracks
@@ -17,14 +17,20 @@ app.controller "TimetracksModalInstanceCtrl", ($scope, $modalInstance, projectId
   $scope.initTimetrack()
 
   $scope.save = (form)->
-    time = $scope.timetracks.reduce (a,b) ->
+    task.timeSpent = $scope.timetracks.reduce (a,b) ->
       a + b.amount
     , 0
-    task.timeSpent = time
-    for timetrack in $scope.timetracks
-      timetrack.projectId = projectId
-      timetrack.save().then (timetrack) ->
-        $modalInstance.close(timetrack)
+    unless $scope.timetracks.length
+      $modalInstance.close()
+      CurrentProject.updateTimetracks()
+    else
+      results = []
+      for timetrack in $scope.timetracks
+        timetrack.projectId = projectId
+        results.push timetrack.save()
+      $q.all(results).then ->
+        $modalInstance.close()
+        CurrentProject.updateTimetracks()
       , ->
         $modalInstance.dismiss "error"
 

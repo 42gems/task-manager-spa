@@ -7,6 +7,7 @@ app.controller "NewTaskModalInstanceCtrl", ($scope, $modalInstance, Task, Curren
     if taskForm.$valid
       $scope.task.create().then (task) ->
         $modalInstance.close(task)
+        CurrentProject.updateTimetracks()
       , (error) ->
         $modalInstance.dismiss "error"
 
