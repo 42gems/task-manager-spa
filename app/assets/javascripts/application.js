@@ -23,6 +23,7 @@
 //= require libs/form-validation
 //= require_tree ./app
 //= require libs/ui-bootstrap
+//= require libs/bootstrap.min
 //= require libs/moment.min
 //= require libs/datetimepicker
 //= require libs/spin

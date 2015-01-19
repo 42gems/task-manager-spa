@@ -1,6 +1,6 @@
 %div( ng-class="{'form-group': formGroup}")
-  .dropdown( dropdown )
-    %a.dropdown-toggle( href dropdown-toggle )
+  .dropdown
+    %a.dropdown-toggle( href data-toggle="dropdown" id="{{idAttr}}" )
       .input-group
         .input-group-btn( ng-if='addon' )
           .btn.btn-default {{ addon }}

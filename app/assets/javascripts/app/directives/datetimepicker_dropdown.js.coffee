@@ -7,3 +7,4 @@ app.directive 'datetimepickerDropdown', () ->
     dateFormatting: "@"
     addon: "@"
     formGroup: "@"
+    idAttr: "@"
