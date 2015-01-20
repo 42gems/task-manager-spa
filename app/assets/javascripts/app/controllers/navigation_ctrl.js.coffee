@@ -1,4 +1,4 @@
-app.controller 'NavigationCtrl', ($rootScope, $scope, Project, CurrentProject, ProjectsService, AuthenticationService, ModalService) ->
+app.controller 'NavigationCtrl', ($rootScope, $scope, Project, CurrentProject, ProjectsService, AuthenticationService, ModalService, $timeout) ->
   groups =
       owner: 'My Projects'
       member: 'Collaborated Projects'
@@ -43,7 +43,8 @@ app.controller 'NavigationCtrl', ($rootScope, $scope, Project, CurrentProject, P
 
   $scope.$on 'draggable:end', (event, data) ->
     $scope.showTrash = false
-    # $scope.$digest()
+    $timeout ->
+      $scope.$digest()
 
   $scope.removeTask = (task) ->
     ModalService.confirm("Delete task #{task.title}?").then ->
