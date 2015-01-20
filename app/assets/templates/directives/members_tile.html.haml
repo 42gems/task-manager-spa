@@ -1,0 +1,12 @@
+.tile( ng-repeat='member in members' )
+  .header
+    .title
+      %img( ng-src='{{member.imageUrl}}' )
+      {{ member.firstName }} {{ member.lastName }}
+  .footer
+    .owner( ng-class='{rounded: isOwner()}' )
+      {{ member.email }}
+    .buttons( ng-if='isOwner()' )
+      .btn.btn-destroy.fill( ng-click='deleteMember(member)' )
+        %i.fa.fa-trash
+        Remove

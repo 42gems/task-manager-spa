@@ -192,7 +192,7 @@ a:hover {
 
 /* Projects
 *******************************************/
-.project {
+.tile {
   vertical-align: top;
   display: inline-block;
   width: 350px;
@@ -281,6 +281,11 @@ a:hover {
 
         &.pull-right {
           border-radius: 0px 0px ($pbr - 1) 0px;
+        }
+
+        &.fill {
+          width: 100%;
+          border-radius: 0px 0px ($pbr - 1) ($pbr - 1);
         }
       }
     }

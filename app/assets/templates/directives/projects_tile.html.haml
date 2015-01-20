@@ -1,4 +1,4 @@
-.project( ng-repeat='project in projects' )
+.tile( ng-repeat='project in projects' )
   .header
     .title {{ project.title }}
     .pull-right( ng-if='project.private' )

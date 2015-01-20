@@ -14,15 +14,4 @@
     %h4 There are no users to invite.
 
 %div( ng-if='members' )
-  %table.table
-    %thead
-      %tr
-        %td #
-        %td Email
-        %td Actions
-    %tbody
-      %tr( ng-repeat='member in members' )
-        %td {{ member.id }}
-        %td {{ member.email }}
-        %td
-          .btn.btn-danger( ng-if='isManagable' ng-click='removeMember(member.id)' ) Remove
+  %members-tile( members='members' )
