@@ -1,47 +1,46 @@
-%nav.navbar.navbar-default( role="navigation" )
-  .container( ng-controller='NavigationCtrl')
-    %div( ng-hide="showTrash" )
-      .navbar-header
-        %button.navbar-toggle( data-target="#collapsable" data-toggle="collapse" type="button" )
-          %span.sr-only Toggle navigation
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        %a.navbar-brand( href='#' )
-      #collapsable.collapse.navbar-collapse
-        %ul.nav.navbar-nav
-          %li
-            %a( ui-sref='board' )
-              %i.fa.fa-tasks
-              Board
-        %ul.nav.navbar-nav.navbar-left
-          %li
-            %a( ui-sref='projects' )
-              %i.fa.fa-th-list
-              Projects
-          %li
-            %a( ui-sref='members' )
-              %i.fa.fa-users
-              Members
-          %li( ng-show='pendingInvites > 0' )
-            %a( ui-sref='invites' )
-              %i.fa.fa-reply-all
-              Invites
-              %span.badge
-                {{ pendingInvites }}
-          %li
-            %ul.nav.navbar-nav
-              %li
-                %a( ui-sref='timeline' )
-                  %i.fa.fa-bar-chart
-                  Timeline
-              %li
-                %div.timeline-badges
-                  .badge.badge-success( tooltip-placement="bottom" tooltip="time spent" ) {{ selected.timeStats.timeSpent | secondsToTime : 'h' }}
-                  .badge.badge-warning( tooltip-placement="bottom" tooltip="time left" ) {{ selected.timeStats.timeLeft  | secondsToTime : 'h' }}
-        %select-project
-        %auth_links
-    #trash.container( ng-drop="true" ng-show="showTrash" ng-drop-success='removeTask($data, state)' )
-      %a.fa.fa-trash
-      %span
-        Remove
+%nav.navbar.navbar-default( role="navigation" ng-controller='NavigationCtrl' )
+  .container(  )
+    .navbar-header
+      %button.navbar-toggle( data-target="#collapsable" data-toggle="collapse" type="button" )
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand( href='#' )
+    #collapsable.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li
+          %a( ui-sref='board' )
+            %i.fa.fa-tasks
+            Board
+      %ul.nav.navbar-nav.navbar-left
+        %li
+          %a( ui-sref='projects' )
+            %i.fa.fa-th-list
+            Projects
+        %li
+          %a( ui-sref='members' )
+            %i.fa.fa-users
+            Members
+        %li( ng-show='pendingInvites > 0' )
+          %a( ui-sref='invites' )
+            %i.fa.fa-reply-all
+            Invites
+            %span.badge
+              {{ pendingInvites }}
+        %li
+          %ul.nav.navbar-nav
+            %li
+              %a( ui-sref='timeline' )
+                %i.fa.fa-bar-chart
+                Timeline
+            %li
+              %div.timeline-badges
+                .badge.badge-success( tooltip-placement="bottom" tooltip="time spent" ) {{ selected.timeStats.timeSpent | secondsToTime : 'h' }}
+                .badge.badge-warning( tooltip-placement="bottom" tooltip="time left" ) {{ selected.timeStats.timeLeft  | secondsToTime : 'h' }}
+      %select-project
+      %auth_links
+  #trash.alert.alert-danger( ng-drop="true" ng-show="showTrash" ng-drop-success='removeTask($data, state)' )
+    %a.fa.fa-trash
+    %span
+      Remove

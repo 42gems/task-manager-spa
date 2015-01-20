@@ -38,10 +38,12 @@ app.controller 'NavigationCtrl', ($rootScope, $scope, Project, CurrentProject, P
     $scope.updateContext()
 
   $scope.$on 'draggable:start', (event, data) ->
-    $scope.showTrash = true#data.data.constructor.name == 'TaskResource'
+    $scope.showTrash = true
+    $scope.$digest()
 
   $scope.$on 'draggable:end', (event, data) ->
     $scope.showTrash = false
+    # $scope.$digest()
 
   $scope.removeTask = (task) ->
     ModalService.confirm("Delete task #{task.title}?").then ->

@@ -34,9 +34,13 @@ $pbr: 8px;
 *******************************************/
 #trash {
   text-align: center;
+  position: absolute;
+  top: 0;
+  width: 100%;
   font-size: 28px;
   color: #a94442;
-  padding: 15px;
+  padding: 9px;
+  opacity: 0.5;
   a {
     color: inherit;
     text-decoration: none;
@@ -44,6 +48,7 @@ $pbr: 8px;
   }
   &.drag-enter {
     font-weight: bold;
+    opacity: 1;
   }
 }
 
