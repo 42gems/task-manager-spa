@@ -1,4 +1,4 @@
-app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, ProjectsService, AuthenticationService) ->
+app.controller 'NavigationCtrl', ($rootScope, $scope, Project, CurrentProject, ProjectsService, AuthenticationService, ModalService) ->
   groups =
       owner: 'My Projects'
       member: 'Collaborated Projects'
@@ -36,3 +36,14 @@ app.controller 'NavigationCtrl', ($scope, Project, CurrentProject, ProjectsServi
 
   $scope.$on 'currentProject:updateTimetracks', (event, data) ->
     $scope.updateContext()
+
+  $scope.$on 'draggable:start', (event, data) ->
+    $scope.showTrash = true#data.data.constructor.name == 'TaskResource'
+
+  $scope.$on 'draggable:end', (event, data) ->
+    $scope.showTrash = false
+
+  $scope.removeTask = (task) ->
+    ModalService.confirm("Delete task #{task.title}?").then ->
+      task.remove().then ->
+        $rootScope.$broadcast('task:removed', task)

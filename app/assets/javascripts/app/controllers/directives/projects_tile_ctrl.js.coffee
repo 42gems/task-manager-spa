@@ -15,6 +15,6 @@ app.controller 'ProjectsTileCtrl', ($scope, $state, $position, Project, UserServ
 
   $scope.isManagable = (project) ->
     $scope.currentUser.id == project.ownerId
-  
+
   $scope.isRounded = (project) ->
     'rounded' unless $scope.isManagable(project)

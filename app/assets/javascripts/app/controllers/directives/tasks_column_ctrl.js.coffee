@@ -1,4 +1,4 @@
-app.controller 'TasksColumnCtrl', ($scope, $modal) ->
+app.controller 'TasksColumnCtrl', ($scope, $modal, CurrentProject) ->
 
   $scope.delete = (task) ->
     task.delete().then (respone) ->
@@ -10,7 +10,8 @@ app.controller 'TasksColumnCtrl', ($scope, $modal) ->
 
   $scope.updateStatus = (updated_task, state)->
     updated_task.state = state
-    updated_task.save()
+    updated_task.save().then ->
+      CurrentProject.updateTimetracks()
     # finding an index of corresponding task from current scope
     i = $scope.tasks.indexOf(task) for task in $scope.tasks when task.id == updated_task.id
     $scope.tasks[i].state = state

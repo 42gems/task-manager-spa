@@ -22,7 +22,11 @@ app.controller 'BoardCtrl', ($scope, $state, Task, Project, CurrentProject, Proj
   $scope.$on 'projects:updated', (event, data) ->
     $scope.projects = data
     $state.go('projects.new') if $scope.projects.length == 0
-    
+
   if CurrentProject.get()
     $scope.currentProject = CurrentProject.get()
     $scope.updateContext()
+
+  $scope.$on 'task:removed', (event, data) ->
+    i = $scope.tasks.indexOf(data)
+    $scope.tasks.splice(i, 1)

@@ -11,6 +11,7 @@ app.controller "EditTaskModalInstanceCtrl", ($scope, $modalInstance, Task, Curre
     if taskForm.$valid
       $scope.task.save().then (task) ->
         $modalInstance.close(task)
+        CurrentProject.updateTimetracks()
       , ->
         $modalInstance.dismiss "error"
 

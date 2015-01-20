@@ -1,4 +1,4 @@
-app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, CurrentProject, ProjectsService, ModalService) ->
+app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, CurrentProject, ProjectsService) ->
   $scope.projects = []
   $scope.currentUser = UserService.getCurrentUser() if UserService.getCurrentUser()
 
@@ -34,7 +34,7 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
       console.log error
 
   if ProjectsService.get()
-    $scope.projects = ProjectsService.get() 
+    $scope.projects = ProjectsService.get()
     $scope.filterProjects($scope.projects)
 
   $scope.$on 'currentUser:updated', (event, data) ->
