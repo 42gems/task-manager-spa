@@ -18,7 +18,7 @@ class API::ProjectsController < API::BaseController
   def users_for_invite
     @users = @project.select_users_for_invites
     if params[:search] then
-      @users = @users.where("email like :search or concat(first_name, ' ', last_name) like :search", search: "%#{params[:search]}%")
+      @users = @users.filter_for_invites params[:search]
     end
     @users = @users.take(10)
   end
