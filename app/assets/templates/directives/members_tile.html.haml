@@ -3,10 +3,12 @@
     .title
       %img( ng-src='{{member.imageUrl}}' )
       {{ member.firstName }} {{ member.lastName }}
+      %sup( ng-if="isOwner(member)" )
+        %i.fa.fa-star.color-warning( tooltip="Owner" )
   .footer
-    .owner( ng-class='{rounded: isOwner()}' )
+    .owner( ng-class='{rounded: isFooterRounded(member)}' )
       {{ member.email }}
-    .buttons( ng-if='isOwner()' )
+    .buttons( ng-if='!isFooterRounded(member)' )
       .btn.btn-destroy.fill( ng-click='deleteMember(member)' )
         %i.fa.fa-trash
         Remove

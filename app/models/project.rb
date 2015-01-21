@@ -25,6 +25,10 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def members_with_owner
+    [self.owner] + members.accepted_invite
+  end
+
   def time_spent
     tasks.open.pluck(:time_spent).compact.sum
   end

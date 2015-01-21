@@ -6,5 +6,11 @@ app.controller 'MembersTileCtrl', ($scope, $state, $position, Project, UserServi
       CurrentProject.get().removeMember(user.id).then ->
         $state.go('members', {}, { reload: true })
 
-  $scope.isOwner = ->
+  $scope.isManagable = ->
     $scope.currentUser.id == CurrentProject.get().ownerId
+
+  $scope.isOwner = (member) ->
+    member.id == CurrentProject.get().ownerId
+
+  $scope.isFooterRounded = (member) ->
+    $scope.isOwner(member) || !$scope.isManagable()

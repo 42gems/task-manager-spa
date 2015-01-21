@@ -8,7 +8,7 @@ class API::ProjectsController < API::BaseController
   end
 
   def members
-    @members = @project.members.accepted_invite
+    @members = @project.members_with_owner
   end
 
   def user_rights
