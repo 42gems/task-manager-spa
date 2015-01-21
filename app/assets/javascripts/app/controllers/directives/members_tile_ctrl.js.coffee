@@ -12,5 +12,5 @@ app.controller 'MembersTileCtrl', ($scope, $state, $position, Project, UserServi
   $scope.isOwner = (member) ->
     member.id == CurrentProject.get().ownerId
 
-  $scope.isFooterRounded = (member) ->
-    $scope.isOwner(member) || !$scope.isManagable()
+  $scope.isRemovable = (member) ->
+    !($scope.isOwner(member) || !$scope.isManagable())

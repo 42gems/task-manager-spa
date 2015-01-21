@@ -219,6 +219,14 @@ a:hover {
     .pull-right i {
       cursor: pointer;
       margin-top: 18px;
+      &.fa {
+        position: relative;
+        top: -8px;
+        right: -5px;
+      }
+      &.fa-trash:hover {
+        color: $dark_red
+      }
     }
   }
 
