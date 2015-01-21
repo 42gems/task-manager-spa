@@ -16,11 +16,7 @@ class API::ProjectsController < API::BaseController
   end
 
   def users_for_invite
-    @users = @project.select_users_for_invites
-    if params[:search] then
-      @users = @users.filter_for_invites params[:search]
-    end
-    @users = @users.take(10)
+    @users = @project.select_users_for_invites params[:search]
   end
 
   def timeline_matrix

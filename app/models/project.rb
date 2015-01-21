@@ -10,9 +10,11 @@ class Project < ActiveRecord::Base
 
   scope :is_public, -> { where private: false }
 
-  def select_users_for_invites
+  def select_users_for_invites(search)
     user_ids = Invite.where(project_id: id).pluck(:user_id) << owner.id
-    User.where.not(id: user_ids)
+    users = User.where.not(id: user_ids)
+    users = users.filter_for_invites search if search
+    users.take 10
   end
 
   def type_for(user)
