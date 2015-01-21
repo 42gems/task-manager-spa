@@ -1,13 +1,13 @@
 %ul.nav.navbar-nav.navbar-right
-  %li( ng-if="$state.is('sign_in') || $state.is('sign_up')" )
+  %li( ng-if="!isLoggedIn" )
     %a( ui-sref='sign_in' )
       %i.fa.fa-sign-in
       Log In
-  %li( ng-if="$state.is('sign_in') || $state.is('sign_up')" )
+  %li( ng-if="!isLoggedIn" )
     %a( ui-sref='sign_up' )
       %i.fa.fa-check-square-o
       Register
-  %li.dropdown( dropdown ng-if="!($state.is('sign_in') || $state.is('sign_up'))" )
+  %li.dropdown( dropdown ng-if="isLoggedIn" )
     %a.dropdown-toggle( href dropdown-toggle )
       %img( ng-src="{{ avatarUrl }}" width= "auto" height="30px")
       {{ userFullName }}

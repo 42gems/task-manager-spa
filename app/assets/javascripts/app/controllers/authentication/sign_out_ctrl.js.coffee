@@ -2,7 +2,7 @@ app.controller 'SignOutCtrl', ($scope, $window, $state, UserService, Authenticat
   $scope.logOut = ->
     UserService.logOut()
       .success (data) ->
-        AuthenticationService.isLoggedIn = false
+        AuthenticationService.isLoggedIn.set false
         $state.go('sign_in')
       .error (status, data) ->
         console.log data

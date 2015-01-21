@@ -14,6 +14,6 @@ app.factory 'TokenInterceptor', ($q, $window, AuthenticationService, $location) 
   responseError: (rejection) ->
     if rejection?.status == 401 && $window.localStorage.taskManagerSpaToken
       delete $window.localStorage.taskManagerSpaToken
-      AuthenticationService.isLoggedIn = false
+      AuthenticationService.isLoggedIn.set false
       $location.path('/sign_in')
     $q.reject(rejection)

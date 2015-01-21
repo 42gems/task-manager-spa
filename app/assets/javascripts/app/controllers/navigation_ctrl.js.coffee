@@ -3,6 +3,7 @@ app.controller 'NavigationCtrl', ($rootScope, $scope, Project, CurrentProject, P
       owner: 'My Projects'
       member: 'Collaborated Projects'
       public: 'Public Projects'
+  $scope.isLoggedIn = AuthenticationService.isLoggedIn.get()
 
   $scope.updateCurrentProject = ->
     CurrentProject.set($scope.selected)
@@ -26,8 +27,16 @@ app.controller 'NavigationCtrl', ($rootScope, $scope, Project, CurrentProject, P
   $scope.groupNameFor = (type) ->
     groups[type]
 
+  $scope.removeTask = (task) ->
+    ModalService.confirm("Delete task #{task.title}?").then ->
+      task.remove().then ->
+        $rootScope.$broadcast('task:removed', task)
+
   $scope.$watch 'selected', ->
     $scope.updateCurrentProject()
+
+  $scope.$on 'authentication:changed', (event, data) ->
+    $scope.isLoggedIn = data
 
   $scope.$on 'currentUser:updated', (event, data) ->
     $scope.userFullName = "#{data.firstName} #{data.lastName}"
@@ -46,7 +55,3 @@ app.controller 'NavigationCtrl', ($rootScope, $scope, Project, CurrentProject, P
     $timeout ->
       $scope.$digest()
 
-  $scope.removeTask = (task) ->
-    ModalService.confirm("Delete task #{task.title}?").then ->
-      task.remove().then ->
-        $rootScope.$broadcast('task:removed', task)

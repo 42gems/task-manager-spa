@@ -1,6 +1,6 @@
 app.run ($rootScope, AuthenticationService, $state, Invite) ->
   $rootScope.$on "$stateChangeSuccess", () ->
-    if !AuthenticationService.isLoggedIn
+    if !AuthenticationService.isLoggedIn.get()
       $rootScope.pendingInvites = 0
     else
       Invite.pendingProjects().then (count) ->

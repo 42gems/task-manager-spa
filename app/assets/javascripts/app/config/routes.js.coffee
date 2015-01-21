@@ -43,5 +43,5 @@ app.config ($stateProvider, $urlRouterProvider) ->
       skipLogin: true
       onEnter: ($state, AuthenticationService, $timeout) ->
         $timeout ->
-          if AuthenticationService.isLoggedIn
+          if AuthenticationService.isLoggedIn.get()
             $state.go('board')

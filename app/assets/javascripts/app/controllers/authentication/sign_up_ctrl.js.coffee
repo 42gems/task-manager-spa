@@ -6,7 +6,7 @@ app.controller 'SignUpCtrl', ($scope, User, $state, UserService, AuthenticationS
 
     if form.$valid
       UserService.signup($scope.user).then (data) ->
-        AuthenticationService.isLoggedIn = true
+        AuthenticationService.isLoggedIn.set true
         $window.localStorage.taskManagerSpaToken = data.authToken
         $state.go('board')
       , (response) ->
