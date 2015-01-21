@@ -2,7 +2,8 @@ app.controller 'MembersCtrl', ($scope, $state, Project, CurrentProject, UserServ
 
   $scope.fetchUsersForInvite = ->
     Project.usersForInvite($scope.currentProject.id).then (users) ->
-      $scope.usersForInvite = users
+      $scope.usersForInvite = users.map (user) ->
+        angular.extend(user, fullName: "#{user.firstName} #{user.lastName}")
       $scope.selected = $scope.usersForInvite[0]
     , ->
       console.log 'Could not fetch users for invite'

@@ -15,6 +15,8 @@
 //= require libs/underscore
 //= require libs/angular
 //= require libs/ng-draggable
+//= require libs/ui-select
+//= require libs/angular-sanitize
 //= require angular-rails-templates
 //= require angularjs/rails/resource
 //= require_tree ../templates

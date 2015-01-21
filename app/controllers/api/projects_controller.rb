@@ -8,7 +8,7 @@ class API::ProjectsController < API::BaseController
   end
 
   def members
-    @members = @project.members_with_owner
+    @users = @project.members_with_owner
   end
 
   def user_rights
@@ -16,7 +16,7 @@ class API::ProjectsController < API::BaseController
   end
 
   def users_for_invite
-    respond_with @project.select_users_for_invites
+    @users = @project.select_users_for_invites
   end
 
   def timeline_matrix

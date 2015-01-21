@@ -6,7 +6,14 @@
     .col-sm-4
       .well.well-sm
         .input-group
-          %select.form-control.addon-on-the-right( ng-model="selected" ng-options="user.email for user in usersForInvite" )
+          %ui-select.addon-on-the-right( ng-model="selected" theme="bootstrap" )
+            %ui-select-match{:placeholder => "Enter email or lastname"} {{selected.fullName}}
+            %ui-select-choices{:repeat => "user in usersForInvite | propsFilter: {fullName: $select.search, email: $select.search}"}
+              %div{"ng-bind-html" => "user.fullName | highlight: $select.search"}
+              %small
+                email:
+                %span{"ng-bind-html" => "''+user.email | highlight: $select.search"}
+
           .input-group-btn
             .btn.btn-default( ng-click='addMember(selected.id)' ) invite
 
