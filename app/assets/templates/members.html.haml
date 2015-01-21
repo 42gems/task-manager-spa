@@ -2,13 +2,13 @@
   %h3.center There are no users who accepted any invites.
 
 %div( ng-if='isManagable' )
-  .row( ng-if='usersForInvite.length > 0' )
+  .row( ng-if='!noUsersForInvite' )
     .col-sm-4
       .well.well-sm
         .input-group
-          %ui-select.addon-on-the-right( ng-model="selected" theme="bootstrap" )
+          %ui-select( ng-model="selected" theme="bootstrap")
             %ui-select-match{:placeholder => "Enter email or lastname"} {{selected.fullName}}
-            %ui-select-choices{:repeat => "user in usersForInvite | propsFilter: {fullName: $select.search, email: $select.search}"}
+            %ui-select-choices{:repeat => "user in usersForInvite", :refresh => "fetchUsersForInvite($select.search)", 'refresh-delay' => '500'}
               %div{"ng-bind-html" => "user.fullName | highlight: $select.search"}
               %small
                 email:
@@ -17,7 +17,7 @@
           .input-group-btn
             .btn.btn-default( ng-click='addMember(selected.id)' ) invite
 
-  .well.well-sm( ng-if='usersForInvite.length == 0' )
+  .well.well-sm( ng-if='noUsersForInvite' )
     %h4 There are no users to invite.
 
 %div( ng-if='members' )

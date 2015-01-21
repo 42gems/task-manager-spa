@@ -1,15 +1,24 @@
 app.controller 'MembersCtrl', ($scope, $state, Project, CurrentProject, UserService) ->
+  $scope.usersForInvite = []
 
-  $scope.fetchUsersForInvite = ->
-    Project.usersForInvite($scope.currentProject.id).then (users) ->
-      $scope.usersForInvite = users.map (user) ->
-        angular.extend(user, fullName: "#{user.firstName} #{user.lastName}")
-      $scope.selected = $scope.usersForInvite[0]
-    , ->
-      console.log 'Could not fetch users for invite'
+  setUsers = (users) ->
+    $scope.usersForInvite = users.map (user) ->
+          angular.extend(user, fullName: "#{user.firstName} #{user.lastName}")
+        $scope.selected = $scope.usersForInvite[0]
+
+  $scope.fetchUsersForInvite = (search) ->
+    return if search == ''
+    Project.usersForInvite($scope.currentProject.id, search).then (users) ->
+      setUsers(users)
 
   $scope.updateContext = ->
-    $scope.fetchUsersForInvite()
+    $scope.selected = {}
+    $scope.usersForInvite = []
+    Project.usersForInvite($scope.currentProject.id, '').then (users) ->
+      if(users.length == 0)
+        $scope.noUsersForInvite = true
+      else
+        setUsers(users)
 
     Project.members($scope.currentProject.id).then (members) ->
       $scope.members = members
@@ -22,6 +31,7 @@ app.controller 'MembersCtrl', ($scope, $state, Project, CurrentProject, UserServ
       console.log 'Could not fetch members of a project'
 
   $scope.addMember = (member_id) ->
+    return unless member_id
     $scope.currentProject.addMember(member_id).then (response) ->
       console.log 'Invitation has been sent'
       # getting index of corresponding member from local scope

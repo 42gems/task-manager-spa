@@ -11,8 +11,8 @@ app.factory 'Project', (railsResourceFactory, RailsResource) ->
     @userRights = (id) ->
       @$get(@$url() + "/#{id}/user_rights")
 
-    @usersForInvite = (id) ->
-      @$get(@$url() + "/#{id}/users_for_invite")
+    @usersForInvite = (id, search) ->
+      @$get(@$url() + "/#{id}/users_for_invite?search=#{search}")
 
     @timelineMatrix = (id) ->
       @$get(@$url() + "/#{id}/timeline_matrix")
