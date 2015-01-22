@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
 
   scope :accepted_invite, -> { where(invites: { accepted: true }) }
   scope :pending_invite,  -> { where(invites: { accepted: false }) }
-  scope :filter_for_invites, -> (search) { where("email like :search or concat(first_name, ' ', last_name) like :search", search: "%#{search}%") }
+  scope :filter_for_invites, -> (search) { where("email ilike :search or concat(first_name, ' ', last_name) ilike :search", search: "%#{search}%") }
 
   def pending_invites
     invites.pending.includes(:project)
