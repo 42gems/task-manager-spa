@@ -14,7 +14,7 @@
       %label.col-sm-4.control-label( for='inputEstimatedTime' ) Estimated Time
       .col-sm-6
         %input#inputEstimatedTime.form-control( placeholder='3d 2h 1m 10s' ng-model='task.estimatedTime' humanized-amount validation-field-required="false" )
-    .form-group
+    .form-group( ng-if="task.timeSpent" )
       %label.col-sm-4.control-label( for='inputTimeSpent' ) Time Spent
       .col-sm-6
         %input#inputTimeSpent.form-control( placeholder='{{task.timeSpent}}' ng-model='task.timeSpent' humanized-amount validation-field-required="false" disabled='true' )

@@ -11,8 +11,8 @@ class Project < ActiveRecord::Base
   scope :is_public, -> { where private: false }
 
   def select_users_for_invites(search)
-    user_ids = Invite.where(project_id: id).pluck(:user_id) << owner.id
-    users = User.where.not(id: user_ids)
+    invited_members_ids = invites.pluck(:user_id) << owner.id
+    users = User.where.not(id: invited_members_ids)
     users = users.filter_for_invites search if search
     users.take 10
   end
@@ -32,11 +32,11 @@ class Project < ActiveRecord::Base
   end
 
   def time_spent
-    tasks.open.pluck(:time_spent).compact.sum
+    tasks.open.sum(:time_spent)
   end
 
   def time_spent_all
-    tasks.pluck(:time_spent).compact.sum
+    tasks.sum(:time_spent)
   end
 
   def time_left
@@ -44,7 +44,7 @@ class Project < ActiveRecord::Base
   end
 
   def estimated_time
-    tasks.open.pluck(:estimated_time).compact.sum
+    tasks.open.sum(:estimated_time)
   end
 
   def time_stats
