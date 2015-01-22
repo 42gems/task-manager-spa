@@ -11,6 +11,16 @@
       .col-sm-6
         %textarea#inputDesc.form-control( placeholder='Description of the task' ng-model='task.description' validation-field-required="false" )
     .form-group
+      %label.col-sm-4.control-label( for='inputDesc' ) Assignee
+      .col-sm-6
+        %ui-select( ng-model="task.assignee" theme="bootstrap")
+          %ui-select-match{:placeholder => "Enter email or lastname"} {{task.assignee.fullName}}
+          %ui-select-choices{:repeat => "member in members | propsFilter: {email: $select.search, fullName: $select.search}"}
+            %div{"ng-bind-html" => "member.fullName | highlight: $select.search"}
+            %small
+              email:
+              %span{"ng-bind-html" => "''+member.email | highlight: $select.search"}
+    .form-group
       %label.col-sm-4.control-label( for='inputEstimatedTime' ) Estimated Time
       .col-sm-6
         %input#inputEstimatedTime.form-control( placeholder='3d 2h 1m 10s' ng-model='task.estimatedTime' humanized-amount validation-field-required="false" )

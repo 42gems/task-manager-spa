@@ -1,7 +1,11 @@
-app.controller "EditTaskModalInstanceCtrl", ($scope, $modalInstance, Task, CurrentProject, id) ->
+app.controller "EditTaskModalInstanceCtrl", ($scope, $modalInstance, Task, CurrentProject, Project, id) ->
 
   Task.get({ projectId: CurrentProject.get().id, id: id }).then (task) ->
     $scope.task = task
+    Project.members(CurrentProject.get().id).then (members) ->
+      task.assignee = member for member in members when member.id == task.assigneeId
+      $scope.members = members.map (member) ->
+          angular.extend(member, fullName: "#{member.firstName} #{member.lastName}")
   , ->
     console.log 'Could not fetch project'
 
@@ -9,6 +13,8 @@ app.controller "EditTaskModalInstanceCtrl", ($scope, $modalInstance, Task, Curre
     $scope.$broadcast('runCustomValidations')
 
     if taskForm.$valid
+      # TODO: add serializer
+      $scope.task.assigneeId = $scope.task.assignee.id
       $scope.task.save().then (task) ->
         $modalInstance.close(task)
         CurrentProject.updateTimetracks()

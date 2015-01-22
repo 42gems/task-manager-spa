@@ -7,8 +7,8 @@ class API::TasksController < API::BaseController
 
   private
   def task_params
-    params.require(:task).permit(:project_id, :title, :description, :state, 
-                                 :estimated_date, :estimated_time, :deadline)
+    params.require(:task).permit(:project_id, :title, :description, :state,
+                                 :estimated_date, :estimated_time, :deadline, :assignee_id)
   end
 
   def fetch_project

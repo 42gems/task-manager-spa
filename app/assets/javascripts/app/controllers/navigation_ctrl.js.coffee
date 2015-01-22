@@ -39,7 +39,7 @@ app.controller 'NavigationCtrl', ($rootScope, $scope, Project, CurrentProject, P
     $scope.isLoggedIn = data
 
   $scope.$on 'currentUser:updated', (event, data) ->
-    $scope.userFullName = "#{data.firstName} #{data.lastName}"
+    $scope.userFullName = data.fullName
     $scope.avatarUrl = data.imageUrl
     $scope.updateContext()
 
