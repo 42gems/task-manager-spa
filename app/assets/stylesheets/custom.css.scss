@@ -216,6 +216,10 @@ a:hover {
     padding: 0px 15px;
     font-size: 22px;
 
+    img {
+      max-height: 32px;
+    }
+
     .pull-right i {
       cursor: pointer;
       margin-top: 18px;
