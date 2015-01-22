@@ -9,8 +9,6 @@ app.controller "NewTaskModalInstanceCtrl", ($scope, $modalInstance, Task, Curren
     $scope.$broadcast('runCustomValidations')
 
     if taskForm.$valid
-      # TODO: add serializer
-      $scope.task.assigneeId = $scope.task.assignee.id
       $scope.task.create().then (task) ->
         $modalInstance.close(task)
         CurrentProject.updateTimetracks()
