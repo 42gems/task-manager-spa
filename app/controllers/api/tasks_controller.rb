@@ -2,7 +2,7 @@ class API::TasksController < API::BaseController
   before_action :fetch_project, except: [:edit, :show, :destroy]
 
   def index
-    respond_with @project.tasks
+    @tasks = @project.tasks
   end
 
   private
