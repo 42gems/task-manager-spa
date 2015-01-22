@@ -1,7 +1,7 @@
 .tile( ng-repeat='member in members' )
   .header
     .title
-      %img( ng-src='{{member.imageUrl}}' )
+      %img.avatar( ng-src='{{member.imageUrl}}' )
       {{ member.firstName }} {{ member.lastName }}
     .pull-right( ng-if='isOwner(member)' )
       %i.fa.fa-star.color-warning( tooltip="Owner" )

@@ -9,7 +9,7 @@
       Register
   %li.dropdown( dropdown ng-if="isLoggedIn" )
     %a.dropdown-toggle( href dropdown-toggle )
-      %img( ng-src="{{ avatarUrl }}" width= "auto" height="30px")
+      %img.avatar( ng-src="{{ avatarUrl }}")
       {{ userFullName }}
       %span.caret
     %ul.dropdown-menu

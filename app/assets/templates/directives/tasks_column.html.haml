@@ -4,11 +4,12 @@
     #create_btn.small-caps.btn.btn-success( ng-disabled='!isManagable' ng-click="newTaskModal()" ) add task
   %div( ng-repeat="task in tasks | filter:{ state: state }" )
     .task( ng-drag='isManagable' ng-drag-data='task' draggable='false' )
-      %span {{ task.title }}
+      %span
+        %img.avatar( ng-src="{{task.assignee.imageUrl}}" )
+        {{ task.title }}
       %span.pull-right.icons( ng-if='isManagable' ng-drag='false' )
         %i.fa.fa-edit.hoverable( ng-click="editTaskModal(task.id)" )
         %i.fa.fa-clock-o.mgl.hoverable( ng-controller='TimetracksCtrl' ng-click='openModal(task.projectId, task)' )
-        %img( ng-src="{{task.assignee.imageUrl}}" )
       .clearfix
       %div( ng-if='task.estimatedTime' )
         %span.reverse-indent Time left

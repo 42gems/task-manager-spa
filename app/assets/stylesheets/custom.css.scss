@@ -59,6 +59,10 @@ $pbr: 8px;
   float: none;
 }
 
+img.avatar {
+  max-height: 30px;
+}
+
 a:hover {
   cursor: pointer;
 }
@@ -215,10 +219,6 @@ a:hover {
   .header {
     padding: 0px 15px;
     font-size: 22px;
-
-    img {
-      max-height: 32px;
-    }
 
     .pull-right i {
       cursor: pointer;
