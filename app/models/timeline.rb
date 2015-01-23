@@ -10,6 +10,10 @@ class Timeline
 
   private
 
+    # TODO: fix it. Ruby code that needs explanation sucks.
+    # rethink all the timeline logic.
+    # Do we really need this complex matrix? Why not just display all the timetracks for the current period?
+
     # First row of the matrix consists only from dates where first element is always empty string.
     # Other rows corresponds to the members of a project, that tracked some time on it.
     # First element of user's row is their email.
@@ -22,7 +26,7 @@ class Timeline
       members = []
       members << @project.members.includes(:timetracks)
       members << @project.owner
-      
+
       members.flatten!.each do |member|
         if member.timetracks.any?
           row = [''] * matrix[0].length
@@ -31,7 +35,7 @@ class Timeline
           member.timetracks.each do |track|
             date = track.start_date
             i = matrix[0].index(date)
-            
+
             increase_tracked_amount(track.amount, row, i) unless i.nil?
           end
           matrix << row
@@ -42,11 +46,11 @@ class Timeline
 
     def build_interval
       last_week = (Time.now - 7.days)..Time.now
-      
+
       if @opts.any?
         to   = @opts[:to]
-        from = @opts[:from]  
-        
+        from = @opts[:from]
+
         if from
           to ? from..to : from..Time.now
         else
@@ -59,7 +63,7 @@ class Timeline
 
     def increase_tracked_amount(amount, row, i)
       if row[i].is_a? Integer
-        row[i] += amount 
+        row[i] += amount
       else
         row[i] = amount
       end

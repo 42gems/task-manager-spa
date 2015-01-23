@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   scope :accepted_invite, -> { where(invites: { accepted: true }) }
   scope :pending_invite,  -> { where(invites: { accepted: false }) }
+  # TODO: replace 'search' with 'term' as search sounds like a method name.
+  # also rename this method just to search by as it has nothing to do with invites alone.
   scope :filter_for_invites, -> (search) { where("email ilike :search or concat(first_name, ' ', last_name) ilike :search", search: "%#{search}%") }
 
   def pending_invites
@@ -35,6 +37,7 @@ class User < ActiveRecord::Base
     data.flatten.uniq
   end
 
+  # TODO: replace with has_many invited_projects, trough: :invites ..
   def invited_to_projects
     project_ids = Invite.where(user_id: self.id).pluck :project_id
     Project.where(id: project_ids)

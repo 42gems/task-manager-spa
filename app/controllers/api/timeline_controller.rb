@@ -6,6 +6,7 @@ class API::TimelineController < API::BaseController
     respond_with @timeline.matrix
   end
 
+  # TODO style
 private
 
   def fetch_project
