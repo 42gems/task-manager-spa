@@ -19,6 +19,10 @@ class User < ActiveRecord::Base
     invites.pending.includes(:project)
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def image_data=(value)
     return unless value.present?
     if value.is_a? String then

@@ -2,7 +2,7 @@
   .header
     .title
       %img.avatar( ng-src='{{member.imageUrl}}' )
-      {{ member.firstName }} {{ member.lastName }}
+      {{ member.fullName }}
     .pull-right( ng-if='isOwner(member)' )
       %i.fa.fa-star.color-warning( tooltip="Owner" )
     .pull-right( ng-if='isRemovable(member)' )
