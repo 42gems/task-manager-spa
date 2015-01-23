@@ -1,15 +1,11 @@
 app.controller 'MembersCtrl', ($scope, $state, Project, CurrentProject, UserService) ->
   $scope.usersForInvite = []
 
-  setUsers = (users) ->
-    $scope.usersForInvite = users.map (user) ->
-          angular.extend(user, fullName: "#{user.firstName} #{user.lastName}")
-        $scope.selected = $scope.usersForInvite[0]
-
   $scope.fetchUsersForInvite = (search) ->
     return if search == ''
     Project.usersForInvite($scope.currentProject.id, search).then (users) ->
-      setUsers(users)
+      $scope.usersForInvite = users
+      $scope.selected = $scope.usersForInvite[0]
 
   $scope.updateContext = ->
     $scope.selected = {}
@@ -18,7 +14,8 @@ app.controller 'MembersCtrl', ($scope, $state, Project, CurrentProject, UserServ
       if(users.length == 0)
         $scope.noUsersForInvite = true
       else
-        setUsers(users)
+        $scope.usersForInvite = users
+        $scope.selected = $scope.usersForInvite[0]
 
     Project.members($scope.currentProject.id).then (members) ->
       $scope.members = members

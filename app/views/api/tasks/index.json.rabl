@@ -5,5 +5,5 @@ attribute :created_at, :deadline, :description,
 
 # TODO: use new style for hashes: { key: :value }
 child :assignee => :assignee do
-  attributes :id, :email, :first_name, :last_name, :image_url
+  extends "shared/user_node"
 end

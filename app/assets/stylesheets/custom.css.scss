@@ -59,8 +59,13 @@ $pbr: 8px;
   float: none;
 }
 
-img.avatar {
-  max-height: 30px;
+img {
+  &.avatar {
+    max-height: 30px;
+  }
+  &.avatar-small {
+    max-height: 17px;
+  }
 }
 
 a:hover {
@@ -179,6 +184,13 @@ a:hover {
         min-width: 100px;
         max-width: 230px;
         width: 100%;
+      }
+
+      .footer .assignee {
+        color: #8c8c8c;
+        font-size: 12px;
+        font-weight: lighter;
+        letter-spacing: 0.5px;
       }
     }
 

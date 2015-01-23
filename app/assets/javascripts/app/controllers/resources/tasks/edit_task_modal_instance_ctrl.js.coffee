@@ -4,8 +4,7 @@ app.controller "EditTaskModalInstanceCtrl", ($scope, $modalInstance, Task, Curre
     $scope.task = task
     Project.members(CurrentProject.get().id).then (members) ->
       task.assignee = member for member in members when member.id == task.assigneeId
-      $scope.members = members.map (member) ->
-          angular.extend(member, fullName: "#{member.firstName} #{member.lastName}")
+      $scope.members = members
   , ->
     console.log 'Could not fetch project'
 

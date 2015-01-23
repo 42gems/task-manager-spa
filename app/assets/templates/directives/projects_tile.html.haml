@@ -10,8 +10,7 @@
   .footer
     .owner( ng-class='isRounded(project)' )
       %i.fa.fa-user
-      {{ project.owner.firstName }}
-      {{ project.owner.lastName }}
+      {{ project.owner.fullName }}
       %span( ng-hide='project.owner.firstName && project.owner.lastName' ) {{ project.owner.email }}
     .buttons( ng-if='isManagable(project)' )
       .btn.btn-edit.pull-left

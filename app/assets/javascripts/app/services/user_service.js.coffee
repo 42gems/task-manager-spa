@@ -5,7 +5,6 @@ app.factory 'UserService', ($http, $rootScope) ->
       currentUser
 
     setCurrentUser: (val) ->
-      val.fullName = "#{val.firstName} #{val.lastName}"
       currentUser = val
       $rootScope.$broadcast('currentUser:updated', val)
 

@@ -2,7 +2,7 @@ collection @projects
 attributes :id, :owner_id, :title, :description, :private
 
 child owner: :owner do
-  attributes :id, :email, :first_name, :last_name
+  extends "shared/user_node"
 end
 
 node(:type)        { |project| project.type_for(current_user) }

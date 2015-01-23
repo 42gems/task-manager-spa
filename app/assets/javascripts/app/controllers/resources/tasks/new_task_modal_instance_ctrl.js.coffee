@@ -2,8 +2,7 @@ app.controller "NewTaskModalInstanceCtrl", ($scope, $modalInstance, Task, Curren
   $scope.task = new Task( projectId: CurrentProject.get().id, assignee: UserService.getCurrentUser() )
 
   Project.members(CurrentProject.get().id).then (members) ->
-      $scope.members = members.map (member) ->
-          angular.extend(member, fullName: "#{member.firstName} #{member.lastName}")
+      $scope.members = members
 
   $scope.save = (taskForm)->
     $scope.$broadcast('runCustomValidations')
