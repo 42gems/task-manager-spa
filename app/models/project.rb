@@ -28,6 +28,19 @@ class Project < ActiveRecord::Base
     [self.owner] + members.accepted_invite
   end
 
+  def add_member(user)
+    if members.include? user
+      false
+    else
+      members << user
+      true
+    end
+  end
+
+  def delete_member(member_id)
+    members.delete(member_id)
+  end
+
   def time_spent
     tasks.open.sum(:time_spent)
   end

@@ -6,10 +6,9 @@ class API::TimelineController < API::BaseController
     respond_with @timeline.matrix
   end
 
-  # TODO style
-private
+  private
 
-  def fetch_project
-    @project = Project.find(params[:project_id])
-  end
+    def fetch_project
+      @project = Project.find(params[:project_id])
+    end
 end

@@ -22,12 +22,12 @@
           %a( ui-sref='members' )
             %i.fa.fa-users
             Members
-        %li( ng-show='pendingInvites > 0' )
+        %li( ng-show='pendingInvitesCount > 0' )
           %a( ui-sref='invites' )
             %i.fa.fa-reply-all
             Invites
             %span.badge
-              {{ pendingInvites }}
+              {{ pendingInvitesCount }}
         %li
           %ul.nav.navbar-nav
             %li

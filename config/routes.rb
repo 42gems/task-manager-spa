@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
     resources :invites, only: [:index, :update, :destroy] do
       collection do
-        get :pending_invites
+        get :pending_invites_count
       end
     end
   end

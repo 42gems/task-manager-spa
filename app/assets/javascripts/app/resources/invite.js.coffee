@@ -5,5 +5,5 @@ app.factory 'Invite', (railsResourceFactory, RailsResource) ->
       name: 'invite'
       updateMethod: 'patch'
 
-    @pendingProjects = ->
-      @$get('/api/invites/pending_invites')
+    @pendingProjectsCount = ->
+      @$get('/api/invites/pending_invites_count')

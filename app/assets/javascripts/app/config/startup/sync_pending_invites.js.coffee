@@ -1,9 +1,9 @@
 app.run ($rootScope, AuthenticationService, $state, Invite) ->
   $rootScope.$on "$stateChangeSuccess", () ->
     if !AuthenticationService.isLoggedIn.get()
-      $rootScope.pendingInvites = 0
+      $rootScope.pendingInvitesCount = 0
     else
-      Invite.pendingProjects().then (count) ->
-        $rootScope.pendingInvites = count
+      Invite.pendingProjectsCount().then (count) ->
+        $rootScope.pendingInvitesCount = count
       , (error) ->
         console.log 'Could not fetch invites'
