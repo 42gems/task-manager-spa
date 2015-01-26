@@ -1,9 +1,11 @@
-app.controller 'MembersCtrl', ($scope, $state, Project, CurrentProject, UserService) ->
+app.controller 'MembersCtrl', ($scope, $state, Project, CurrentProject, UserService, MaskService) ->
   $scope.usersForInvite = []
 
   $scope.fetchUsersForInvite = (search) ->
     return if search == ''
+    timer = MaskService.show 500, '.input-group-btn'
     Project.usersForInvite($scope.currentProject.id, search).then (users) ->
+      MaskService.hide timer
       $scope.usersForInvite = users
       $scope.selected = $scope.usersForInvite[0]
 

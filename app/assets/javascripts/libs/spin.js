@@ -37,7 +37,7 @@ var modal_opts = {
 };
 
 //jQuery extension
-$.fn.hideMask = function(){
+$.fn.hideBodyMask = function(){
     this.each(function() {
         var $this = $(this),
         data = $this.data();
@@ -52,8 +52,9 @@ $.fn.hideMask = function(){
     return this;
 }
 
-$.fn.showMask = function() {
-    var opts = modal_opts;
+$.fn.showBodyMask = function(opts) {
+    if (opts == null) opts = default_opts;
+    if (opts == "modal") opts = modal_opts;
 
     this.each(function() {
         var $this = $(this),
@@ -64,8 +65,10 @@ $.fn.showMask = function() {
         }
 
         var spinElem = this;
-        $('body').append('<div id="spin_modal_overlay" style="background-color: rgba(0, 0, 0, 0.6); width:100%; height:100%; position:fixed; top:0px; left:0px; z-index:'+(opts.zIndex-1)+'"/>');
-        spinElem = $("#spin_modal_overlay")[0];
+        if (opts == modal_opts){
+            $('body').append('<div id="spin_modal_overlay" style="background-color: rgba(0, 0, 0, 0.6); width:100%; height:100%; position:fixed; top:0px; left:0px; z-index:'+(opts.zIndex-1)+'"/>');
+            spinElem = $("#spin_modal_overlay")[0];
+        }
         data.spinner = new Spinner($.extend({color: $this.css('color')}, opts)).spin(spinElem);
     });
     return this;
