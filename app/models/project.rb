@@ -8,16 +8,10 @@ class Project < ActiveRecord::Base
   validates_presence_of :title
   validates_length_of :description, maximum: 255
 
-  # TODO: ruby style usually doesn't use "is_" prefixes. Better just write "public" or "public_only",
-  # as "is_whatever" looks like badly named method that returns boolean.
-  scope :is_public, -> { where private: false }
+  scope :public_only, -> { where private: false }
 
-  def select_users_for_invites(search)
-    invited_members_ids = invites.pluck(:user_id) << owner.id
-    users = User.where.not(id: invited_members_ids)
-    # TODO move logic to User scope. Add another parameter 'project' and do all the job there.
-    users = users.filter_for_invites search if search
-    users.take 10
+  def select_users_for_invites(search_string)
+    User.search_for_invite_to_project(self, search_string)
   end
 
   def type_for(user)
