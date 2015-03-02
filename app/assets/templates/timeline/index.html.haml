@@ -1,19 +1,21 @@
-%tabset( ng-if='currentProject' )
-  %tab( select="getLastWeekTimeline()" heading='Last week' )
-    %timeline-table
+.row
+  .form-inline
+    .col-sm-3
+    .col-sm-3
+      %datetimepicker-dropdown( time-model="range.from" config='{minView: "day"}' date-formatting='dd/MM/yyyy' addon='From' )
+    .col-sm-3
+      %datetimepicker-dropdown( time-model="range.to"   config='{minView: "day"}' date-formatting='dd/MM/yyyy' addon='To')
 
-  %tab( select="getLastMonthTimeline()" heading='Last month' )
-    %timeline-table
-
-  %tab( select='getCustomTimeline()' heading='Custom range' )
-    %br
-    .row
-      %form( name="form" novalidate )
-        .form-inline
-          .col-sm-3
-          .col-sm-3
-            %datetimepicker-dropdown( time-model="range.from" config='{minView: "day"}' date-formatting='dd/MM/yyyy' addon='From' )
-          .col-sm-3
-            %datetimepicker-dropdown( time-model="range.to"   config='{minView: "day"}' date-formatting='dd/MM/yyyy' addon='To')
-
-    %timeline-table
+#timetracks
+  %div.group( ng-repeat="date in dates" )
+    .group-title
+      %span.octicon.octicon-git-commit
+      Tracks on {{ date }}
+    %ul.list-unstyled
+      %li.clearfix( ng-repeat="track in timetracks | filter: {date: date}" )
+        %div.avatar.pull-left( style="background-image: url({{ track.user.imageUrl }})" )
+        %div.info.pull-left
+          %div.task-title
+            {{ track.task.title }}
+          %div.user-name
+            {{ track.user.fullName }}

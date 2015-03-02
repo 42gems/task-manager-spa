@@ -21,6 +21,10 @@ class Timeline
     # Matrix looks like: [ ['', day1, day2, day3, ...], [email, '', amount, ''], ... ]
     def build_matrix
       interval = build_interval
+      @project.timetracks.where(start_date: interval)
+    end
+    def build_matrix2
+      interval = build_interval
       matrix = []
       matrix << @project.timetracks.where(start_date: interval).pluck(:start_date).uniq.unshift('')
       members = []

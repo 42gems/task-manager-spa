@@ -20,12 +20,11 @@ class API::ProjectsController < API::BaseController
   end
 
   def timeline_matrix
-    timeline = Timeline.new(@project, { from: params[:from], to: params[:to] })
-    respond_with timeline.matrix
+    @timetracks = @project.timetracks.includes(:user).includes(:task).order created_at: :desc
   end
 
   def add_member
-    UserMailer.send_notification(@project, @user) if @project.add_member(@user)
+    @project.add_member(@user)
     head 200
   end
 

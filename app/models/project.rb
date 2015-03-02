@@ -29,11 +29,9 @@ class Project < ActiveRecord::Base
   end
 
   def add_member(user)
-    if members.include? user
-      false
-    else
+    unless members.include? user
       members << user
-      true
+      UserMailer.send_notification(self, user)
     end
   end
 
