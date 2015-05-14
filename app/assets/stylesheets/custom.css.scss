@@ -148,6 +148,7 @@ a:hover {
 .addon-on-the-right {
   border-radius: 4px 0 0 4px;
 }
+
 /* Tasks
 *******************************************/
 #create_btn {
@@ -295,6 +296,15 @@ a:hover {
           }
         }
 
+        &.btn-save {
+          color: white;
+          background-color: #5cb85c;
+
+          &:hover {
+            background-color: #449d44;
+          }
+        }
+
         &.btn-destroy {
           color: $lighter_grey;
           background-color: $dark_red;
@@ -407,4 +417,25 @@ $timetrack-size: 27pt;
 }
 .CustomValidationError {
   color: #a94442;
+}
+
+
+/* Tile form controls
+*******************************************/
+.form-control {
+  
+  &.tile-control {
+    background-color: #f4f4f4;
+    border: none;
+    padding: 0;
+
+    &.input-header { 
+      font-size: 24px;
+      font-family: 'Open Sans Italic'
+    }
+    &.input-desc { 
+      font-size: 16px;
+      font-style: none;
+    }
+  }   
 }
