@@ -33,9 +33,14 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
       console.log 'Could not create a project'
       console.log error
 
+  $scope.initInputStates = ->
+    for project in $scope.projects
+      project.inputState = 'hidden'
+
   if ProjectsService.get()
     $scope.projects = ProjectsService.get()
     $scope.filterProjects($scope.projects)
+    $scope.initInputStates()
 
   $scope.$on 'currentUser:updated', (event, data) ->
     $scope.currentUser = data
@@ -43,3 +48,4 @@ app.controller 'ProjectsCtrl', ($scope, $state, Project, User, UserService, Curr
   $scope.$on 'projects:updated', (event, data) ->
     $scope.projects = data
     $scope.filterProjects($scope.projects)
+    $scope.initInputStates()

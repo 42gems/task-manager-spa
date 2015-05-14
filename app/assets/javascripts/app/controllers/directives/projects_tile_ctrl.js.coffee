@@ -13,8 +13,31 @@ app.controller 'ProjectsTileCtrl', ($scope, $state, $position, Project, UserServ
       , (error) ->
         console.log 'Could not remove project'
 
+  $scope.saveProject = (projct) ->
+    projct.ownerId = $scope.currentUser.id
+    project = new Project(projct)
+    project.save().then (response) ->
+      console.log 'Project successfuly updated'
+      $scope.toggleInputs(projct)
+    , (error) ->
+      console.log 'Could not update a project'
+      console.log error
+      $scope.toggleInputs(project)
+
   $scope.isManagable = (project) ->
     $scope.currentUser.id == project.ownerId
 
   $scope.isRounded = (project) ->
     'rounded' unless $scope.isManagable(project)
+
+  $scope.reversedInputState = (project) ->
+    if project.inputState is 'hidden'
+      ''
+    else
+      'hidden'
+
+  $scope.toggleInputs = (project) ->
+    if project.inputState is 'hidden'
+      project.inputState = ''
+    else
+      project.inputState = 'hidden'

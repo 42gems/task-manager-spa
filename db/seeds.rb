@@ -1,5 +1,5 @@
 3.times do |i|
-  User.create!(email: "user#{i}@example.com", password: "password") unless User.where(email: "user#{i}@example.com").exists?
+  User.create!(first_name: "user", last_name: "#{i}", email: "user#{i}@example.com", password: "password") unless User.where(email: "user#{i}@example.com").exists?
 end
 
 User.first.projects.create title: 'Project #1'
